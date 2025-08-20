@@ -3,1180 +3,688 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PáircPro - Professional GAA Analysis Platform</title>
+    <title>PáircPro - Professional GAA Video Analysis Platform</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #fafafa;
-            color: #1a1a1a;
-            line-height: 1.6;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header */
+        .header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            color: #1e293b;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
             z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
         }
 
         .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
+            padding: 0 2rem;
         }
 
         .logo {
-            font-size: 28px;
-            font-weight: 700;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
             color: #0066cc;
-            cursor: pointer;
         }
 
-        .nav-center {
+        .nav-links {
             display: flex;
+            list-style: none;
             gap: 2rem;
         }
 
-        .nav-link {
-            color: #6b7280;
+        .nav-links a {
+            color: #64748b;
+            text-decoration: none;
             font-weight: 500;
-            cursor: pointer;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            transition: all 0.2s;
+            transition: color 0.3s;
         }
 
-        .nav-link:hover {
-            color: #1a1a1a;
-            background: #f3f4f6;
+        .nav-links a:hover {
+            color: #1e293b;
         }
 
-        .nav-right {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .nav-btn {
+        .cta-button {
             background: #0066cc;
             color: white;
-            padding: 0.7rem 1.4rem;
+            padding: 0.75rem 1.5rem;
             border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.2s;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
         }
 
-        .nav-btn:hover {
+        .cta-button:hover {
             background: #0052a3;
             transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.25);
         }
 
-        .nav-btn.secondary {
-            background: transparent;
-            color: #6b7280;
-            border: 1px solid #e5e7eb;
-        }
-
-        .nav-btn.demo {
-            background: #6366f1;
-        }
-
-        .profile-menu {
-            position: relative;
-        }
-
-        .profile-btn {
-            background: transparent;
-            border: 1px solid #e5e7eb;
-            padding: 0.7rem 1.2rem;
-            border-radius: 8px;
-            color: #6b7280;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .profile-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            padding: 0.5rem 0;
-            min-width: 160px;
-            display: none;
-            z-index: 1001;
-        }
-
-        .profile-dropdown.show {
-            display: block;
-        }
-
-        .dropdown-item {
-            padding: 0.75rem 1rem;
-            color: #374151;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .dropdown-item:hover {
-            background: #f9fafb;
-        }
-
+        /* Hero Section */
         .hero {
-            padding: 12rem 2rem 8rem;
-            background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
+            background: linear-gradient(135deg, #fafbfc 0%, #f1f5f9 100%);
+            color: #1e293b;
+            padding: 8rem 0 6rem;
+            margin-top: 80px;
+            text-align: center;
             position: relative;
             overflow: hidden;
         }
 
-        .hero::after {
+        .hero::before {
             content: '';
             position: absolute;
-            top: 20%;
+            top: 0;
             left: 0;
-            width: 100%;
-            height: 30%;
-            background: linear-gradient(45deg, #0066cc 0%, #6366f1 50%, #8b5cf6 100%);
-            clip-path: polygon(0 30%, 100% 0%, 100% 70%, 0% 100%);
-            opacity: 0.08;
-            z-index: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(0,102,204,0.05)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.5;
         }
 
         .hero-container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
+            padding: 0 2rem;
             position: relative;
             z-index: 1;
         }
 
-        .hero-content {
-            max-width: 600px;
-            margin-bottom: 4rem;
-        }
-
         .hero-badge {
-            background: #eff6ff;
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
             color: #0066cc;
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 1.5rem;
             border-radius: 50px;
-            font-size: 14px;
-            font-weight: 500;
+            font-size: 0.9rem;
+            font-weight: 600;
             margin-bottom: 2rem;
             display: inline-block;
+            border: 1px solid rgba(0, 102, 204, 0.2);
         }
 
         .hero-title {
-            font-size: 4rem;
-            font-weight: 600;
-            color: #1a1a1a;
-            line-height: 1.1;
+            font-size: 3.5rem;
+            font-weight: 700;
             margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #1e293b, #475569);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero-subtitle {
-            font-size: 1.25rem;
-            color: #6b7280;
-            margin-bottom: 2.5rem;
-            line-height: 1.5;
+            font-size: 1.3rem;
+            color: #64748b;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
         }
 
         .hero-actions {
             display: flex;
             gap: 1rem;
+            justify-content: center;
             flex-wrap: wrap;
+            margin-bottom: 4rem;
         }
 
         .btn-primary {
-            background: #0066cc;
+            background: linear-gradient(135deg, #0066cc, #6366f1);
             color: white;
             padding: 1rem 2rem;
-            border-radius: 10px;
+            border-radius: 8px;
+            text-decoration: none;
             font-weight: 600;
-            border: none;
-            cursor: pointer;
-            display: flex;
+            transition: all 0.3s;
+            display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            transition: all 0.2s;
+            box-shadow: 0 4px 20px rgba(0, 102, 204, 0.25);
         }
 
         .btn-primary:hover {
-            background: #0052a3;
             transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 102, 204, 0.35);
         }
 
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.9);
-            color: #6366f1;
+            background: white;
+            color: #64748b;
             padding: 1rem 2rem;
-            border-radius: 10px;
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.2s;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
         }
 
         .btn-secondary:hover {
+            border-color: #cbd5e1;
+            color: #475569;
             transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         }
 
-        .dashboard-container {
-            background: #ffffff;
+        /* Demo Video */
+        .demo-video {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
             border-radius: 20px;
-            border: 1px solid #e5e7eb;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-
-        .dashboard-header {
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-            padding: 1.5rem 2rem;
-            border-bottom: 1px solid #e2e8f0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .dashboard-title {
-            font-weight: 600;
-            color: #1e293b;
-            font-size: 18px;
-        }
-
-        .dashboard-status {
-            background: #dcfce7;
-            color: #059669;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .dashboard-content {
             padding: 2rem;
-            min-height: 500px;
-            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
-        }
-
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 280px 1fr 320px;
-            gap: 2rem;
-        }
-
-        .dashboard-sidebar {
-            background: #ffffff;
-            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
             border: 1px solid #e2e8f0;
-            padding: 1.5rem;
         }
 
-        .sidebar-section {
-            margin-bottom: 2rem;
-        }
-
-        .sidebar-title {
-            font-size: 12px;
-            font-weight: 600;
-            color: #374151;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-        }
-
-        .sidebar-item {
-            padding: 0.8rem 1rem;
-            margin-bottom: 0.5rem;
-            border-radius: 10px;
-            font-size: 14px;
-            color: #64748b;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            transition: all 0.2s;
-        }
-
-        .sidebar-item.active {
-            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-            color: #0066cc;
-            font-weight: 600;
-        }
-
-        .sidebar-item:hover:not(.active) {
-            background: #f8fafc;
-            color: #374151;
-        }
-
-        .video-section {
-            background: #ffffff;
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
-            padding: 2rem;
-        }
-
-        .video-container {
-            width: 100%;
-            height: 280px;
-            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+        .video-placeholder {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
             border: 2px dashed #cbd5e1;
             border-radius: 12px;
+            height: 400px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .video-container:hover {
-            border-color: #0066cc;
-            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-        }
-
-        .video-container.has-video {
-            background: #000;
-            border: 1px solid #0066cc;
-            padding: 0;
-        }
-
-        .upload-content {
-            text-align: center;
-        }
-
-        .upload-icon {
-            font-size: 48px;
-            margin-bottom: 1rem;
-            opacity: 0.7;
-        }
-
-        .upload-text {
-            font-size: 16px;
-            color: #374151;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .upload-subtext {
-            font-size: 14px;
-            color: #9ca3af;
-        }
-
-        .video-player {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 12px;
-        }
-
-        .file-input {
-            display: none;
-        }
-
-        .control-panel {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 1rem;
-        }
-
-        .control-btn {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            padding: 0.8rem 1rem;
-            border-radius: 10px;
-            font-size: 13px;
             color: #64748b;
-            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #0066cc, #6366f1);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
-            transition: all 0.2s;
         }
 
-        .control-btn:hover {
-            background: #f1f5f9;
-            transform: translateY(-1px);
-        }
-
-        .control-btn.primary {
-            background: #0066cc;
+        .video-placeholder::after {
+            content: '▶';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-45%, -50%);
             color: white;
-            border-color: #0066cc;
+            font-size: 28px;
+            z-index: 1;
         }
 
-        .control-btn.active {
-            background: #059669;
-            color: white;
-        }
-
-        .analytics-panel {
-            background: #ffffff;
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
-            padding: 1.5rem;
-        }
-
-        .analytics-header {
-            font-size: 16px;
+        .video-text {
+            margin-top: 6rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            color: #374151;
-            margin-bottom: 1.5rem;
+            color: #475569;
         }
 
-        .live-chart {
-            height: 120px;
-            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .chart-line {
-            position: absolute;
-            bottom: 15px;
-            left: 15px;
-            right: 15px;
-            height: 80px;
-            background: linear-gradient(to right, #0066cc, #6366f1, #8b5cf6);
-            clip-path: polygon(0% 80%, 15% 40%, 30% 60%, 45% 20%, 60% 85%, 75% 30%, 90% 70%, 100% 45%);
-            animation: chartPulse 3s ease-in-out infinite;
-        }
-
-        @keyframes chartPulse {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 1; }
-        }
-
-        .mini-charts {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .mini-chart {
-            height: 60px;
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            border-radius: 8px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .mini-chart::after {
-            content: '';
-            position: absolute;
-            bottom: 6px;
-            left: 6px;
-            right: 6px;
-            height: 25px;
-            background: #f59e0b;
-            border-radius: 3px;
-            clip-path: polygon(0% 100%, 25% 60%, 50% 80%, 75% 40%, 100% 70%);
-        }
-
-        .stat-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .stat-item {
-            background: #f8fafc;
-            padding: 1rem;
-            border-radius: 10px;
-            text-align: center;
-            border: 1px solid #e2e8f0;
-        }
-
-        .stat-value {
-            color: #0066cc;
-            font-weight: 700;
-            font-size: 20px;
-            display: block;
-        }
-
-        .stat-label {
-            color: #64748b;
-            font-size: 12px;
+        .video-subtext {
+            font-size: 0.9rem;
+            color: #94a3b8;
             margin-top: 0.5rem;
         }
 
+        /* Features Section */
         .features {
-            padding: 8rem 2rem;
-            background: #f9fafb;
+            padding: 6rem 0;
+            background: #f8fafc;
         }
 
-        .features-container {
-            max-width: 1400px;
+        .container {
+            max-width: 1200px;
             margin: 0 auto;
+            padding: 0 2rem;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 5rem;
+            margin-bottom: 4rem;
         }
 
         .section-title {
             font-size: 2.5rem;
-            font-weight: 600;
-            color: #1a1a1a;
+            font-weight: 700;
+            color: #1e293b;
             margin-bottom: 1rem;
         }
 
         .section-subtitle {
             font-size: 1.2rem;
-            color: #6b7280;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
         }
 
         .feature-card {
             background: white;
-            border-radius: 16px;
-            border: 1px solid #f3f4f6;
-            padding: 2.5rem;
-            transition: all 0.3s ease;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: all 0.3s;
         }
 
         .feature-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
         }
 
         .feature-icon {
-            width: 56px;
-            height: 56px;
-            background: #eff6ff;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #0066cc, #6366f1);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
+            margin: 0 auto 1.5rem;
             font-size: 24px;
-            margin-bottom: 1.5rem;
+            color: white;
         }
 
         .feature-title {
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             font-weight: 600;
-            color: #1a1a1a;
+            color: #1e293b;
             margin-bottom: 1rem;
         }
 
         .feature-description {
-            color: #6b7280;
+            color: #64748b;
             line-height: 1.6;
         }
 
+        /* Pricing Section */
         .pricing {
-            padding: 8rem 2rem;
-            background: #ffffff;
+            padding: 6rem 0;
+            background: white;
         }
 
         .pricing-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
+            max-width: 1000px;
+            margin: 3rem auto 0;
         }
 
         .pricing-card {
             background: white;
-            border: 1px solid #e5e7eb;
+            border: 2px solid #e2e8f0;
             border-radius: 16px;
-            padding: 2rem;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s;
             position: relative;
-            transition: all 0.2s ease;
         }
 
         .pricing-card:hover {
             border-color: #0066cc;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
         }
 
         .pricing-card.featured {
             border-color: #0066cc;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transform: scale(1.05);
         }
 
-        .pricing-badge {
+        .popular-badge {
             position: absolute;
-            top: -12px;
+            top: -10px;
             left: 50%;
             transform: translateX(-50%);
-            background: #0066cc;
+            background: linear-gradient(135deg, #0066cc, #6366f1);
             color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: 500;
-        }
-
-        .pricing-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .pricing-title {
-            font-size: 1.25rem;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
             font-weight: 600;
-            color: #1a1a1a;
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e293b;
             margin-bottom: 0.5rem;
         }
 
-        .pricing-price {
+        .plan-price {
             font-size: 3rem;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 0.25rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
         }
 
-        .pricing-period {
-            color: #6b7280;
-            font-size: 15px;
+        .plan-period {
+            color: #64748b;
+            margin-bottom: 2rem;
         }
 
-        .pricing-features {
+        .plan-features {
             list-style: none;
-            margin: 2rem 0;
+            text-align: left;
+            margin-bottom: 2rem;
         }
 
-        .pricing-features li {
+        .plan-features li {
             display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
+            align-items: center;
+            color: #475569;
             margin-bottom: 0.75rem;
-            color: #4b5563;
-            font-size: 15px;
+            padding-left: 0.5rem;
         }
 
-        .pricing-features li::before {
+        .plan-features li::before {
             content: "✓";
-            color: #0066cc;
-            font-weight: 600;
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 0.75rem;
             flex-shrink: 0;
         }
 
-        .pricing-cta {
+        .btn-plan {
             width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-plan-primary {
+            background: linear-gradient(135deg, #0066cc, #6366f1);
+            color: white;
+        }
+
+        .btn-plan-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-plan-secondary {
+            background: white;
+            color: #0066cc;
+            border: 2px solid #0066cc;
+        }
+
+        .btn-plan-secondary:hover {
             background: #0066cc;
             color: white;
-            border: none;
-            padding: 1rem;
-            border-radius: 8px;
-            font-weight: 500;
-            font-size: 15px;
-            cursor: pointer;
-            transition: all 0.2s ease;
         }
 
-        .pricing-cta:hover {
-            background: #0052a3;
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
         }
 
-        .pricing-card:not(.featured) .pricing-cta {
-            background: transparent;
-            color: #0066cc;
-            border: 1px solid #0066cc;
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .pricing-card:not(.featured) .pricing-cta:hover {
-            background: #eff6ff;
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
         }
 
+        .cta-description {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1e293b;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .footer p {
+            opacity: 0.8;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Mobile Responsive */
         @media (max-width: 768px) {
-            .hero-title { font-size: 2.5rem; }
-            .nav-center { display: none; }
-            .dashboard-grid { grid-template-columns: 1fr; }
+            .nav-links {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .pricing-card.featured {
+                transform: none;
+            }
         }
     </style>
 </head>
 <body>
-    <nav class="navbar">
+    <!-- Header -->
+    <header class="header">
         <div class="nav-container">
-            <div class="logo" onclick="handleClick('🏠 PáircPro Homepage')">PáircPro</div>
-            <div class="nav-center">
-                <div class="nav-link" onclick="handleClick('📊 Features section')">Features</div>
-                <div class="nav-link" onclick="handleClick('💰 Pricing section')">Pricing</div>
-                <div class="nav-link" onclick="handleClick('📚 Resources coming soon!')">Resources</div>
-            </div>
-            <div class="nav-right">
-                <div class="profile-menu">
-                    <button class="profile-btn" onclick="toggleDropdown()">Profile ▼</button>
-                    <div class="profile-dropdown" id="dropdown">
-                        <div class="dropdown-item" onclick="handleClick('🔐 Redirecting to login page...')">Log in</div>
-                        <div class="dropdown-item" onclick="handleClick('👤 Creating new profile...')">Create profile</div>
-                        <div class="dropdown-item" onclick="handleClick('🎧 Opening support center...')">Support</div>
-                    </div>
-                </div>
-                <button class="nav-btn secondary" onclick="handleClick('✅ Redirecting to sign in...')">Sign in</button>
-                <button class="nav-btn" onclick="handleClick('🚀 Starting 14-day free trial!')">Start free trial</button>
-                <button class="nav-btn demo" onclick="handleClick('📞 Booking demo call!')">Book demo</button>
-            </div>
+            <a href="index.html" class="logo">PáircPro</a>
+            <nav class="nav-links">
+                <a href="features.html">Features</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <a href="auth.html" class="cta-button">Get Started</a>
         </div>
-    </nav>
+    </header>
 
+    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-badge">🚀 Now with AI-powered analysis</div>
-                <h1 class="hero-title">Professional GAA analysis platform</h1>
-                <p class="hero-subtitle">
-                    Advanced match analysis software designed specifically for GAA teams. 
-                    From video analysis to AI-powered insights, everything you need to elevate your team's performance.
-                </p>
-                <div class="hero-actions">
-                    <button class="btn-primary" onclick="handleClick('🚀 Starting your 14-day free trial!')">
-                        Start free trial <span>→</span>
-                    </button>
-                    <button class="btn-secondary" onclick="handleClick('📞 Demo booking opened!')">
-                        Book demo
-                    </button>
-                </div>
+            <div class="hero-badge">Professional GAA Analysis Platform</div>
+            <h1 class="hero-title">Revolutionize Your GAA Analysis</h1>
+            <p class="hero-subtitle">
+                Advanced video analysis software designed specifically for GAA teams. 
+                From multi-angle video analysis to AI-powered insights, everything you need to elevate your team's performance.
+            </p>
+            
+            <div class="hero-actions">
+                <a href="auth.html" class="btn-primary">
+                    Start Free Trial →
+                </a>
+                <a href="contact.html" class="btn-secondary">
+                    Book Demo
+                </a>
             </div>
 
-            <div class="dashboard-container">
-                <div class="dashboard-header">
-                    <div class="dashboard-title">Advanced GAA Analysis Dashboard</div>
-                    <div class="dashboard-status">Live Analysis</div>
-                </div>
-                <div class="dashboard-content">
-                    <div class="dashboard-grid">
-                        <div class="dashboard-sidebar">
-                            <div class="sidebar-section">
-                                <div class="sidebar-title">Sport Type</div>
-                                <div class="sidebar-item active" onclick="switchSport('football', this)">
-                                    ⚽ Football
-                                </div>
-                                <div class="sidebar-item" onclick="switchSport('hurling', this)">
-                                    🏑 Hurling
-                                </div>
-                                <div class="sidebar-item" onclick="switchSport('camogie', this)">
-                                    🥍 Camogie
-                                </div>
-                            </div>
-                            
-                            <div class="sidebar-section">
-                                <div class="sidebar-title">Analysis Tools</div>
-                                <div class="sidebar-item" onclick="switchTool('video', this)">
-                                    📹 Video Analysis
-                                </div>
-                                <div class="sidebar-item" onclick="switchTool('live', this)">
-                                    📡 Live Analysis
-                                </div>
-                                <div class="sidebar-item" onclick="switchTool('heatmap', this)">
-                                    🔥 Heat Maps
-                                </div>
-                                <div class="sidebar-item" onclick="switchTool('stats', this)">
-                                    📊 Match Stats
-                                </div>
-                            </div>
-
-                            <div class="sidebar-section">
-                                <div class="sidebar-title">Action Features</div>
-                                <div class="sidebar-item" onclick="switchAction('events', this)">
-                                    ⚡ Event Detection
-                                </div>
-                                <div class="sidebar-item" onclick="switchAction('tracking', this)">
-                                    📍 Player Tracking
-                                </div>
-                                <div class="sidebar-item" onclick="switchAction('formation', this)">
-                                    🎯 Formation Analysis
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="video-section">
-                            <div class="video-container" onclick="handleVideoClick()" id="videoContainer">
-                                <input type="file" class="file-input" id="fileInput" accept="video/*" onchange="handleFileSelect(event)">
-                                
-                                <div class="upload-content" id="uploadContent">
-                                    <div class="upload-icon">🎬</div>
-                                    <div class="upload-text">Drop match video here or click to upload</div>
-                                    <div class="upload-subtext">MP4, MOV, AVI up to 1GB • AI analysis included</div>
-                                </div>
-
-                                <video class="video-player" id="videoPlayer" style="display: none;" controls>
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-
-                            <div class="control-panel">
-                                <button class="control-btn primary" onclick="markEvent(this)">⚡ Mark Event</button>
-                                <button class="control-btn" onclick="toggleAI(this)" id="aiBtn">🤖 AI Detection</button>
-                                <button class="control-btn" onclick="exportAnalysis(this)">📊 Export</button>
-                                <button class="control-btn" onclick="generateHeatmap(this)">🔥 Heat Map</button>
-                                <button class="control-btn" onclick="trackPlayers(this)">📍 Track Players</button>
-                            </div>
-                        </div>
-
-                        <div class="analytics-panel">
-                            <div class="analytics-header">📊 Live Analytics</div>
-                            
-                            <div class="live-chart">
-                                <div class="chart-line"></div>
-                            </div>
-
-                            <div class="mini-charts">
-                                <div class="mini-chart"></div>
-                                <div class="mini-chart"></div>
-                                <div class="mini-chart"></div>
-                                <div class="mini-chart"></div>
-                            </div>
-
-                            <div class="stat-grid">
-                                <div class="stat-item">
-                                    <span class="stat-value" id="possession">64%</span>
-                                    <span class="stat-label">Possession</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-value" id="accuracy">87%</span>
-                                    <span class="stat-label">Shot Accuracy</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-value" id="goals">4</span>
-                                    <span class="stat-label">Goals</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-value" id="points">18</span>
-                                    <span class="stat-label">Points</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-value" id="events">23</span>
-                                    <span class="stat-label">Key Events</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-value" id="heatScore">9.2</span>
-                                    <span class="stat-label">Heat Score</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="demo-video">
+                <div class="video-placeholder">
+                    <div class="video-text">Watch PáircPro in Action</div>
+                    <div class="video-subtext">See how easy it is to analyze GAA matches with our professional tools</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="features" id="features">
-        <div class="features-container">
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Advanced GAA analysis features</h2>
-                <p class="section-subtitle">Professional tools designed specifically for Gaelic games</p>
+                <h2 class="section-title">Powerful GAA Analysis Features</h2>
+                <p class="section-subtitle">Professional-grade tools designed specifically for Gaelic games</p>
             </div>
 
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h3 class="feature-title">AI-powered event detection</h3>
-                    <p class="feature-description">Automatically detect goals, points, fouls, and key plays with machine learning trained specifically for GAA sports.</p>
+                    <div class="feature-icon">🎥</div>
+                    <h3 class="feature-title">Multi-Angle Video Analysis</h3>
+                    <p class="feature-description">Upload multiple camera angles and analyze them simultaneously with frame-by-frame precision and variable playback speeds.</p>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon">🔥</div>
-                    <h3 class="feature-title">Advanced heat maps</h3>
-                    <p class="feature-description">Visualize player movement, possession zones, and tactical patterns with dynamic heat mapping technology.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">📡</div>
-                    <h3 class="feature-title">Live match analysis</h3>
-                    <p class="feature-description">Real-time analysis during matches with instant event detection and live statistical updates.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">📍</div>
-                    <h3 class="feature-title">Player tracking</h3>
-                    <p class="feature-description">Track individual player movements, speed, and positioning throughout the match with AI-powered recognition.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">⚽</div>
-                    <h3 class="feature-title">Multi-sport support</h3>
-                    <p class="feature-description">Specialized analysis for Football, Hurling, and Camogie with sport-specific metrics and insights.</p>
+                    <div class="feature-icon">🏷️</div>
+                    <h3 class="feature-title">GAA-Specific Event Tagging</h3>
+                    <p class="feature-description">Comprehensive event system for Football and Hurling with own vs opposition kickout tracking and sport-specific metrics.</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">📊</div>
-                    <h3 class="feature-title">Performance analytics</h3>
-                    <p class="feature-description">Comprehensive statistical analysis with sports science-backed metrics and detailed performance reports.</p>
+                    <h3 class="feature-title">Live Match Analysis</h3>
+                    <p class="feature-description">Real-time event tagging during matches with instant statistical updates and coach collaboration tools.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Advanced Analytics</h3>
+                    <p class="feature-description">Professional heat maps, tactical pattern recognition, and opposition analysis with GAA-specific insights.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3 class="feature-title">Professional Reports</h3>
+                    <p class="feature-description">Generate comprehensive PDF reports with statistics, visualizations, and insights for coaches and players.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">☁️</div>
+                    <h3 class="feature-title">Cloud Platform</h3>
+                    <p class="feature-description">Secure cloud storage with team collaboration tools and seamless access from any device, anywhere.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="pricing" id="pricing">
-        <div class="features-container">
+    <!-- Pricing Section -->
+    <section class="pricing">
+        <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Simple, transparent pricing</h2>
-                <p class="section-subtitle">Start with a free trial, then choose the plan that fits your team</p>
+                <h2 class="section-title">Simple, Transparent Pricing</h2>
+                <p class="section-subtitle">Choose the plan that's right for your team</p>
             </div>
 
             <div class="pricing-grid">
                 <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3 class="pricing-title">Free Trial</h3>
-                        <div class="pricing-price">€0</div>
-                        <div class="pricing-period">14 days free</div>
-                    </div>
-                    <ul class="pricing-features">
+                    <div class="plan-name">Free</div>
+                    <div class="plan-price">€0</div>
+                    <div class="plan-period">Forever free</div>
+                    <ul class="plan-features">
                         <li>Basic video analysis</li>
-                        <li>Simple event marking</li>
-                        <li>3 match uploads</li>
-                        <li>Basic reports</li>
-                        <li>1 team, 10 players</li>
+                        <li>Manual event tagging</li>
+                        <li>Up to 3 matches per month</li>
+                        <li>CSV export</li>
                     </ul>
-                    <button class="pricing-cta" onclick="handleClick('🚀 Starting free trial!')">Start free trial</button>
+                    <a href="auth.html" class="btn-plan btn-plan-secondary">Get Started Free</a>
                 </div>
 
                 <div class="pricing-card featured">
-                    <div class="pricing-badge">Most Popular</div>
-                    <div class="pricing-header">
-                        <h3 class="pricing-title">Professional</h3>
-                        <div class="pricing-price">€49</div>
-                        <div class="pricing-period">per month</div>
-                    </div>
-                    <ul class="pricing-features">
-                        <li>Advanced video analysis</li>
-                        <li>AI-powered event detection</li>
-                        <li>Heat maps & player tracking</li>
+                    <div class="popular-badge">Most Popular</div>
+                    <div class="plan-name">Premium</div>
+                    <div class="plan-price">€199</div>
+                    <div class="plan-period">per month</div>
+                    <ul class="plan-features">
+                        <li>Multi-angle video analysis</li>
+                        <li>GAA-specific event tagging</li>
                         <li>Live match analysis</li>
-                        <li>Unlimited match uploads</li>
-                        <li>Professional reports</li>
-                        <li>5 teams, 100 players</li>
-                        <li>Priority support</li>
+                        <li>Advanced statistics</li>
+                        <li>PDF reports</li>
+                        <li>25GB video storage</li>
                     </ul>
-                    <button class="pricing-cta" onclick="handleClick('💼 Getting Professional plan!')">Get started</button>
+                    <a href="auth.html" class="btn-plan btn-plan-primary">Start Free Trial</a>
                 </div>
 
                 <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3 class="pricing-title">Enterprise</h3>
-                        <div class="pricing-price">€149</div>
-                        <div class="pricing-period">per month</div>
-                    </div>
-                    <ul class="pricing-features">
-                        <li>Everything in Professional</li>
-                        <li>Unlimited teams & players</li>
-                        <li>Custom AI training</li>
-                        <li>Advanced integrations</li>
-                        <li>Dedicated support manager</li>
-                        <li>Custom reporting & branding</li>
-                        <li>Multi-location access</li>
-                        <li>SLA guarantee</li>
+                    <div class="plan-name">Enterprise</div>
+                    <div class="plan-price">€499</div>
+                    <div class="plan-period">per month</div>
+                    <ul class="plan-features">
+                        <li>Everything in Premium</li>
+                        <li>Unlimited video storage</li>
+                        <li>Multi-user accounts</li>
+                        <li>Team collaboration</li>
+                        <li>API access</li>
+                        <li>Dedicated support</li>
                     </ul>
-                    <button class="pricing-cta" onclick="handleClick('🤝 Contacting enterprise sales!')">Contact sales</button>
+                    <a href="contact.html" class="btn-plan btn-plan-secondary">Contact Sales</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <script>
-        // Global variables
-        let currentVideo = null;
-        let aiActive = false;
-        let statsInterval = null;
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to Transform Your GAA Analysis?</h2>
+                <p class="cta-description">Join professional coaches and analysts who trust PáircPro for their match analysis needs.</p>
+                <a href="auth.html" class="btn-primary">Start Your Free Trial</a>
+            </div>
+        </div>
+    </section>
 
-        // Main click handler - this WILL work in standalone HTML
-        function handleClick(message) {
-            alert(message);
-        }
-
-        // Dropdown toggle
-        function toggleDropdown() {
-            const dropdown = document.getElementById('dropdown');
-            dropdown.classList.toggle('show');
-        }
-
-        // Sport switching
-        function switchSport(sport, element) {
-            const siblings = element.parentNode.querySelectorAll('.sidebar-item');
-            siblings.forEach(item => item.classList.remove('active'));
-            element.classList.add('active');
-            handleClick('🏆 Switched to ' + sport + ' analysis mode');
-            updateStatsForSport(sport);
-        }
-
-        // Tool switching
-        function switchTool(tool, element) {
-            const siblings = element.parentNode.querySelectorAll('.sidebar-item');
-            siblings.forEach(item => item.classList.remove('active'));
-            element.classList.add('active');
-            handleClick('📊 Activated ' + tool + ' analysis tool');
-        }
-
-        // Action switching
-        function switchAction(action, element) {
-            const siblings = element.parentNode.querySelectorAll('.sidebar-item');
-            siblings.forEach(item => item.classList.remove('active'));
-            element.classList.add('active');
-            
-            const messages = {
-                events: '⚡ Event detection activated',
-                tracking: '📍 Player tracking enabled', 
-                formation: '🎯 Formation analysis active'
-            };
-            handleClick(messages[action]);
-        }
-
-        // Video functions
-        function handleVideoClick() {
-            if (!currentVideo) {
-                document.getElementById('fileInput').click();
-            }
-        }
-
-        function handleFileSelect(event) {
-            const file = event.target.files[0];
-            if (file) {
-                if (!file.type.startsWith('video/')) {
-                    handleClick('❌ Please select a valid video file');
-                    return;
-                }
-                
-                handleClick('✅ Processing video... AI analysis starting...');
-                loadVideo(URL.createObjectURL(file), file.name);
-            }
-        }
-
-        function loadVideo(url, filename) {
-            const container = document.getElementById('videoContainer');
-            const uploadContent = document.getElementById('uploadContent');
-            const videoPlayer = document.getElementById('videoPlayer');
-
-            uploadContent.style.display = 'none';
-            videoPlayer.style.display = 'block';
-            videoPlayer.src = url;
-            
-            container.classList.add('has-video');
-            currentVideo = videoPlayer;
-
-            setTimeout(() => {
-                const events = Math.floor(Math.random() * 20) + 10;
-                handleClick('🎯 Video "' + filename + '" analyzed! AI detected ' + events + ' key events.');
-                startStatsAnimation();
-            }, 2000);
-        }
-
-        // Control functions
-        function markEvent(btn) {
-            btn.style.background = '#059669';
-            btn.innerHTML = '✅ Marked!';
-            setTimeout(() => {
-                btn.style.background = '#0066cc';
-                btn.innerHTML = '⚡ Mark Event';
-                handleClick('📍 Event marked successfully!');
-            }, 1500);
-        }
-
-        function toggleAI(btn) {
-            aiActive = !aiActive;
-            if (aiActive) {
-                btn.classList.add('active');
-                btn.innerHTML = '🤖 AI Active';
-                handleClick('🤖 AI detection activated!');
-            } else {
-                btn.classList.remove('active');
-                btn.innerHTML = '🤖 AI Detection';
-            }
-        }
-
-        function exportAnalysis(btn) {
-            btn.style.background = '#6366f1';
-            btn.innerHTML = '⏳ Exporting...';
-            setTimeout(() => {
-                btn.style.background = '#059669';
-                btn.innerHTML = '✅ Complete!';
-                setTimeout(() => {
-                    handleClick('📊 Analysis exported successfully!');
-                    btn.style.background = '#f8fafc';
-                    btn.innerHTML = '📊 Export';
-                    btn.style.color = '#64748b';
-                }, 1000);
-            }, 1500);
-        }
-
-        function generateHeatmap(btn) {
-            btn.style.background = '#ef4444';
-            btn.style.color = 'white';
-            btn.innerHTML = '🔥 Generating...';
-            setTimeout(() => {
-                handleClick('🔥 Heat map generated successfully!');
-                btn.style.background = '#f8fafc';
-                btn.style.color = '#64748b';
-                btn.innerHTML = '🔥 Heat Map';
-            }, 1500);
-        }
-
-        function trackPlayers(btn) {
-            btn.style.background = '#059669';
-            btn.style.color = 'white';
-            btn.innerHTML = '📍 Tracking...';
-            setTimeout(() => {
-                handleClick('📍 Now tracking all players!');
-                btn.style.background = '#f8fafc';
-                btn.style.color = '#64748b';
-                btn.innerHTML = '📍 Track Players';
-            }, 1500);
-        }
-
-        // Stats functions
-        function updateStatsForSport(sport) {
-            const sportStats = {
-                football: { possession: '64%', accuracy: '87%', goals: '4', points: '18', events: '23', heatScore: '9.2' },
-                hurling: { possession: '58%', accuracy: '92%', goals: '2', points: '19', events: '31', heatScore: '8.7' },
-                camogie: { possession: '61%', accuracy: '89%', goals: '3', points: '16', events: '27', heatScore: '8.9' }
-            };
-            
-            const stats = sportStats[sport];
-            Object.keys(stats).forEach(key => {
-                const element = document.getElementById(key);
-                if (element) element.textContent = stats[key];
-            });
-        }
-
-        function startStatsAnimation() {
-            if (statsInterval) return;
-            
-            statsInterval = setInterval(() => {
-                document.getElementById('possession').textContent = (Math.floor(Math.random() * 20) + 55) + '%';
-                document.getElementById('accuracy').textContent = (Math.floor(Math.random() * 15) + 80) + '%';
-                document.getElementById('events').textContent = Math.floor(Math.random() * 10) + 20;
-                document.getElementById('heatScore').textContent = (Math.random() * 2 + 8).toFixed(1);
-            }, 3000);
-        }
-
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(event) {
-            const profileMenu = document.querySelector('.profile-menu');
-            if (!profileMenu.contains(event.target)) {
-                document.getElementById('dropdown').classList.remove('show');
-            }
-        });
-
-        // Start live analysis on page load
-        window.addEventListener('load', function() {
-            startStatsAnimation();
-        });
-    </script>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 PáircPro. All rights reserved. | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a> | <a href="contact.html">Contact</a></p>
+        </div>
+    </footer>
 </body>
-
 </html>
