@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pricing - PáircPro | Professional GAA Video Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         * {
             margin: 0;
@@ -1008,38 +1009,38 @@
     <script>
         let isAnnual = false;
 
-        const mockUser = {
-            name: localStorage.getItem('userName') || 'John Doe',
-            email: localStorage.getItem('userEmail') || 'john@example.com',
-            plan: localStorage.getItem('userPlan') || 'Premium Trial',
-            trialDaysLeft: 12
-        };
+        // Initialize Supabase
+        const supabaseUrl = 'https://gkcgngqdsmyutvbzepsn.supabase.co'
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdrY2duZ3Fkc215dXR2YnplcHNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU3MDU5NTAsImV4cCI6MjA3MTI4MTk1MH0.rDTTUn_McI1sSfZH12o5FLrS1iSXNEo14Pxce6YI3qA'
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
 
-        function updateNavigation() {
-            const isLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
+        async function updateNavigation() {
+            const { data: { user } } = await supabase.auth.getUser()
             const authButtons = document.getElementById('authButtons');
             
-            if (isLoggedIn) {
-                if (mockUser.plan.includes('Trial')) {
-                    const trialBanner = document.createElement('div');
-                    trialBanner.className = 'trial-banner';
-                    trialBanner.innerHTML = `Trial: ${mockUser.trialDaysLeft} days left - <a href="pricing.html" style="color: #92400e; text-decoration: underline;">Upgrade now</a>`;
-                    document.body.insertBefore(trialBanner, document.body.firstChild);
-                }
+            if (user) {
+                const userData = user.user_metadata;
+                const userName = userData.full_name || 'User';
+                const userEmail = user.email;
+                
+                const trialBanner = document.createElement('div');
+                trialBanner.className = 'trial-banner';
+                trialBanner.innerHTML = `Trial: 14 days left - <a href="pricing.html" style="color: #92400e; text-decoration: underline;">Upgrade now</a>`;
+                document.body.insertBefore(trialBanner, document.body.firstChild);
 
                 authButtons.innerHTML = `
                     <a href="app.html" class="login-btn">Launch App</a>
                     <div class="account-menu">
                         <div class="account-button" onclick="toggleAccountDropdown()">
-                            <div class="account-avatar">${mockUser.name.charAt(0)}</div>
-                            <span style="font-weight: 500;">${mockUser.name.split(' ')[0]}</span>
+                            <div class="account-avatar">${userName.charAt(0)}</div>
+                            <span style="font-weight: 500;">${userName.split(' ')[0]}</span>
                             <span style="font-size: 12px;">▼</span>
                         </div>
                         <div class="account-dropdown" id="accountDropdown">
                             <div class="dropdown-header">
-                                <div style="font-weight: 600;">${mockUser.name}</div>
-                                <div class="dropdown-email">${mockUser.email}</div>
-                                <div class="dropdown-plan">${mockUser.plan}</div>
+                                <div style="font-weight: 600;">${userName}</div>
+                                <div class="dropdown-email">${userEmail}</div>
+                                <div class="dropdown-plan">Premium Trial</div>
                             </div>
                             <a href="#" class="dropdown-item" onclick="alert('Account settings coming soon!')">Account Settings</a>
                             <a href="pricing.html" class="dropdown-item">Billing & Plans</a>
@@ -1066,8 +1067,8 @@
             }
         });
 
-        function logout() {
-            localStorage.removeItem('userLoggedIn');
+        async function logout() {
+            await supabase.auth.signOut();
             location.reload();
         }
 
@@ -1121,10 +1122,8 @@
 
         window.addEventListener('DOMContentLoaded', updateNavigation);
 
-        window.addEventListener('storage', function(e) {
-            if (e.key === 'userLoggedIn') {
-                updateNavigation();
-            }
+        supabase.auth.onAuthStateChange(() => {
+            updateNavigation();
         });
     </script>
 </body>
