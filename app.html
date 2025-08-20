@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PáircPro - GAA Video Analysis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', sans-serif;
+            background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+            color: white;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .app-container {
+            height: 100vh;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 200px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo {
+            padding: 24px 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            font-size: 26px;
+            font-weight: 700;
+            color: white;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-section {
+            padding: 24px 16px 16px;
+        }
+
+        .nav-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            margin-bottom: 4px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-item.active {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-icon {
+            margin-right: 12px;
+            font-size: 16px;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .top-bar {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            padding: 20px 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .top-controls {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: clamp(8px, 1vw, 10px) clamp(16px, 2vw, 20px);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: clamp(12px, 1vw, 14px);
+            transition: all 0.2s ease;
+            font-family: inherit;
+            white-space: nowrap;
+            min-height: 0;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #0066cc;
+        }
+
+        .btn-primary:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-1px);
+        }
+
+        .content-area {
+            flex: 1;
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .left-panel {
+            width: 320px;
+            min-width: 280px;
+            max-width: 360px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            height: calc(100vh - 140px);
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .panel {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: visible;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+        }
+
+        .panel-header {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-weight: 700;
+            font-size: 16px;
+            color: white;
+        }
+
+        .panel-content {
+            padding: 20px;
+        }
+
+        .sport-tabs {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 20px;
+        }
+
+        .sport-tab {
+            flex: 1;
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .sport-tab.active {
+            background: white;
+            color: #0066cc;
+            border-color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .sport-tab:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .event-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .event-grid.three-columns {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        .event-category {
+            margin-bottom: 20px;
+        }
+
+        .category-title {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .event-btn {
+            padding: clamp(10px, 1.2vw, 12px) clamp(12px, 1.5vw, 16px);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: clamp(11px, 1vw, 13px);
+            font-weight: 600;
+            transition: all 0.2s ease;
+            text-align: center;
+            font-family: inherit;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-height: 0;
+        }
+
+        .event-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .goal-btn { background: #10b981; color: white; }
+        .point-btn { background: #f59e0b; color: white; }
+        .wide-btn { background: #ef4444; color: white; }
+        .save-btn { background: #8b5cf6; color: white; }
+        .foul-btn { background: #f97316; color: white; }
+        .card-btn { background: #dc2626; color: white; }
+        .free-btn { background: #06b6d4; color: white; }
+        .other-btn { background: rgba(255, 255, 255, 0.2); color: white; }
+
+        .video-section {
+            flex: 1;
+            min-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            height: calc(100vh - 140px);
+            overflow: hidden;
+        }
+
+        .video-container {
+            flex: 1;
+            min-height: 300px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            backdrop-filter: blur(20px);
+            overflow: hidden;
+        }
+
+        .upload-area {
+            text-align: center;
+            padding: 60px 40px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 12px;
+        }
+
+        .upload-area:hover {
+            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .upload-area h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .timeline-section {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            height: 120px;
+            flex-shrink: 0;
+        }
+
+        .controls-bar {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-shrink: 0;
+            min-height: 96px;
+        }
+
+        .play-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: white;
+            border: none;
+            color: #0066cc;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .play-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .time-display {
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 600;
+        }
+
+        .progress-container {
+            flex: 1;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: white;
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+
+        .right-panel {
+            width: 360px;
+            min-width: 300px;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            height: calc(100vh - 140px);
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .score-display {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+        }
+
+        .team-score {
+            text-align: center;
+            flex: 1;
+        }
+
+        .team-name {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .score {
+            font-size: 28px;
+            font-weight: 800;
+            color: white;
+        }
+
+        .vs {
+            margin: 0 24px;
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 600;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 800;
+            color: white;
+        }
+
+        .possession-bar {
+            margin: 20px 0;
+        }
+
+        .possession-display {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .possession-progress {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .possession-fill {
+            height: 100%;
+            background: linear-gradient(to right, white 52%, rgba(255, 255, 255, 0.4) 52%);
+        }
+
+        .event-list {
+            max-height: 220px;
+            overflow-y: auto;
+        }
+
+        .event-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            margin-bottom: 6px;
+            border-radius: 8px;
+            font-size: 13px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .event-time {
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 600;
+        }
+
+        .heat-map {
+            height: 160px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+        }
+
+        .shortcuts-info {
+            margin-top: 16px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            font-size: 11px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .shortcuts-info strong {
+            color: white;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* Force scrollbar to always show so users know content is scrollable */
+        .left-panel::-webkit-scrollbar,
+        .right-panel::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .left-panel::-webkit-scrollbar-track,
+        .right-panel::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        .left-panel::-webkit-scrollbar-thumb,
+        .right-panel::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 4px;
+        }
+
+        .left-panel::-webkit-scrollbar-thumb:hover,
+        .right-panel::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">PáircPro</div>
+            
+            <div class="nav-section">
+                <div class="nav-title">Analysis</div>
+                <div class="nav-item active">
+                    <span class="nav-icon">🎥</span>
+                    Video Analysis
+                </div>
+                <div class="nav-item">
+                    <span class="nav-icon">📁</span>
+                    Projects
+                </div>
+                <div class="nav-item">
+                    <span class="nav-icon">📊</span>
+                    Reports
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-title">Tools</div>
+                <div class="nav-item">
+                    <span class="nav-icon">✂️</span>
+                    Clip Creator
+                </div>
+                <div class="nav-item">
+                    <span class="nav-icon">🔥</span>
+                    Heat Maps
+                </div>
+                <div class="nav-item">
+                    <span class="nav-icon">⚖️</span>
+                    Compare
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-title">Account</div>
+                <div class="nav-item">
+                    <span class="nav-icon">⚙️</span>
+                    Settings
+                </div>
+                <div class="nav-item">
+                    <span class="nav-icon">❓</span>
+                    Help
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="top-bar">
+                <h1 class="page-title">Video Analysis</h1>
+                <div class="top-controls">
+                    <button class="btn btn-secondary" onclick="saveProject()">Save Project</button>
+                    <button class="btn btn-primary" onclick="exportAnalysis()">Export Analysis</button>
+                </div>
+            </div>
+
+            <div class="content-area">
+                <div class="left-panel">
+                    <div class="panel">
+                        <div class="panel-header">Match Setup</div>
+                        <div class="panel-content">
+                            <div class="sport-tabs">
+                                <div class="sport-tab active" onclick="setSport('football')">Football</div>
+                                <div class="sport-tab" onclick="setSport('hurling')">Hurling</div>
+                            </div>
+                            
+                            <input type="file" id="videoFile" class="file-input" accept="video/*" onchange="handleVideoUpload(event)">
+                            <button class="btn btn-secondary" style="width: 100%; margin-top: 10px;" onclick="document.getElementById('videoFile').click()">
+                                📁 Choose Match Video
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-header">Event Tagging</div>
+                        <div class="panel-content">
+                            <div class="event-category">
+                                <div class="category-title">Scoring</div>
+                                <div class="event-grid three-columns" id="scoringGrid">
+                                    <button class="event-btn goal-btn" onclick="tagEvent('Goal')">Goal</button>
+                                    <button class="event-btn point-btn" onclick="tagEvent('Point')">Point</button>
+                                    <button class="event-btn point-btn" onclick="tagEvent('2 Point')" id="twoPointBtn">2 Point</button>
+                                    <button class="event-btn wide-btn" onclick="tagEvent('Wide')">Wide</button>
+                                    <button class="event-btn save-btn" onclick="tagEvent('Saved')">Saved</button>
+                                    <button class="event-btn wide-btn" onclick="tagEvent('45')" id="football45">45</button>
+                                    <button class="event-btn wide-btn" onclick="tagEvent('65')" id="hurling65" style="display: none;">65</button>
+                                </div>
+                            </div>
+
+                            <div class="event-category">
+                                <div class="category-title">Own Kickouts</div>
+                                <div class="event-grid">
+                                    <button class="event-btn free-btn" onclick="tagEvent('Own Kickout Won')">Won</button>
+                                    <button class="event-btn foul-btn" onclick="tagEvent('Own Kickout Lost')">Lost</button>
+                                </div>
+                            </div>
+
+                            <div class="event-category">
+                                <div class="category-title">Opposition Kickouts</div>
+                                <div class="event-grid">
+                                    <button class="event-btn free-btn" onclick="tagEvent('Opp Kickout Won')">Won</button>
+                                    <button class="event-btn foul-btn" onclick="tagEvent('Opp Kickout Lost')">Lost</button>
+                                </div>
+                            </div>
+
+                            <div class="event-category">
+                                <div class="category-title">Other Restarts</div>
+                                <div class="event-grid">
+                                    <button class="event-btn free-btn" onclick="tagEvent('Free Kick')">Free Kick</button>
+                                    <button class="event-btn free-btn" onclick="tagEvent('Sideline')">Sideline</button>
+                                    <button class="event-btn other-btn" onclick="tagEvent('Penalty')">Penalty</button>
+                                    <button class="event-btn other-btn" onclick="tagEvent('Throw-in')">Throw-in</button>
+                                </div>
+                            </div>
+
+                            <div class="event-category">
+                                <div class="category-title">Fouls</div>
+                                <div class="event-grid">
+                                    <button class="event-btn foul-btn" onclick="tagEvent('Foul')">Foul</button>
+                                    <button class="event-btn card-btn" onclick="tagEvent('Yellow Card')">Yellow Card</button>
+                                    <button class="event-btn card-btn" onclick="tagEvent('Red Card')">Red Card</button>
+                                    <button class="event-btn card-btn" onclick="tagEvent('Black Card')">Black Card</button>
+                                </div>
+                            </div>
+
+                            <div class="event-category">
+                                <div class="category-title">Other</div>
+                                <div class="event-grid">
+                                    <button class="event-btn other-btn" onclick="tagEvent('Substitution')">Substitution</button>
+                                    <button class="event-btn other-btn" onclick="tagEvent('Turnover')">Turnover</button>
+                                    <button class="event-btn other-btn" onclick="tagEvent('Injury')">Injury</button>
+                                    <button class="event-btn other-btn" onclick="tagEvent('Custom')">Custom</button>
+                                </div>
+                            </div>
+
+                            <div class="shortcuts-info">
+                                <strong>Keyboard Shortcuts</strong>
+                                G - Goal | P - Point | W - Wide | S - Save<br>
+                                F - Foul | C - Card | Space - Play/Pause
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-section">
+                    <div class="video-container" id="videoContainer">
+                        <div class="upload-area" onclick="document.getElementById('videoFile').click()">
+                            <h3>Upload Match Video</h3>
+                            <p style="margin-top: 12px; opacity: 0.8;">Click to select or drag & drop</p>
+                            <p style="margin-top: 8px; font-size: 13px; opacity: 0.6;">MP4, AVI, MOV supported</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-section">
+                        <h4 style="margin-bottom: 16px; font-weight: 700;">Event Timeline</h4>
+                        <div id="timeline" style="height: 60px; background: rgba(0, 0, 0, 0.3); border-radius: 8px; position: relative; border: 1px solid rgba(255, 255, 255, 0.1);">
+                            <p style="text-align: center; line-height: 60px; color: rgba(255, 255, 255, 0.6); font-size: 13px;">No events tagged yet. Start tagging events in the video.</p>
+                        </div>
+                    </div>
+
+                    <div class="controls-bar">
+                        <button class="play-btn" id="playBtn" onclick="togglePlayPause()">▶</button>
+                        <span class="time-display" id="timeDisplay">00:00 / 00:00</span>
+                        <div class="progress-container" onclick="seekVideo(event)">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <button class="btn btn-primary" onclick="markEvent()">Mark Event</button>
+                    </div>
+                </div>
+
+                <div class="right-panel">
+                    <div class="score-display">
+                        <div class="team-score">
+                            <div class="team-name">Home</div>
+                            <div class="score" id="homeScore">0-00</div>
+                        </div>
+                        <div class="vs">VS</div>
+                        <div class="team-score">
+                            <div class="team-name">Away</div>
+                            <div class="score" id="awayScore">0-00</div>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-header">Match Statistics</div>
+                        <div class="panel-content">
+                            <div class="possession-bar">
+                                <div class="possession-display">
+                                    <span style="color: rgba(255, 255, 255, 0.8);">Possession</span>
+                                    <span id="possessionText" style="color: white;">52% - 48%</span>
+                                </div>
+                                <div class="possession-progress">
+                                    <div class="possession-fill"></div>
+                                </div>
+                            </div>
+
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <div class="stat-label">Total Events</div>
+                                    <div class="stat-value" id="totalEvents">0</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">Goals</div>
+                                    <div class="stat-value" id="goalCount">0</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">Points</div>
+                                    <div class="stat-value" id="pointCount">0</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">Fouls</div>
+                                    <div class="stat-value" id="foulCount">0</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">Own K/O Won</div>
+                                    <div class="stat-value" id="ownKickoutWon">0</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">Opp K/O Won</div>
+                                    <div class="stat-value" id="oppKickoutWon">0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-header">Export Options</div>
+                        <div class="panel-content">
+                            <button class="btn btn-secondary" style="width: 100%; margin-bottom: 12px;" onclick="exportCSV()">
+                                📊 Export CSV
+                            </button>
+                            <button class="btn btn-secondary" style="width: 100%; margin-bottom: 12px;" onclick="exportPDF()">
+                                📄 PDF Report
+                            </button>
+                            <button class="btn btn-secondary" style="width: 100%;" onclick="shareLink()">
+                                🔗 Share Link
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-header">Heat Map</div>
+                        <div class="panel-content">
+                            <div class="heat-map">
+                                Field Heat Map (Possession zones)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-header">Recent Events</div>
+                        <div class="panel-content">
+                            <div class="event-list" id="eventList">
+                                <p style="opacity: 0.6; font-size: 13px; text-align: center;">No events tagged yet</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Global variables
+        let currentVideo = null;
+        let events = [];
+        let isPlaying = false;
+        let currentTime = 0;
+        let duration = 0;
+        let currentSport = 'football';
+
+        // Statistics
+        let stats = {
+            Goal: 0,
+            Point: 0,
+            '2 Point': 0,
+            Wide: 0,
+            Saved: 0,
+            '45': 0,
+            '65': 0,
+            'Own Kickout Won': 0,
+            'Own Kickout Lost': 0,
+            'Opp Kickout Won': 0,
+            'Opp Kickout Lost': 0,
+            'Free Kick': 0,
+            Sideline: 0,
+            Penalty: 0,
+            'Throw-in': 0,
+            Foul: 0,
+            'Yellow Card': 0,
+            'Red Card': 0,
+            'Black Card': 0,
+            Substitution: 0,
+            Turnover: 0,
+            Injury: 0,
+            Custom: 0
+        };
+
+        let scores = {
+            home: { goals: 0, points: 0 },
+            away: { goals: 0, points: 0 }
+        };
+
+        // Set sport function
+        function setSport(sport) {
+            currentSport = sport;
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.sport-tab').forEach(tab => tab.classList.remove('active'));
+            
+            // Add active class to clicked tab
+            document.querySelectorAll('.sport-tab').forEach(tab => {
+                if (tab.textContent.toLowerCase() === sport.toLowerCase()) {
+                    tab.classList.add('active');
+                }
+            });
+            
+            // Show/hide sport-specific buttons
+            const twoPointBtn = document.getElementById('twoPointBtn');
+            const football45 = document.getElementById('football45');
+            const hurling65 = document.getElementById('hurling65');
+            
+            if (sport === 'football') {
+                twoPointBtn.style.display = 'block';
+                football45.style.display = 'block';
+                hurling65.style.display = 'none';
+            } else {
+                twoPointBtn.style.display = 'none';
+                football45.style.display = 'none';
+                hurling65.style.display = 'block';
+            }
+        }
+
+        // Video upload function
+        function handleVideoUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const videoUrl = URL.createObjectURL(file);
+                const videoContainer = document.getElementById('videoContainer');
+                
+                videoContainer.innerHTML = `
+                    <video id="mainVideo" width="100%" height="100%" controls style="border-radius: 12px;">
+                        <source src="${videoUrl}" type="${file.type}">
+                        Your browser does not support the video tag.
+                    </video>
+                `;
+                
+                currentVideo = document.getElementById('mainVideo');
+                currentVideo.addEventListener('loadedmetadata', () => {
+                    duration = currentVideo.duration;
+                    updateTimeDisplay();
+                });
+                
+                currentVideo.addEventListener('timeupdate', () => {
+                    currentTime = currentVideo.currentTime;
+                    updateTimeDisplay();
+                    updateProgressBar();
+                });
+            }
+        }
+
+        // Play/pause function
+        function togglePlayPause() {
+            if (!currentVideo) return;
+            
+            if (isPlaying) {
+                currentVideo.pause();
+                document.getElementById('playBtn').textContent = '▶';
+                isPlaying = false;
+            } else {
+                currentVideo.play();
+                document.getElementById('playBtn').textContent = '⏸';
+                isPlaying = true;
+            }
+        }
+
+        // Update time display
+        function updateTimeDisplay() {
+            const timeDisplay = document.getElementById('timeDisplay');
+            const current = formatTime(currentTime);
+            const total = formatTime(duration);
+            timeDisplay.textContent = `${current} / ${total}`;
+        }
+
+        // Update progress bar
+        function updateProgressBar() {
+            if (duration > 0) {
+                const percentage = (currentTime / duration) * 100;
+                document.getElementById('progressFill').style.width = `${percentage}%`;
+            }
+        }
+
+        // Seek video function
+        function seekVideo(event) {
+            if (!currentVideo) return;
+            
+            const progressBar = event.currentTarget;
+            const rect = progressBar.getBoundingClientRect();
+            const clickX = event.clientX - rect.left;
+            const percentage = clickX / rect.width;
+            const newTime = percentage * duration;
+            
+            currentVideo.currentTime = newTime;
+            currentTime = newTime;
+        }
+
+        // Format time helper
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // Tag event function
+        function tagEvent(eventType) {
+            const timestamp = currentTime;
+            const event = {
+                type: eventType,
+                time: timestamp,
+                timeString: formatTime(timestamp),
+                sport: currentSport,
+                id: Date.now()
+            };
+            
+            events.push(event);
+            events.sort((a, b) => a.time - b.time);
+            
+            updateStatistics(eventType);
+            updateEventList();
+            updateTimeline();
+            updateScores(eventType);
+        }
+
+        // Update statistics
+        function updateStatistics(eventType) {
+            stats[eventType]++;
+            
+            document.getElementById('totalEvents').textContent = events.length;
+            document.getElementById('goalCount').textContent = stats.Goal;
+            document.getElementById('pointCount').textContent = stats.Point + stats['2 Point'];
+            document.getElementById('foulCount').textContent = stats.Foul + stats['Yellow Card'] + stats['Red Card'] + stats['Black Card'];
+            document.getElementById('ownKickoutWon').textContent = stats['Own Kickout Won'];
+            document.getElementById('oppKickoutWon').textContent = stats['Opp Kickout Won'];
+        }
+
+        // Update scores
+        function updateScores(eventType) {
+            // Simple logic for demo - in real app, would ask which team scored
+            if (eventType === 'Goal') {
+                scores.home.goals++;
+            } else if (eventType === 'Point') {
+                scores.home.points++;
+            } else if (eventType === '2 Point') {
+                scores.home.points += 2;
+            }
+            
+            document.getElementById('homeScore').textContent = 
+                `${scores.home.goals}-${scores.home.points.toString().padStart(2, '0')}`;
+            document.getElementById('awayScore').textContent = 
+                `${scores.away.goals}-${scores.away.points.toString().padStart(2, '0')}`;
+        }
+
+        // Update event list
+        function updateEventList() {
+            const eventList = document.getElementById('eventList');
+            
+            if (events.length === 0) {
+                eventList.innerHTML = '<p style="opacity: 0.6; font-size: 13px; text-align: center;">No events tagged yet</p>';
+                return;
+            }
+            
+            eventList.innerHTML = events.slice(-5).reverse().map(event => `
+                <div class="event-item">
+                    <span>${event.type}</span>
+                    <span class="event-time">${event.timeString}</span>
+                </div>
+            `).join('');
+        }
+
+        // Update timeline
+        function updateTimeline() {
+            const timeline = document.getElementById('timeline');
+            
+            if (events.length === 0 || duration === 0) {
+                timeline.innerHTML = '<p style="text-align: center; line-height: 60px; color: rgba(255, 255, 255, 0.6); font-size: 13px;">No events tagged yet. Start tagging events in the video.</p>';
+                return;
+            }
+            
+            timeline.innerHTML = '';
+            
+            events.forEach(event => {
+                const marker = document.createElement('div');
+                marker.style.position = 'absolute';
+                marker.style.top = '10px';
+                marker.style.width = '4px';
+                marker.style.height = '40px';
+                marker.style.borderRadius = '2px';
+                marker.style.left = `${(event.time / duration) * 100}%`;
+                
+                switch(event.type) {
+                    case 'Goal': marker.style.background = '#10b981'; break;
+                    case 'Point': 
+                    case '2 Point': marker.style.background = '#f59e0b'; break;
+                    case 'Foul': marker.style.background = '#f97316'; break;
+                    default: marker.style.background = 'white';
+                }
+                
+                timeline.appendChild(marker);
+            });
+        }
+
+        // Mark event function
+        function markEvent() {
+            tagEvent('Mark');
+        }
+
+        // Save project function
+        function saveProject() {
+            const projectData = {
+                events: events,
+                stats: stats,
+                scores: scores,
+                sport: currentSport,
+                timestamp: new Date().toISOString()
+            };
+            
+            const blob = new Blob([JSON.stringify(projectData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `paircpro-project-${Date.now()}.json`;
+            a.click();
+        }
+
+        // Export analysis function
+        function exportAnalysis() {
+            exportCSV();
+        }
+
+        // Export CSV function
+        function exportCSV() {
+            if (events.length === 0) {
+                alert('No events to export');
+                return;
+            }
+            
+            const csvContent = [
+                ['Event Type', 'Time (seconds)', 'Time (MM:SS)', 'Sport', 'Timestamp'],
+                ...events.map(event => [
+                    event.type,
+                    event.time.toFixed(2),
+                    event.timeString,
+                    event.sport,
+                    new Date().toISOString()
+                ])
+            ].map(row => row.join(',')).join('\n');
+            
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `paircpro-events-${Date.now()}.csv`;
+            a.click();
+        }
+
+        // Export PDF function
+        function exportPDF() {
+            alert('PDF export feature coming soon!');
+        }
+
+        // Share link function
+        function shareLink() {
+            alert('Share link feature coming soon!');
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (event) => {
+            if (event.target.tagName === 'INPUT') return;
+            
+            switch(event.key.toLowerCase()) {
+                case 'g': tagEvent('Goal'); break;
+                case 'p': tagEvent('Point'); break;
+                case 'w': tagEvent('Wide'); break;
+                case 's': tagEvent('Saved'); break;
+                case 'f': tagEvent('Foul'); break;
+                case 'c': tagEvent('Yellow Card'); break;
+                case ' ': 
+                    event.preventDefault();
+                    togglePlayPause();
+                    break;
+            }
+        });
+
+        // Initialize the app when page loads
+        window.addEventListener('DOMContentLoaded', function() {
+            setSport('football');
+        });
+    </script>
+</body>
+</html>
