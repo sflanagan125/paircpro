@@ -97,6 +97,107 @@
             box-shadow: 0 4px 12px rgba(0, 102, 204, 0.25);
         }
 
+        /* Account Dropdown */
+        .account-menu {
+            position: relative;
+        }
+
+        .account-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: #1e293b;
+        }
+
+        .account-button:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+        }
+
+        .account-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #0066cc;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .account-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            min-width: 200px;
+            z-index: 1000;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .account-dropdown.show {
+            display: block;
+        }
+
+        .dropdown-header {
+            padding: 1rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .dropdown-email {
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-top: 0.25rem;
+        }
+
+        .dropdown-plan {
+            font-size: 0.75rem;
+            color: #0066cc;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: #374151;
+            text-decoration: none;
+            transition: background 0.2s;
+            border-bottom: 1px solid #f9fafb;
+        }
+
+        .dropdown-item:hover {
+            background: #f8fafc;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+            color: #dc2626;
+        }
+
+        .trial-banner {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            color: #92400e;
+            padding: 0.5rem 1rem;
+            text-align: center;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, #fafbfc 0%, #f1f5f9 100%);
@@ -713,6 +814,14 @@
     </footer>
 
     <script>
+        // Mock user data - in real app this would come from your backend
+        const mockUser = {
+            name: 'John Doe',
+            email: 'john@example.com',
+            plan: 'Premium Trial',
+            trialDaysLeft: 12
+        };
+
         // Check authentication status and update navigation
         function updateNavigation() {
             const isLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
@@ -721,8 +830,36 @@
             const ctaButton = document.getElementById('ctaButton');
             
             if (isLoggedIn) {
-                // Update header navigation
-                authButtons.innerHTML = '<a href="app.html" class="cta-button">Launch App</a>';
+                // Show trial banner if on trial
+                if (mockUser.plan.includes('Trial')) {
+                    const trialBanner = document.createElement('div');
+                    trialBanner.className = 'trial-banner';
+                    trialBanner.innerHTML = `Trial: ${mockUser.trialDaysLeft} days left - <a href="pricing.html" style="color: #92400e; text-decoration: underline;">Upgrade now</a>`;
+                    document.body.insertBefore(trialBanner, document.body.firstChild);
+                }
+
+                // Update header navigation with account menu
+                authButtons.innerHTML = `
+                    <a href="app.html" class="login-btn">Launch App</a>
+                    <div class="account-menu">
+                        <div class="account-button" onclick="toggleAccountDropdown()">
+                            <div class="account-avatar">${mockUser.name.charAt(0)}</div>
+                            <span style="font-weight: 500;">${mockUser.name.split(' ')[0]}</span>
+                            <span style="font-size: 12px;">▼</span>
+                        </div>
+                        <div class="account-dropdown" id="accountDropdown">
+                            <div class="dropdown-header">
+                                <div style="font-weight: 600;">${mockUser.name}</div>
+                                <div class="dropdown-email">${mockUser.email}</div>
+                                <div class="dropdown-plan">${mockUser.plan}</div>
+                            </div>
+                            <a href="#" class="dropdown-item" onclick="alert('Account settings coming soon!')">Account Settings</a>
+                            <a href="pricing.html" class="dropdown-item">Billing & Plans</a>
+                            <a href="#" class="dropdown-item" onclick="alert('Support coming soon!')">Support</a>
+                            <a href="#" class="dropdown-item" onclick="logout()">Sign Out</a>
+                        </div>
+                    </div>
+                `;
                 
                 // Update hero section
                 heroActions.innerHTML = `
@@ -740,15 +877,32 @@
             }
         }
 
-        // Simulate login (this would be handled by your auth system)
-        function simulateLogin() {
-            localStorage.setItem('userLoggedIn', 'true');
-            updateNavigation();
+        // Toggle account dropdown
+        function toggleAccountDropdown() {
+            const dropdown = document.getElementById('accountDropdown');
+            dropdown.classList.toggle('show');
         }
 
-        // Simulate logout
-        function simulateLogout() {
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const accountMenu = document.querySelector('.account-menu');
+            if (accountMenu && !accountMenu.contains(event.target)) {
+                const dropdown = document.getElementById('accountDropdown');
+                if (dropdown) {
+                    dropdown.classList.remove('show');
+                }
+            }
+        });
+
+        // Logout function
+        function logout() {
             localStorage.removeItem('userLoggedIn');
+            location.reload(); // Refresh page to show logged out state
+        }
+
+        // Simulate login for testing
+        function simulateLogin() {
+            localStorage.setItem('userLoggedIn', 'true');
             updateNavigation();
         }
 
@@ -761,6 +915,9 @@
                 updateNavigation();
             }
         });
+
+        // Test function - you can call this in browser console: simulateLogin()
+        window.simulateLogin = simulateLogin;
     </script>
 </body>
 </html>
