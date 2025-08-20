@@ -666,11 +666,14 @@
            showSuccess('Account created successfully! Redirecting to your dashboard...');
            
            setTimeout(() => {
-               localStorage.setItem('userLoggedIn', 'true');
-               localStorage.setItem('userPlan', 'Premium Trial');
-               localStorage.setItem('trialStartDate', new Date().toISOString());
-               window.location.href = 'app.html';
-           }, 2000);
+    // Store actual user data from the form
+    localStorage.setItem('userLoggedIn', 'true');
+    localStorage.setItem('userName', data.firstName + ' ' + data.lastName);
+    localStorage.setItem('userEmail', data.email);
+    localStorage.setItem('userPlan', 'Premium Trial');
+    localStorage.setItem('trialStartDate', new Date().toISOString());
+    window.location.href = 'app.html';
+}, 2000);
        });
 
        document.getElementById('loginForm').addEventListener('submit', function(e) {
@@ -698,4 +701,5 @@
    </script>
 </body>
 </html>
+
 
