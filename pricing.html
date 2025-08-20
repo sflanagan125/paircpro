@@ -69,7 +69,7 @@
         }
 
         .login-btn {
-            color: white;
+            color: white !important;
             text-decoration: none;
             font-weight: 500;
             padding: 0.5rem 1rem;
@@ -78,6 +78,10 @@
 
         .login-btn:hover {
             opacity: 0.8;
+        }
+
+        .login-btn:visited {
+            color: white !important;
         }
 
         .cta-button {
@@ -93,6 +97,107 @@
         .cta-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Account Dropdown */
+        .account-menu {
+            position: relative;
+        }
+
+        .account-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: white;
+        }
+
+        .account-button:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .account-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: white;
+            color: #0066cc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .account-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            min-width: 200px;
+            z-index: 1000;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .account-dropdown.show {
+            display: block;
+        }
+
+        .dropdown-header {
+            padding: 1rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .dropdown-email {
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-top: 0.25rem;
+        }
+
+        .dropdown-plan {
+            font-size: 0.75rem;
+            color: #0066cc;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: #374151;
+            text-decoration: none;
+            transition: background 0.2s;
+            border-bottom: 1px solid #f9fafb;
+        }
+
+        .dropdown-item:hover {
+            background: #f8fafc;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+            color: #dc2626;
+        }
+
+        .trial-banner {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            color: #92400e;
+            padding: 0.5rem 1rem;
+            text-align: center;
+            font-size: 0.875rem;
+            font-weight: 500;
         }
 
         /* Main Content */
@@ -618,9 +723,9 @@
                 <a href="contact.html">Contact</a>
             </nav>
             <div class="auth-buttons" id="authButtons">
-    <a href="auth.html?mode=login" class="login-btn">Log in</a>
-    <a href="auth.html" class="cta-button">Get started</a>
-</div>
+                <a href="auth.html?mode=login" class="login-btn">Log in</a>
+                <a href="auth.html" class="cta-button">Get started</a>
+            </div>
         </div>
     </header>
 
@@ -844,24 +949,6 @@
                 <div class="faq-grid">
                     <div class="faq-item">
                         <button class="faq-question" onclick="toggleFAQ(this)">
-                            Can I switch plans anytime?
-                        </button>
-                        <div class="faq-answer">
-                            Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately, and we'll prorate any billing differences.
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">
-                            What happens if I exceed my storage limit?
-                        </button>
-                        <div class="faq-answer">
-                            We'll notify you when you're approaching your limit. You can either upgrade your plan or delete older videos to free up space.
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">
                             Is there a free trial for Premium plans?
                         </button>
                         <div class="faq-answer">
@@ -921,6 +1008,69 @@
     <script>
         let isAnnual = false;
 
+        const mockUser = {
+            name: localStorage.getItem('userName') || 'John Doe',
+            email: localStorage.getItem('userEmail') || 'john@example.com',
+            plan: localStorage.getItem('userPlan') || 'Premium Trial',
+            trialDaysLeft: 12
+        };
+
+        function updateNavigation() {
+            const isLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
+            const authButtons = document.getElementById('authButtons');
+            
+            if (isLoggedIn) {
+                if (mockUser.plan.includes('Trial')) {
+                    const trialBanner = document.createElement('div');
+                    trialBanner.className = 'trial-banner';
+                    trialBanner.innerHTML = `Trial: ${mockUser.trialDaysLeft} days left - <a href="pricing.html" style="color: #92400e; text-decoration: underline;">Upgrade now</a>`;
+                    document.body.insertBefore(trialBanner, document.body.firstChild);
+                }
+
+                authButtons.innerHTML = `
+                    <a href="app.html" class="login-btn">Launch App</a>
+                    <div class="account-menu">
+                        <div class="account-button" onclick="toggleAccountDropdown()">
+                            <div class="account-avatar">${mockUser.name.charAt(0)}</div>
+                            <span style="font-weight: 500;">${mockUser.name.split(' ')[0]}</span>
+                            <span style="font-size: 12px;">▼</span>
+                        </div>
+                        <div class="account-dropdown" id="accountDropdown">
+                            <div class="dropdown-header">
+                                <div style="font-weight: 600;">${mockUser.name}</div>
+                                <div class="dropdown-email">${mockUser.email}</div>
+                                <div class="dropdown-plan">${mockUser.plan}</div>
+                            </div>
+                            <a href="#" class="dropdown-item" onclick="alert('Account settings coming soon!')">Account Settings</a>
+                            <a href="pricing.html" class="dropdown-item">Billing & Plans</a>
+                            <a href="#" class="dropdown-item" onclick="alert('Support coming soon!')">Support</a>
+                            <a href="#" class="dropdown-item" onclick="logout()">Sign Out</a>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function toggleAccountDropdown() {
+            const dropdown = document.getElementById('accountDropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        document.addEventListener('click', function(event) {
+            const accountMenu = document.querySelector('.account-menu');
+            if (accountMenu && !accountMenu.contains(event.target)) {
+                const dropdown = document.getElementById('accountDropdown');
+                if (dropdown) {
+                    dropdown.classList.remove('show');
+                }
+            }
+        });
+
+        function logout() {
+            localStorage.removeItem('userLoggedIn');
+            location.reload();
+        }
+
         function toggleBilling() {
             isAnnual = !isAnnual;
             const toggle = document.getElementById('billingToggle');
@@ -932,12 +1082,10 @@
                 monthlyLabel.classList.remove('active');
                 annualLabel.classList.add('active');
                 
-                // Update Premium pricing
                 document.getElementById('premiumPrice').textContent = '159';
                 document.getElementById('premiumPeriod').textContent = 'per month, billed annually';
                 document.getElementById('premiumSavings').style.display = 'block';
                 
-                // Update Enterprise pricing
                 document.getElementById('enterprisePrice').textContent = '399';
                 document.getElementById('enterprisePeriod').textContent = 'per month, billed annually';
                 document.getElementById('enterpriseSavings').style.display = 'block';
@@ -946,36 +1094,56 @@
                 monthlyLabel.classList.add('active');
                 annualLabel.classList.remove('active');
                 
-                // Update Premium pricing
                 document.getElementById('premiumPrice').textContent = '199';
                 document.getElementById('premiumPeriod').textContent = 'per month';
                 document.getElementById('premiumSavings').style.display = 'none';
                 
-                // Update Enterprise pricing
                 document.getElementById('enterprisePrice').textContent = '499';
                 document.getElementById('enterprisePeriod').textContent = 'per month';
                 document.getElementById('enterpriseSavings').style.display = 'none';
             }
         }
 
-        // FAQ Toggle Function
         function toggleFAQ(element) {
             const answer = element.nextElementSibling;
             const isActive = element.classList.contains('active');
             
-            // Close all FAQ items
             document.querySelectorAll('.faq-question').forEach(q => {
                 q.classList.remove('active');
                 q.nextElementSibling.classList.remove('active');
             });
             
-            // Open clicked item if it wasn't active
             if (!isActive) {
                 element.classList.add('active');
                 answer.classList.add('active');
             }
         }
+
+        window.addEventListener('DOMContentLoaded', updateNavigation);
+
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'userLoggedIn') {
+                updateNavigation();
+            }
+        });
     </script>
 </body>
-</html>
+</html> onclick="toggleFAQ(this)">
+                            Can I switch plans anytime?
+                        </button>
+                        <div class="faq-answer">
+                            Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately, and we'll prorate any billing differences.
+                        </div>
+                    </div>
 
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            What happens if I exceed my storage limit?
+                        </button>
+                        <div class="faq-answer">
+                            We'll notify you when you're approaching your limit. You can either upgrade your plan or delete older videos to free up space.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question"
