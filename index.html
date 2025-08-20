@@ -63,6 +63,24 @@
             color: #1e293b;
         }
 
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .login-btn {
+            color: #64748b;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s;
+        }
+
+        .login-btn:hover {
+            color: #1e293b;
+        }
+
         .cta-button {
             background: #0066cc;
             color: white;
@@ -508,6 +526,10 @@
                 display: none;
             }
 
+            .auth-buttons {
+                gap: 0.5rem;
+            }
+
             .hero-title {
                 font-size: 2.5rem;
             }
@@ -533,7 +555,10 @@
                 <a href="pricing.html">Pricing</a>
                 <a href="contact.html">Contact</a>
             </nav>
-            <a href="auth.html" class="cta-button">Get Started</a>
+            <div class="auth-buttons" id="authButtons">
+                <a href="auth.html?mode=login" class="login-btn">Log in</a>
+                <a href="auth.html" class="cta-button">Get started</a>
+            </div>
         </div>
     </header>
 
@@ -547,7 +572,7 @@
                 From multi-angle video analysis to AI-powered insights, everything you need to elevate your team's performance.
             </p>
             
-            <div class="hero-actions">
+            <div class="hero-actions" id="heroActions">
                 <a href="auth.html" class="btn-primary">
                     Start Free Trial →
                 </a>
@@ -675,7 +700,7 @@
             <div class="cta-content">
                 <h2 class="cta-title">Ready to Transform Your GAA Analysis?</h2>
                 <p class="cta-description">Join professional coaches and analysts who trust PáircPro for their match analysis needs.</p>
-                <a href="auth.html" class="btn-primary">Start Your Free Trial</a>
+                <a href="auth.html" class="btn-primary" id="ctaButton">Start Your Free Trial</a>
             </div>
         </div>
     </section>
@@ -686,5 +711,56 @@
             <p>&copy; 2025 PáircPro. All rights reserved. | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a> | <a href="contact.html">Contact</a></p>
         </div>
     </footer>
+
+    <script>
+        // Check authentication status and update navigation
+        function updateNavigation() {
+            const isLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
+            const authButtons = document.getElementById('authButtons');
+            const heroActions = document.getElementById('heroActions');
+            const ctaButton = document.getElementById('ctaButton');
+            
+            if (isLoggedIn) {
+                // Update header navigation
+                authButtons.innerHTML = '<a href="app.html" class="cta-button">Launch App</a>';
+                
+                // Update hero section
+                heroActions.innerHTML = `
+                    <a href="app.html" class="btn-primary">
+                        Launch App →
+                    </a>
+                    <a href="contact.html" class="btn-secondary">
+                        Book Demo
+                    </a>
+                `;
+                
+                // Update CTA button
+                ctaButton.href = 'app.html';
+                ctaButton.textContent = 'Launch App';
+            }
+        }
+
+        // Simulate login (this would be handled by your auth system)
+        function simulateLogin() {
+            localStorage.setItem('userLoggedIn', 'true');
+            updateNavigation();
+        }
+
+        // Simulate logout
+        function simulateLogout() {
+            localStorage.removeItem('userLoggedIn');
+            updateNavigation();
+        }
+
+        // Initialize navigation on page load
+        window.addEventListener('DOMContentLoaded', updateNavigation);
+
+        // Listen for storage changes (if user logs in/out in another tab)
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'userLoggedIn') {
+                updateNavigation();
+            }
+        });
+    </script>
 </body>
 </html>
