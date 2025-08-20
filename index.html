@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PáircPro - Professional GAA Video Analysis Platform</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         * {
             margin: 0;
@@ -814,44 +815,43 @@
     </footer>
 
     <script>
-        // Mock user data - in real app this would come from your backend
-        const mockUser = {
-    name: localStorage.getItem('userName') || 'John Doe',
-    email: localStorage.getItem('userEmail') || 'john@example.com',
-    plan: localStorage.getItem('userPlan') || 'Premium Trial',
-    trialDaysLeft: 12
-        };
+        // Initialize Supabase
+        const supabaseUrl = 'YOUR_PROJECT_URL'
+        const supabaseKey = 'YOUR_ANON_KEY'
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
 
         // Check authentication status and update navigation
-        function updateNavigation() {
-            const isLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
+        async function updateNavigation() {
+            const { data: { user } } = await supabase.auth.getUser()
             const authButtons = document.getElementById('authButtons');
             const heroActions = document.getElementById('heroActions');
             const ctaButton = document.getElementById('ctaButton');
             
-            if (isLoggedIn) {
-                // Show trial banner if on trial
-                if (mockUser.plan.includes('Trial')) {
-                    const trialBanner = document.createElement('div');
-                    trialBanner.className = 'trial-banner';
-                    trialBanner.innerHTML = `Trial: ${mockUser.trialDaysLeft} days left - <a href="pricing.html" style="color: #92400e; text-decoration: underline;">Upgrade now</a>`;
-                    document.body.insertBefore(trialBanner, document.body.firstChild);
-                }
+            if (user) {
+                const userData = user.user_metadata;
+                const userName = userData.full_name || 'User';
+                const userEmail = user.email;
+                
+                // Show trial banner
+                const trialBanner = document.createElement('div');
+                trialBanner.className = 'trial-banner';
+                trialBanner.innerHTML = `Trial: 14 days left - <a href="pricing.html" style="color: #92400e; text-decoration: underline;">Upgrade now</a>`;
+                document.body.insertBefore(trialBanner, document.body.firstChild);
 
                 // Update header navigation with account menu
                 authButtons.innerHTML = `
                     <a href="app.html" class="login-btn">Launch App</a>
                     <div class="account-menu">
                         <div class="account-button" onclick="toggleAccountDropdown()">
-                            <div class="account-avatar">${mockUser.name.charAt(0)}</div>
-                            <span style="font-weight: 500;">${mockUser.name.split(' ')[0]}</span>
+                            <div class="account-avatar">${userName.charAt(0)}</div>
+                            <span style="font-weight: 500;">${userName.split(' ')[0]}</span>
                             <span style="font-size: 12px;">▼</span>
                         </div>
                         <div class="account-dropdown" id="accountDropdown">
                             <div class="dropdown-header">
-                                <div style="font-weight: 600;">${mockUser.name}</div>
-                                <div class="dropdown-email">${mockUser.email}</div>
-                                <div class="dropdown-plan">${mockUser.plan}</div>
+                                <div style="font-weight: 600;">${userName}</div>
+                                <div class="dropdown-email">${userEmail}</div>
+                                <div class="dropdown-plan">Premium Trial</div>
                             </div>
                             <a href="#" class="dropdown-item" onclick="alert('Account settings coming soon!')">Account Settings</a>
                             <a href="pricing.html" class="dropdown-item">Billing & Plans</a>
@@ -895,30 +895,18 @@
         });
 
         // Logout function
-        function logout() {
-            localStorage.removeItem('userLoggedIn');
-            location.reload(); // Refresh page to show logged out state
-        }
-
-        // Simulate login for testing
-        function simulateLogin() {
-            localStorage.setItem('userLoggedIn', 'true');
-            updateNavigation();
+        async function logout() {
+            await supabase.auth.signOut();
+            location.reload();
         }
 
         // Initialize navigation on page load
         window.addEventListener('DOMContentLoaded', updateNavigation);
 
-        // Listen for storage changes (if user logs in/out in another tab)
-        window.addEventListener('storage', function(e) {
-            if (e.key === 'userLoggedIn') {
-                updateNavigation();
-            }
+        // Listen for auth state changes
+        supabase.auth.onAuthStateChange(() => {
+            updateNavigation();
         });
-
-        // Test function - you can call this in browser console: simulateLogin()
-        window.simulateLogin = simulateLogin;
     </script>
 </body>
 </html>
-
