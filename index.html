@@ -816,10 +816,10 @@
     <script>
         // Mock user data - in real app this would come from your backend
         const mockUser = {
-            name: 'John Doe',
-            email: 'john@example.com',
-            plan: 'Premium Trial',
-            trialDaysLeft: 12
+    name: localStorage.getItem('userName') || 'John Doe',
+    email: localStorage.getItem('userEmail') || 'john@example.com',
+    plan: localStorage.getItem('userPlan') || 'Premium Trial',
+    trialDaysLeft: 12
         };
 
         // Check authentication status and update navigation
@@ -921,3 +921,4 @@
     </script>
 </body>
 </html>
+
