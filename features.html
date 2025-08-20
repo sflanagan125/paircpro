@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features - PáircPro | Professional GAA Video Analysis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            opacity: 0.8;
+        }
+
+        .cta-button {
+            background: white;
+            color: #0066cc;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+            color: white;
+            padding: 6rem 0 4rem;
+            text-align: center;
+        }
+
+        .hero-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        /* Features Grid */
+        .features-section {
+            padding: 6rem 0;
+            background: #f8fafc;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #0066cc, #6366f1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 24px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            color: #475569;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-list li::before {
+            content: "✓";
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* Detailed Features */
+        .detailed-features {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .feature-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 6rem;
+        }
+
+        .feature-row:nth-child(even) {
+            direction: rtl;
+        }
+
+        .feature-row:nth-child(even) > * {
+            direction: ltr;
+        }
+
+        .feature-content h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-content p {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        .feature-image {
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            border-radius: 16px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+            color: white;
+            padding: 4rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: #f8fafc;
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0066cc, #6366f1);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #0066cc;
+            padding: 1rem 2rem;
+            border: 2px solid #0066cc;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: #0066cc;
+            color: white;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1e293b;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .footer p {
+            opacity: 0.8;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .feature-row {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .feature-row:nth-child(even) {
+                direction: ltr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">PáircPro</a>
+            <nav class="nav-links">
+                <a href="features.html" class="active">Features</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <a href="app.html" class="cta-button">Launch App</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-container">
+                <h1>Powerful Features for GAA Analysis</h1>
+                <p>Everything you need to analyze GAA matches like a professional. From video tagging to advanced statistics, PáircPro has you covered.</p>
+            </div>
+        </section>
+
+        <!-- Core Features Grid -->
+        <section class="features-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Core Features</h2>
+                    <p class="section-subtitle">Professional-grade tools designed specifically for GAA coaches and analysts</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎥</div>
+                        <h3>Multi-Angle Video Analysis</h3>
+                        <p>Upload and analyze multiple camera angles simultaneously. View frame-by-frame with variable playback speeds for precise analysis.</p>
+                        <ul class="feature-list">
+                            <li>Multiple camera angle support</li>
+                            <li>Frame-by-frame stepping</li>
+                            <li>Variable playback speeds (0.25x - 2x)</li>
+                            <li>HD and 4K video quality</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🏷️</div>
+                        <h3>GAA-Specific Event Tagging</h3>
+                        <p>Comprehensive GAA event system with sport-specific categories, player ratings, and text annotations for detailed match analysis.</p>
+                        <ul class="feature-list">
+                            <li>Football & Hurling optimization</li>
+                            <li>Own vs Opposition kickout tracking</li>
+                            <li>Event rating system (1-5 stars)</li>
+                            <li>Text notes and annotations</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Advanced GAA Analytics</h3>
+                        <p>Real-time statistics with GAA-specific insights including kickout success rates, possession analysis, and tactical pattern recognition.</p>
+                        <ul class="feature-list">
+                            <li>Live kickout success tracking</li>
+                            <li>Possession zone analysis</li>
+                            <li>Match comparison tools</li>
+                            <li>Opposition weakness detection</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Interactive Drawing Tools</h3>
+                        <p>Annotate video frames with professional drawing tools. Highlight plays, mark player movements, and create tactical diagrams.</p>
+                        <ul class="feature-list">
+                            <li>Frame annotation tools</li>
+                            <li>Tactical formation overlays</li>
+                            <li>Player movement tracking</li>
+                            <li>Custom GAA field diagrams</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🔥</div>
+                        <h3>Heat Maps & Visualizations</h3>
+                        <p>Generate professional heat maps showing event locations, player positions, and tactical patterns specific to GAA gameplay.</p>
+                        <ul class="feature-list">
+                            <li>Event location heat maps</li>
+                            <li>Player position tracking</li>
+                            <li>Kickout target zones</li>
+                            <li>Scoring pattern analysis</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📋</div>
+                        <h3>Professional Reports</h3>
+                        <p>Generate comprehensive PDF reports with statistics, visualizations, and insights. Share analysis with coaches and players.</p>
+                        <ul class="feature-list">
+                            <li>Automated PDF generation</li>
+                            <li>Player performance profiles</li>
+                            <li>Team collaboration tools</li>
+                            <li>Power BI integration</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Features -->
+        <section class="detailed-features">
+            <div class="container">
+                <div class="feature-row">
+                    <div class="feature-content">
+                        <h3>Multi-Angle Video Analysis</h3>
+                        <p>Upload multiple camera angles and analyze them simultaneously. Our advanced video player supports frame-by-frame stepping and variable playback speeds from 0.25x to 2x for detailed tactical analysis. Perfect for reviewing complex GAA plays from every angle.</p>
+                        <ul class="feature-list">
+                            <li>Support for up to 3 camera angles</li>
+                            <li>Frame-by-frame stepping with arrow keys</li>
+                            <li>Variable speed controls (0.25x - 2x)</li>
+                            <li>Synchronized playback across angles</li>
+                        </ul>
+                    </div>
+                    <div class="feature-image">
+                        Multi-Angle Video Player Preview
+                    </div>
+                </div>
+
+                <div class="feature-row">
+                    <div class="feature-content">
+                        <h3>GAA-Specific Intelligence</h3>
+                        <p>Purpose-built for GAA with advanced kickout analysis, tactical pattern recognition, and opposition scouting tools. Track own vs opposition kickouts, analyze scoring patterns, and identify weaknesses specific to GAA gameplay.</p>
+                        <ul class="feature-list">
+                            <li>Kickout success prediction zones</li>
+                            <li>GAA tactical pattern recognition</li>
+                            <li>Opposition weakness detection</li>
+                            <li>Weather condition analysis</li>
+                        </ul>
+                    </div>
+                    <div class="feature-image">
+                        GAA Analytics Dashboard Preview
+                    </div>
+                </div>
+
+                <div class="feature-row">
+                    <div class="feature-content">
+                        <h3>Professional Drawing & Annotation</h3>
+                        <p>Annotate video frames with professional drawing tools. Create tactical diagrams, highlight player movements, and add detailed notes to enhance your analysis presentations for coaches and players.</p>
+                        <ul class="feature-list">
+                            <li>Frame annotation and drawing tools</li>
+                            <li>GAA formation overlays</li>
+                            <li>Player movement tracking</li>
+                            <li>Event rating system (1-5 stars)</li>
+                        </ul>
+                    </div>
+                    <div class="feature-image">
+                        Drawing Tools Interface Preview
+                    </div>
+                </div>
+
+                <div class="feature-row">
+                    <div class="feature-content">
+                        <h3>Live Match Analysis</h3>
+                        <p>Tag events during live matches with our mobile-optimized interface. Share real-time insights with coaches on the sideline and generate instant statistical updates as the game unfolds.</p>
+                        <ul class="feature-list">
+                            <li>Live tagging during matches</li>
+                            <li>Real-time coach collaboration</li>
+                            <li>Instant statistical updates</li>
+                            <li>Mobile-optimized interface</li>
+                        </ul>
+                    </div>
+                    <div class="feature-image">
+                        Live Analysis Interface Preview
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3>3</h3>
+                        <p>Camera Angles</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>Live</h3>
+                        <p>Match Tagging</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>GAA</h3>
+                        <p>Optimized</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>AI</h3>
+                        <p>Insights</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Ready to Transform Your GAA Analysis?</h2>
+                    <p>Join professional coaches and analysts who trust PáircPro for their match analysis needs.</p>
+                    <div class="cta-buttons">
+                        <a href="app.html" class="btn-primary">Start Free Trial</a>
+                        <a href="pricing.html" class="btn-secondary">View Pricing</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 PáircPro. All rights reserved. | <a href="privacy.html" style="color: white;">Privacy Policy</a> | <a href="terms.html" style="color: white;">Terms of Service</a></p>
+        </div>
+    </footer>
+</body>
+</html>
