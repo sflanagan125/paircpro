@@ -558,6 +558,10 @@
     </div>
 
     <script>
+        // Initialize Supabase
+const supabaseUrl = 'https://gkcgngqdsmyutvbzepsn.supabase.co'
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdrY2duZ3Fkc215dXR2YnplcHNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU3MDU5NTAsImV4cCI6MjA3MTI4MTk1MH0.rDTTUn_McI1sSfZH12o5FLrS1iSXNEo14Pxce6YI3qA'
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
         let currentTab = 'signup';
 
         // Check URL for mode parameter
@@ -658,52 +662,78 @@
         }
 
         // Form submissions
-        document.getElementById('signupForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            
-            const error = validateSignup(data);
-            if (error) {
-                showError(error);
-                return;
+document.getElementById('signupForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData);
+    
+    const error = validateSignup(data);
+    if (error) {
+        showError(error);
+        return;
+    }
+    
+    try {
+        showSuccess('Creating your account...');
+        
+        const { data: authData, error: authError } = await supabase.auth.signUp({
+            email: data.email,
+            password: data.password,
+            options: {
+                data: {
+                    first_name: data.firstName,
+                    last_name: data.lastName,
+                    full_name: data.firstName + ' ' + data.lastName,
+                    organization: data.organization,
+                    role: data.role,
+                    sport: data.sport
+                }
             }
-            
-            showSuccess('Account created successfully! Redirecting to your dashboard...');
-            
-            setTimeout(() => {
-                const firstName = document.getElementById('firstName').value;
-                const lastName = document.getElementById('lastName').value;
-                const email = document.getElementById('email').value;
-                
-                localStorage.setItem('userLoggedIn', 'true');
-                localStorage.setItem('userName', firstName + ' ' + lastName);
-                localStorage.setItem('userEmail', email);
-                localStorage.setItem('userPlan', 'Premium Trial');
-                localStorage.setItem('trialStartDate', new Date().toISOString());
-                window.location.href = 'app.html';
-            }, 2000);
         });
 
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            
-            if (!data.email || !data.password) {
-                showError('Please enter both email and password');
-                return;
-            }
-            
-            showSuccess('Logging in...');
-            
-            setTimeout(() => {
-                localStorage.setItem('userLoggedIn', 'true');
-                window.location.href = 'app.html';
-            }, 1500);
+        if (authError) {
+            showError(authError.message);
+            return;
+        }
+
+        showSuccess('Account created! Check your email to verify your account.');
+        
+    } catch (error) {
+        showError('Failed to create account. Please try again.');
+    }
+});
+        
+document.getElementById('loginForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData);
+    
+    if (!data.email || !data.password) {
+        showError('Please enter both email and password');
+        return;
+    }
+    
+    try {
+        showSuccess('Logging in...');
+        
+        const { data: authData, error } = await supabase.auth.signInWithPassword({
+            email: data.email,
+            password: data.password
         });
+
+        if (error) {
+            showError(error.message);
+            return;
+        }
+
+        window.location.href = 'app.html';
+        
+    } catch (error) {
+        showError('Login failed. Please try again.');
+    }
+});
 
         // Initialize on page load
         window.addEventListener('DOMContentLoaded', function() {
@@ -713,4 +743,5 @@
     </script>
 </body>
 </html>
+
 
