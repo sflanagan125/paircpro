@@ -666,6 +666,10 @@
             showSuccess('Account created successfully! Redirecting to your dashboard...');
             
             setTimeout(() => {
+                localStorage.setItem('userLoggedIn', 'true');
+localStorage.setItem('userPlan', 'Premium Trial');
+localStorage.setItem('trialStartDate', new Date().toISOString());
+window.location.href = 'app.html';
                 window.location.href = 'app.html';
             }, 2000);
         });
@@ -685,6 +689,8 @@
             showSuccess('Logging in...');
             
             setTimeout(() => {
+                localStorage.setItem('userLoggedIn', 'true');
+window.location.href = 'app.html';
                 window.location.href = 'app.html';
             }, 1500);
         });
@@ -693,4 +699,5 @@
         hideMessages();
     </script>
 </body>
+
 </html>
