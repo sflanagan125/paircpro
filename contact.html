@@ -9,367 +9,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-    </style>
-</head>
-<body>
-    <!-- Header -->
-    <header class="header">
-        <div class="nav-container">
-            <a href="index.html" class="logo">PáircPro</a>
-            <nav class="nav-links">
-                <a href="features.html">Features</a>
-                <a href="pricing.html">Pricing</a>
-                <a href="contact.html" class="active">Contact</a>
-            </nav>
-            <div class="auth-buttons" id="authButtons">
-                <a href="auth.html?mode=login" class="login-btn">Log in</a>
-                <a href="auth.html" class="cta-button">Get started</a>
-            </div>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-container">
-                <h1>Get in Touch</h1>
-                <p>Have questions about PáircPro? Need help with your GAA video analysis? We're here to help you succeed.</p>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section class="contact-section">
-            <div class="container">
-                <div class="contact-grid">
-                    <!-- Contact Information -->
-                    <div class="contact-info">
-                        <h2>Contact Information</h2>
-                        <div class="contact-methods">
-                            <div class="contact-method">
-                                <div class="contact-icon">📧</div>
-                                <div class="contact-details">
-                                    <h3>General Support</h3>
-                                    <p>For questions, technical issues, and general inquiries</p>
-                                    <a href="mailto:support@paircpro.ie">support@paircpro.ie</a>
-                                </div>
-                            </div>
-
-                            <div class="contact-method">
-                                <div class="contact-icon">💼</div>
-                                <div class="contact-details">
-                                    <h3>Sales & Enterprise</h3>
-                                    <p>For pricing questions and enterprise solutions</p>
-                                    <a href="mailto:sales@paircpro.ie">sales@paircpro.ie</a>
-                                </div>
-                            </div>
-
-                            <div class="contact-method">
-                                <div class="contact-icon">⚖️</div>
-                                <div class="contact-details">
-                                    <h3>Legal & Privacy</h3>
-                                    <p>For legal matters and data protection inquiries</p>
-                                    <a href="mailto:legal@paircpro.ie">legal@paircpro.ie</a>
-                                </div>
-                            </div>
-
-                            <div class="contact-method">
-                                <div class="contact-icon">🏢</div>
-                                <div class="contact-details">
-                                    <h3>Postal Address</h3>
-                                    <p>PáircPro<br>Ireland</p>
-                                    <a href="#">Company Number: [TBD]</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Contact Form -->
-                    <div class="contact-form">
-                        <h2>Send us a Message</h2>
-                        <form id="contactForm">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="firstName">First Name *</label>
-                                    <input type="text" id="firstName" name="firstName" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="lastName">Last Name *</label>
-                                    <input type="text" id="lastName" name="lastName" required>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="email">Email Address *</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="subject">Subject *</label>
-                                <select id="subject" name="subject" required>
-                                    <option value="">Select a subject</option>
-                                    <option value="technical">Technical Support</option>
-                                    <option value="billing">Billing & Payments</option>
-                                    <option value="features">Feature Request</option>
-                                    <option value="sales">Sales Inquiry</option>
-                                    <option value="partnership">Partnership</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="message">Message *</label>
-                                <textarea id="message" name="message" placeholder="Please describe your question or issue in detail..." required></textarea>
-                            </div>
-
-                            <button type="submit" class="btn-submit">Send Message</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Response Times -->
-        <section class="response-times">
-            <div class="container">
-                <h2 style="margin-bottom: 2rem;">Our Response Times</h2>
-                <div class="response-grid">
-                    <div class="response-item">
-                        <h3>< 1 Hour</h3>
-                        <p>Enterprise Support</p>
-                    </div>
-                    <div class="response-item">
-                        <h3>< 24 Hours</h3>
-                        <p>Premium Support</p>
-                    </div>
-                    <div class="response-item">
-                        <h3>< 48 Hours</h3>
-                        <p>General Inquiries</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Support Resources -->
-        <section class="support-section">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Support Resources</h2>
-                    <p class="section-subtitle">Find answers quickly with our self-service resources</p>
-                </div>
-
-                <div class="support-grid">
-                    <div class="support-card">
-                        <div class="support-card-icon">📚</div>
-                        <h3>Documentation</h3>
-                        <p>Comprehensive guides and tutorials for getting the most out of PáircPro</p>
-                        <a href="#" onclick="alert('Documentation coming soon!')">View Docs</a>
-                    </div>
-
-                    <div class="support-card">
-                        <div class="support-card-icon">🎥</div>
-                        <h3>Video Tutorials</h3>
-                        <p>Step-by-step video guides for GAA analysis workflows and best practices</p>
-                        <a href="#" onclick="alert('Video tutorials coming soon!')">Watch Videos</a>
-                    </div>
-
-                    <div class="support-card">
-                        <div class="support-card-icon">💬</div>
-                        <h3>Community Forum</h3>
-                        <p>Connect with other GAA analysts and share tips, strategies, and insights</p>
-                        <a href="#" onclick="alert('Community forum coming soon!')">Join Community</a>
-                    </div>
-
-                    <div class="support-card">
-                        <div class="support-card-icon">🔧</div>
-                        <h3>System Status</h3>
-                        <p>Check real-time status of PáircPro services and scheduled maintenance</p>
-                        <a href="#" onclick="alert('Status page coming soon!')">Check Status</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FAQ Section -->
-        <section class="faq-section">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Frequently Asked Questions</h2>
-                    <p class="section-subtitle">Quick answers to common questions</p>
-                </div>
-
-                <div class="faq-grid">
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">
-                            How do I get started with PáircPro?
-                        </button>
-                        <div class="faq-answer">
-                            Simply sign up for a free account, upload your first match video, and start tagging events. Our intuitive interface makes it easy to begin analyzing GAA matches immediately.
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">
-                            What video formats are supported?
-                        </button>
-                        <div class="faq-answer">
-                            PáircPro supports all major video formats including MP4, AVI, and MOV. We recommend MP4 for best performance and compatibility across all devices.
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">
-                            Can I analyze live matches?
-                        </button>
-                        <div class="faq-answer">
-                            Yes! Premium and Enterprise plans include live tagging features that allow you to analyze matches in real-time and share insights with coaches on the sideline.
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">
-                            Is my video data secure?
-                        </button>
-                        <div class="faq-answer">
-                            Absolutely. All video files are encrypted and stored securely in EU-based servers. Your analysis data remains private and is never shared without your permission.
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">
-                            Do you offer team training?
-                        </button>
-                        <div class="faq-answer">
-                            Yes! Enterprise customers receive dedicated onboarding and training sessions. We also offer group training workshops for GAA clubs and organizations.
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">
-                            Can I cancel my subscription anytime?
-                        </button>
-                        <div class="faq-answer">
-                            Yes, you can cancel your subscription at any time through your account settings. Your access continues until the end of your billing period, and you can export all your data.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2025 PáircPro. All rights reserved. | <a href="privacy.html" style="color: white;">Privacy Policy</a> | <a href="terms.html" style="color: white;">Terms of Service</a></p>
-        </div>
-    </footer>
-
-    <script>
-        const mockUser = {
-            name: localStorage.getItem('userName') || 'John Doe',
-            email: localStorage.getItem('userEmail') || 'john@example.com',
-            plan: localStorage.getItem('userPlan') || 'Premium Trial',
-            trialDaysLeft: 12
-        };
-
-        function updateNavigation() {
-            const isLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
-            const authButtons = document.getElementById('authButtons');
-            
-            if (isLoggedIn) {
-                if (mockUser.plan.includes('Trial')) {
-                    const trialBanner = document.createElement('div');
-                    trialBanner.className = 'trial-banner';
-                    trialBanner.innerHTML = `Trial: ${mockUser.trialDaysLeft} days left - <a href="pricing.html" style="color: #92400e; text-decoration: underline;">Upgrade now</a>`;
-                    document.body.insertBefore(trialBanner, document.body.firstChild);
-                }
-
-                authButtons.innerHTML = `
-                    <a href="app.html" class="login-btn">Launch App</a>
-                    <div class="account-menu">
-                        <div class="account-button" onclick="toggleAccountDropdown()">
-                            <div class="account-avatar">${mockUser.name.charAt(0)}</div>
-                            <span style="font-weight: 500;">${mockUser.name.split(' ')[0]}</span>
-                            <span style="font-size: 12px;">▼</span>
-                        </div>
-                        <div class="account-dropdown" id="accountDropdown">
-                            <div class="dropdown-header">
-                                <div style="font-weight: 600;">${mockUser.name}</div>
-                                <div class="dropdown-email">${mockUser.email}</div>
-                                <div class="dropdown-plan">${mockUser.plan}</div>
-                            </div>
-                            <a href="#" class="dropdown-item" onclick="alert('Account settings coming soon!')">Account Settings</a>
-                            <a href="pricing.html" class="dropdown-item">Billing & Plans</a>
-                            <a href="#" class="dropdown-item" onclick="alert('Support coming soon!')">Support</a>
-                            <a href="#" class="dropdown-item" onclick="logout()">Sign Out</a>
-                        </div>
-                    </div>
-                `;
-            }
         }
-
-        function toggleAccountDropdown() {
-            const dropdown = document.getElementById('accountDropdown');
-            dropdown.classList.toggle('show');
-        }
-
-        document.addEventListener('click', function(event) {
-            const accountMenu = document.querySelector('.account-menu');
-            if (accountMenu && !accountMenu.contains(event.target)) {
-                const dropdown = document.getElementById('accountDropdown');
-                if (dropdown) {
-                    dropdown.classList.remove('show');
-                }
-            }
-        });
-
-        function logout() {
-            localStorage.removeItem('userLoggedIn');
-            location.reload();
-        }
-
-        // Contact Form Submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            
-            if (!data.firstName || !data.lastName || !data.email || !data.subject || !data.message) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-            
-            alert('Thank you for your message! We\'ll get back to you within 24-48 hours.');
-            this.reset();
-        });
-
-        // FAQ Toggle Function
-        function toggleFAQ(element) {
-            const answer = element.nextElementSibling;
-            const isActive = element.classList.contains('active');
-            
-            document.querySelectorAll('.faq-question').forEach(q => {
-                q.classList.remove('active');
-                q.nextElementSibling.classList.remove('active');
-            });
-            
-            if (!isActive) {
-                element.classList.add('active');
-                answer.classList.add('active');
-            }
-        }
-
-        window.addEventListener('DOMContentLoaded', updateNavigation);
-
-        window.addEventListener('storage', function(e) {
-            if (e.key === 'userLoggedIn') {
-                updateNavigation();
-            }
-        });
-    </script>
-</body>
-</html>
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', sans-serif;
@@ -963,3 +603,364 @@
                 grid-template-columns: 1fr;
             }
         }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">PáircPro</a>
+            <nav class="nav-links">
+                <a href="features.html">Features</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="contact.html" class="active">Contact</a>
+            </nav>
+            <div class="auth-buttons" id="authButtons">
+                <a href="auth.html?mode=login" class="login-btn">Log in</a>
+                <a href="auth.html" class="cta-button">Get started</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-container">
+                <h1>Get in Touch</h1>
+                <p>Have questions about PáircPro? Need help with your GAA video analysis? We're here to help you succeed.</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact-grid">
+                    <!-- Contact Information -->
+                    <div class="contact-info">
+                        <h2>Contact Information</h2>
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <div class="contact-icon">📧</div>
+                                <div class="contact-details">
+                                    <h3>General Support</h3>
+                                    <p>For questions, technical issues, and general inquiries</p>
+                                    <a href="mailto:support@paircpro.ie">support@paircpro.ie</a>
+                                </div>
+                            </div>
+
+                            <div class="contact-method">
+                                <div class="contact-icon">💼</div>
+                                <div class="contact-details">
+                                    <h3>Sales & Enterprise</h3>
+                                    <p>For pricing questions and enterprise solutions</p>
+                                    <a href="mailto:sales@paircpro.ie">sales@paircpro.ie</a>
+                                </div>
+                            </div>
+
+                            <div class="contact-method">
+                                <div class="contact-icon">⚖️</div>
+                                <div class="contact-details">
+                                    <h3>Legal & Privacy</h3>
+                                    <p>For legal matters and data protection inquiries</p>
+                                    <a href="mailto:legal@paircpro.ie">legal@paircpro.ie</a>
+                                </div>
+                            </div>
+
+                            <div class="contact-method">
+                                <div class="contact-icon">🏢</div>
+                                <div class="contact-details">
+                                    <h3>Postal Address</h3>
+                                    <p>PáircPro<br>Ireland</p>
+                                    <a href="#">Company Number: [TBD]</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="contact-form">
+                        <h2>Send us a Message</h2>
+                        <form id="contactForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name *</label>
+                                    <input type="text" id="firstName" name="firstName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name *</label>
+                                    <input type="text" id="lastName" name="lastName" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="subject">Subject *</label>
+                                <select id="subject" name="subject" required>
+                                    <option value="">Select a subject</option>
+                                    <option value="technical">Technical Support</option>
+                                    <option value="billing">Billing & Payments</option>
+                                    <option value="features">Feature Request</option>
+                                    <option value="sales">Sales Inquiry</option>
+                                    <option value="partnership">Partnership</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Message *</label>
+                                <textarea id="message" name="message" placeholder="Please describe your question or issue in detail..." required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn-submit">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Response Times -->
+        <section class="response-times">
+            <div class="container">
+                <h2 style="margin-bottom: 2rem;">Our Response Times</h2>
+                <div class="response-grid">
+                    <div class="response-item">
+                        <h3>< 1 Hour</h3>
+                        <p>Enterprise Support</p>
+                    </div>
+                    <div class="response-item">
+                        <h3>< 24 Hours</h3>
+                        <p>Premium Support</p>
+                    </div>
+                    <div class="response-item">
+                        <h3>< 48 Hours</h3>
+                        <p>General Inquiries</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Support Resources -->
+        <section class="support-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Support Resources</h2>
+                    <p class="section-subtitle">Find answers quickly with our self-service resources</p>
+                </div>
+
+                <div class="support-grid">
+                    <div class="support-card">
+                        <div class="support-card-icon">📚</div>
+                        <h3>Documentation</h3>
+                        <p>Comprehensive guides and tutorials for getting the most out of PáircPro</p>
+                        <a href="#" onclick="alert('Documentation coming soon!')">View Docs</a>
+                    </div>
+
+                    <div class="support-card">
+                        <div class="support-card-icon">🎥</div>
+                        <h3>Video Tutorials</h3>
+                        <p>Step-by-step video guides for GAA analysis workflows and best practices</p>
+                        <a href="#" onclick="alert('Video tutorials coming soon!')">Watch Videos</a>
+                    </div>
+
+                    <div class="support-card">
+                        <div class="support-card-icon">💬</div>
+                        <h3>Community Forum</h3>
+                        <p>Connect with other GAA analysts and share tips, strategies, and insights</p>
+                        <a href="#" onclick="alert('Community forum coming soon!')">Join Community</a>
+                    </div>
+
+                    <div class="support-card">
+                        <div class="support-card-icon">🔧</div>
+                        <h3>System Status</h3>
+                        <p>Check real-time status of PáircPro services and scheduled maintenance</p>
+                        <a href="#" onclick="alert('Status page coming soon!')">Check Status</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Frequently Asked Questions</h2>
+                    <p class="section-subtitle">Quick answers to common questions</p>
+                </div>
+
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            How do I get started with PáircPro?
+                        </button>
+                        <div class="faq-answer">
+                            Simply sign up for a free account, upload your first match video, and start tagging events. Our intuitive interface makes it easy to begin analyzing GAA matches immediately.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            What video formats are supported?
+                        </button>
+                        <div class="faq-answer">
+                            PáircPro supports all major video formats including MP4, AVI, and MOV. We recommend MP4 for best performance and compatibility across all devices.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            Can I analyze live matches?
+                        </button>
+                        <div class="faq-answer">
+                            Yes! Premium and Enterprise plans include live tagging features that allow you to analyze matches in real-time and share insights with coaches on the sideline.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            Is my video data secure?
+                        </button>
+                        <div class="faq-answer">
+                            Absolutely. All video files are encrypted and stored securely in EU-based servers. Your analysis data remains private and is never shared without your permission.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            Do you offer team training?
+                        </button>
+                        <div class="faq-answer">
+                            Yes! Enterprise customers receive dedicated onboarding and training sessions. We also offer group training workshops for GAA clubs and organizations.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            Can I cancel my subscription anytime?
+                        </button>
+                        <div class="faq-answer">
+                            Yes, you can cancel your subscription at any time through your account settings. Your access continues until the end of your billing period, and you can export all your data.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 PáircPro. All rights reserved. | <a href="privacy.html" style="color: white;">Privacy Policy</a> | <a href="terms.html" style="color: white;">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script>
+        const mockUser = {
+            name: localStorage.getItem('userName') || 'John Doe',
+            email: localStorage.getItem('userEmail') || 'john@example.com',
+            plan: localStorage.getItem('userPlan') || 'Premium Trial',
+            trialDaysLeft: 12
+        };
+
+        function updateNavigation() {
+            const isLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
+            const authButtons = document.getElementById('authButtons');
+            
+            if (isLoggedIn) {
+                if (mockUser.plan.includes('Trial')) {
+                    const trialBanner = document.createElement('div');
+                    trialBanner.className = 'trial-banner';
+                    trialBanner.innerHTML = `Trial: ${mockUser.trialDaysLeft} days left - <a href="pricing.html" style="color: #92400e; text-decoration: underline;">Upgrade now</a>`;
+                    document.body.insertBefore(trialBanner, document.body.firstChild);
+                }
+
+                authButtons.innerHTML = `
+                    <a href="app.html" class="login-btn">Launch App</a>
+                    <div class="account-menu">
+                        <div class="account-button" onclick="toggleAccountDropdown()">
+                            <div class="account-avatar">${mockUser.name.charAt(0)}</div>
+                            <span style="font-weight: 500;">${mockUser.name.split(' ')[0]}</span>
+                            <span style="font-size: 12px;">▼</span>
+                        </div>
+                        <div class="account-dropdown" id="accountDropdown">
+                            <div class="dropdown-header">
+                                <div style="font-weight: 600;">${mockUser.name}</div>
+                                <div class="dropdown-email">${mockUser.email}</div>
+                                <div class="dropdown-plan">${mockUser.plan}</div>
+                            </div>
+                            <a href="#" class="dropdown-item" onclick="alert('Account settings coming soon!')">Account Settings</a>
+                            <a href="pricing.html" class="dropdown-item">Billing & Plans</a>
+                            <a href="#" class="dropdown-item" onclick="alert('Support coming soon!')">Support</a>
+                            <a href="#" class="dropdown-item" onclick="logout()">Sign Out</a>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function toggleAccountDropdown() {
+            const dropdown = document.getElementById('accountDropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        document.addEventListener('click', function(event) {
+            const accountMenu = document.querySelector('.account-menu');
+            if (accountMenu && !accountMenu.contains(event.target)) {
+                const dropdown = document.getElementById('accountDropdown');
+                if (dropdown) {
+                    dropdown.classList.remove('show');
+                }
+            }
+        });
+
+        function logout() {
+            localStorage.removeItem('userLoggedIn');
+            location.reload();
+        }
+
+        // Contact Form Submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            if (!data.firstName || !data.lastName || !data.email || !data.subject || !data.message) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            alert('Thank you for your message! We\'ll get back to you within 24-48 hours.');
+            this.reset();
+        });
+
+        // FAQ Toggle Function
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const isActive = element.classList.contains('active');
+            
+            document.querySelectorAll('.faq-question').forEach(q => {
+                q.classList.remove('active');
+                q.nextElementSibling.classList.remove('active');
+            });
+            
+            if (!isActive) {
+                element.classList.add('active');
+                answer.classList.add('active');
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', updateNavigation);
+
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'userLoggedIn') {
+                updateNavigation();
+            }
+        });
+    </script>
+</body>
+</html>
