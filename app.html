@@ -759,8 +759,13 @@
             }
         }
     </style>
+    <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
+<div style="position:fixed;top:0;left:0;right:0;background:#f59e0b;color:white;padding:8px 20px;display:flex;justify-content:space-between;z-index:9999;">
+    <span>⏰ Free Trial: 12 days remaining (2/3 projects used)</span>
+    <button style="background:white;color:#f59e0b;border:none;padding:4px 12px;border-radius:12px;font-weight:bold;" onclick="buyPremium()">Upgrade</button>
+</div>
     <div class="app-container">
         <aside class="sidebar">
             <a href="index.html" class="logo" style="text-decoration: none; color: white;">PáircPro</a>
@@ -1642,6 +1647,18 @@
             updateTeamNames();
         });
     </script>
+<script>
+const stripe = Stripe('pk_test_YOUR_KEY');
+function buyPremium() {
+  stripe.redirectToCheckout({
+    lineItems: [{price: 'price_1Ryc3l3XC25HXCiQFeJWJbIO', quantity: 1}],
+    mode: 'subscription',
+    successUrl: 'https://paircpro.ie/success.html',
+    cancelUrl: 'https://paircpro.ie/app.html',
+  });
+}
+</script>
 </body>
 </html>
+
 
