@@ -221,6 +221,72 @@
             background: rgba(255, 255, 255, 0.15);
         }
 
+        /* Team Setup Section */
+        .team-setup {
+            margin-bottom: 20px;
+        }
+
+        .team-inputs {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .team-input {
+            flex: 1;
+            padding: 8px 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            color: white;
+            font-weight: 600;
+            text-align: center;
+            font-size: 12px;
+            min-width: 0;
+        }
+
+        .team-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .vs-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 600;
+            font-size: 11px;
+            flex-shrink: 0;
+            margin: 0 4px;
+        }
+
+        .team-selector {
+            display: flex;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            padding: 2px;
+        }
+
+        .team-btn {
+            flex: 1;
+            padding: 8px 12px;
+            background: transparent;
+            border: none;
+            border-radius: 4px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .team-btn.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .team-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
         .event-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -264,6 +330,46 @@
         .event-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .event-btn.pressed {
+            transform: scale(0.95);
+            transition: transform 0.1s;
+        }
+
+        /* Neutral events with team indicators */
+        .neutral-event {
+            display: grid;
+            grid-template-columns: 25px 1fr 25px;
+            gap: 6px;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .team-mini-btn {
+            padding: 6px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .team-mini-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .team-mini-btn.home.active {
+            background: #3b82f6;
+            box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+        }
+
+        .team-mini-btn.away.active {
+            background: #ef4444;
+            box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
         }
 
         .goal-btn { background: #10b981; color: white; }
@@ -330,6 +436,40 @@
             padding: 20px;
             height: 120px;
             flex-shrink: 0;
+        }
+
+        .timeline {
+            height: 60px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow-x: auto;
+        }
+
+        .timeline-event {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .timeline-event:hover {
+            transform: translateY(-50%) scale(1.5);
+            z-index: 10;
+        }
+
+        .timeline-event.home {
+            background: #3b82f6;
+        }
+
+        .timeline-event.away {
+            background: #ef4444;
         }
 
         .controls-bar {
@@ -432,6 +572,16 @@
             color: white;
         }
 
+        .score.home.active {
+            color: #3b82f6;
+            text-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+        }
+
+        .score.away.active {
+            color: #ef4444;
+            text-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
+        }
+
         .vs {
             margin: 0 24px;
             font-size: 18px;
@@ -488,7 +638,7 @@
 
         .possession-fill {
             height: 100%;
-            background: linear-gradient(to right, white 52%, rgba(255, 255, 255, 0.4) 52%);
+            background: linear-gradient(to right, #3b82f6 52%, #ef4444 52%);
         }
 
         .event-list {
@@ -506,6 +656,12 @@
             border-radius: 8px;
             font-size: 13px;
             border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .event-team {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-left: 8px;
         }
 
         .event-time {
@@ -563,6 +719,44 @@
         .left-panel::-webkit-scrollbar-thumb:hover,
         .right-panel::-webkit-scrollbar-thumb:hover {
             background: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Notification animations */
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+            .content-area {
+                gap: 15px;
+                padding: 15px;
+            }
+            
+            .left-panel {
+                width: 280px;
+                min-width: 260px;
+            }
+            
+            .right-panel {
+                width: 320px;
+                min-width: 280px;
+            }
         }
     </style>
 </head>
@@ -635,9 +829,28 @@
                                 <div class="sport-tab" onclick="setSport('hurling')">Hurling</div>
                             </div>
                             
+                            <div class="team-setup">
+                                <div class="team-inputs">
+                                    <input type="text" class="team-input" id="homeTeam" placeholder="Home Team" value="Kerry">
+                                    <span class="vs-text">vs</span>
+                                    <input type="text" class="team-input" id="awayTeam" placeholder="Away Team" value="Dublin">
+                                </div>
+                                <div class="team-selector">
+                                    <button class="team-btn active" id="homeBtn" onclick="setActiveTeam('home')">
+                                        🏠 Home Active
+                                    </button>
+                                    <button class="team-btn" id="awayBtn" onclick="setActiveTeam('away')">
+                                        ✈️ Away
+                                    </button>
+                                </div>
+                            </div>
+                            
                             <input type="file" id="videoFile" class="file-input" accept="video/*" onchange="handleVideoUpload(event)">
                             <button class="btn btn-secondary" style="width: 100%; margin-top: 10px;" onclick="document.getElementById('videoFile').click()">
                                 📁 Choose Match Video
+                            </button>
+                            <button class="btn btn-secondary" style="width: 100%; margin-top: 8px; padding: 8px; font-size: 12px;" onclick="undoLastEvent()">
+                                ↶ Undo Last Event
                             </button>
                         </div>
                     </div>
@@ -655,6 +868,15 @@
                                     <button class="event-btn save-btn" onclick="tagEvent('Saved')">Saved</button>
                                     <button class="event-btn wide-btn" onclick="tagEvent('45')" id="football45">45</button>
                                     <button class="event-btn wide-btn" onclick="tagEvent('65')" id="hurling65" style="display: none;">65</button>
+                                </div>
+                            </div>
+
+                            <div class="event-category">
+                                <div class="category-title">Passing</div>
+                                <div class="event-grid" id="passingGrid">
+                                    <button class="event-btn other-btn" onclick="tagEvent('Hand Pass')" id="handPass">Hand Pass</button>
+                                    <button class="event-btn other-btn" onclick="tagEvent('Kick Pass')" id="kickPass">Kick Pass</button>
+                                    <button class="event-btn other-btn" onclick="tagEvent('Hurl Pass')" id="hurlPass" style="display: none;">Hurl Pass</button>
                                 </div>
                             </div>
 
@@ -707,7 +929,8 @@
                             <div class="shortcuts-info">
                                 <strong>Keyboard Shortcuts</strong>
                                 G - Goal | P - Point | W - Wide | S - Save<br>
-                                F - Foul | C - Card | Space - Play/Pause
+                                F - Foul | C - Card | Space - Play/Pause<br>
+                                1 - Home Team | 2 - Away Team | U - Undo
                             </div>
                         </div>
                     </div>
@@ -723,8 +946,16 @@
                     </div>
 
                     <div class="timeline-section">
-                        <h4 style="margin-bottom: 16px; font-weight: 700;">Event Timeline</h4>
-                        <div id="timeline" style="height: 60px; background: rgba(0, 0, 0, 0.3); border-radius: 8px; position: relative; border: 1px solid rgba(255, 255, 255, 0.1);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                            <h4 style="font-weight: 700;">Event Timeline</h4>
+                            <div style="display: flex; gap: 8px;">
+                                <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;" onclick="skipVideo(-10)">⏮️ -10s</button>
+                                <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;" onclick="skipVideo(-5)">⏪ -5s</button>
+                                <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;" onclick="skipVideo(5)">⏩ +5s</button>
+                                <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;" onclick="skipVideo(10)">⏭️ +10s</button>
+                            </div>
+                        </div>
+                        <div class="timeline" id="timeline">
                             <p style="text-align: center; line-height: 60px; color: rgba(255, 255, 255, 0.6); font-size: 13px;">No events tagged yet. Start tagging events in the video.</p>
                         </div>
                     </div>
@@ -742,13 +973,13 @@
                 <div class="right-panel">
                     <div class="score-display">
                         <div class="team-score">
-                            <div class="team-name">Home</div>
-                            <div class="score" id="homeScore">0-00</div>
+                            <div class="team-name" id="homeTeamName">Kerry</div>
+                            <div class="score home active" id="homeScore">0-00</div>
                         </div>
                         <div class="vs">VS</div>
                         <div class="team-score">
-                            <div class="team-name">Away</div>
-                            <div class="score" id="awayScore">0-00</div>
+                            <div class="team-name" id="awayTeamName">Dublin</div>
+                            <div class="score away" id="awayScore">0-00</div>
                         </div>
                     </div>
 
@@ -789,6 +1020,14 @@
                                 <div class="stat-item">
                                     <div class="stat-label">Opp K/O Won</div>
                                     <div class="stat-value" id="oppKickoutWon">0</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">Home Events</div>
+                                    <div class="stat-value" id="homeEvents">0</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">Away Events</div>
+                                    <div class="stat-value" id="awayEvents">0</div>
                                 </div>
                             </div>
                         </div>
@@ -839,6 +1078,7 @@
         let currentTime = 0;
         let duration = 0;
         let currentSport = 'football';
+        let activeTeam = 'home';
 
         // Statistics
         let stats = {
@@ -849,6 +1089,9 @@
             Saved: 0,
             '45': 0,
             '65': 0,
+            'Hand Pass': 0,
+            'Kick Pass': 0,
+            'Hurl Pass': 0,
             'Own Kickout Won': 0,
             'Own Kickout Lost': 0,
             'Opp Kickout Won': 0,
@@ -867,10 +1110,53 @@
             Custom: 0
         };
 
+        let teamStats = {
+            home: {},
+            away: {}
+        };
+
         let scores = {
             home: { goals: 0, points: 0 },
             away: { goals: 0, points: 0 }
         };
+
+        // Initialize team stats
+        Object.keys(stats).forEach(key => {
+            teamStats.home[key] = 0;
+            teamStats.away[key] = 0;
+        });
+
+        // Set active team function
+        function setActiveTeam(team) {
+            activeTeam = team;
+            
+            // Update button states
+            document.getElementById('homeBtn').classList.toggle('active', team === 'home');
+            document.getElementById('awayBtn').classList.toggle('active', team === 'away');
+            
+            // Update score highlighting
+            document.getElementById('homeScore').classList.toggle('active', team === 'home');
+            document.getElementById('awayScore').classList.toggle('active', team === 'away');
+            
+            // Update button text
+            document.getElementById('homeBtn').innerHTML = team === 'home' ? '🏠 Home Active' : '🏠 Home';
+            document.getElementById('awayBtn').innerHTML = team === 'away' ? '✈️ Away Active' : '✈️ Away';
+            
+            // Update mini button highlighting
+            updateMiniButtonHighlighting();
+        }
+
+        function updateMiniButtonHighlighting() {
+            // Remove all active classes
+            document.querySelectorAll('.team-mini-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Add active class to current team's mini buttons
+            document.querySelectorAll(`.team-mini-btn.${activeTeam}`).forEach(btn => {
+                btn.classList.add('active');
+            });
+        }
 
         // Set sport function
         function setSport(sport) {
@@ -890,15 +1176,24 @@
             const twoPointBtn = document.getElementById('twoPointBtn');
             const football45 = document.getElementById('football45');
             const hurling65 = document.getElementById('hurling65');
+            const handPass = document.getElementById('handPass');
+            const kickPass = document.getElementById('kickPass');
+            const hurlPass = document.getElementById('hurlPass');
             
             if (sport === 'football') {
                 twoPointBtn.style.display = 'block';
                 football45.style.display = 'block';
                 hurling65.style.display = 'none';
+                handPass.style.display = 'block';
+                kickPass.style.display = 'block';
+                hurlPass.style.display = 'none';
             } else {
                 twoPointBtn.style.display = 'none';
                 football45.style.display = 'none';
                 hurling65.style.display = 'block';
+                handPass.style.display = 'block';
+                kickPass.style.display = 'none';
+                hurlPass.style.display = 'block';
             }
         }
 
@@ -982,11 +1277,129 @@
             return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
         }
 
-        // Tag event function
-        function tagEvent(eventType) {
+        // Skip video function
+        function skipVideo(seconds) {
+            if (!currentVideo) return;
+            
+            const newTime = Math.max(0, Math.min(duration, currentTime + seconds));
+            currentVideo.currentTime = newTime;
+            currentTime = newTime;
+        }
+
+        // Undo last event function
+        function undoLastEvent() {
+            if (events.length === 0) {
+                alert('No events to undo');
+                return;
+            }
+            
+            const lastEvent = events.pop();
+            
+            // Reverse the statistics
+            stats[lastEvent.type]--;
+            teamStats[lastEvent.team][lastEvent.type]--;
+            
+            // Reverse the scores
+            if (lastEvent.type === 'Goal') {
+                scores[lastEvent.team].goals--;
+            } else if (lastEvent.type === 'Point') {
+                scores[lastEvent.team].points--;
+            } else if (lastEvent.type === '2 Point') {
+                scores[lastEvent.team].points -= 2;
+            }
+            
+            // Update all UI elements
+            refreshAllStats();
+            updateEventList();
+            updateTimeline();
+            refreshScoreboard();
+            
+            // Show user-friendly notification
+            showUndoNotification(lastEvent);
+        }
+
+        // Show undo notification
+        function showUndoNotification(event) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: rgba(0, 0, 0, 0.8);
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
+                font-weight: 600;
+                z-index: 1000;
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                animation: slideIn 0.3s ease;
+            `;
+            
+            notification.textContent = `Undid: ${event.teamName} - ${event.type}`;
+            document.body.appendChild(notification);
+            
+            // Remove notification after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 2000);
+        }
+
+        // Refresh all statistics (for undo functionality)
+        function refreshAllStats() {
+            document.getElementById('totalEvents').textContent = events.length;
+            document.getElementById('goalCount').textContent = stats.Goal;
+            document.getElementById('pointCount').textContent = stats.Point + stats['2 Point'];
+            document.getElementById('foulCount').textContent = stats.Foul + stats['Yellow Card'] + stats['Red Card'] + stats['Black Card'];
+            document.getElementById('ownKickoutWon').textContent = stats['Own Kickout Won'];
+            document.getElementById('oppKickoutWon').textContent = stats['Opp Kickout Won'];
+            
+            // Update team-specific stats
+            const homeEvents = events.filter(e => e.team === 'home').length;
+            const awayEvents = events.filter(e => e.team === 'away').length;
+            document.getElementById('homeEvents').textContent = homeEvents;
+            document.getElementById('awayEvents').textContent = awayEvents;
+            
+            // Update possession calculation
+            const totalEvents = homeEvents + awayEvents;
+            if (totalEvents > 0) {
+                const homePossession = Math.round((homeEvents / totalEvents) * 100);
+                const awayPossession = 100 - homePossession;
+                document.getElementById('possessionText').textContent = `${homePossession}% - ${awayPossession}%`;
+                document.querySelector('.possession-fill').style.background = 
+                    `linear-gradient(to right, #3b82f6 ${homePossession}%, #ef4444 ${homePossession}%)`;
+            } else {
+                document.getElementById('possessionText').textContent = '0% - 0%';
+                document.querySelector('.possession-fill').style.background = 'rgba(255, 255, 255, 0.2)';
+            }
+        }
+
+        // Refresh scoreboard (for undo functionality)
+        function refreshScoreboard() {
+            document.getElementById('homeScore').textContent = 
+                `${scores.home.goals}-${scores.home.points.toString().padStart(2, '0')}`;
+            document.getElementById('awayScore').textContent = 
+                `${scores.away.goals}-${scores.away.points.toString().padStart(2, '0')}`;
+        }
+
+        // Tag event function with team awareness
+        function tagEvent(eventType, team = null) {
+            const targetTeam = team || activeTeam;
+            const homeTeamName = document.getElementById('homeTeam').value || 'Home';
+            const awayTeamName = document.getElementById('awayTeam').value || 'Away';
+            const teamName = targetTeam === 'home' ? homeTeamName : awayTeamName;
+            
             const timestamp = currentTime;
             const event = {
                 type: eventType,
+                team: targetTeam,
+                teamName: teamName,
                 time: timestamp,
                 timeString: formatTime(timestamp),
                 sport: currentSport,
@@ -996,15 +1409,42 @@
             events.push(event);
             events.sort((a, b) => a.time - b.time);
             
-            updateStatistics(eventType);
+            updateStatistics(eventType, targetTeam);
             updateEventList();
             updateTimeline();
-            updateScores(eventType);
+            updateScores(eventType, targetTeam);
+            updateTeamNames();
+            
+            // Auto-switch team for turnovers
+            if (eventType === 'Turnover') {
+                setTimeout(() => {
+                    setActiveTeam(targetTeam === 'home' ? 'away' : 'home');
+                }, 300);
+            }
+            
+            // Visual feedback
+            animateButton(event.target);
         }
 
-        // Update statistics
-        function updateStatistics(eventType) {
+        // Tag neutral event with specific team
+        function tagNeutralEvent(eventType, team) {
+            tagEvent(eventType, team);
+        }
+
+        // Animate button press
+        function animateButton(button) {
+            if (button && button.classList.contains('event-btn')) {
+                button.classList.add('pressed');
+                setTimeout(() => {
+                    button.classList.remove('pressed');
+                }, 200);
+            }
+        }
+
+        // Update statistics with team awareness
+        function updateStatistics(eventType, team) {
             stats[eventType]++;
+            teamStats[team][eventType]++;
             
             document.getElementById('totalEvents').textContent = events.length;
             document.getElementById('goalCount').textContent = stats.Goal;
@@ -1012,23 +1452,46 @@
             document.getElementById('foulCount').textContent = stats.Foul + stats['Yellow Card'] + stats['Red Card'] + stats['Black Card'];
             document.getElementById('ownKickoutWon').textContent = stats['Own Kickout Won'];
             document.getElementById('oppKickoutWon').textContent = stats['Opp Kickout Won'];
+            
+            // Update team-specific stats
+            const homeEvents = events.filter(e => e.team === 'home').length;
+            const awayEvents = events.filter(e => e.team === 'away').length;
+            document.getElementById('homeEvents').textContent = homeEvents;
+            document.getElementById('awayEvents').textContent = awayEvents;
+            
+            // Update possession calculation
+            const totalEvents = homeEvents + awayEvents;
+            if (totalEvents > 0) {
+                const homePossession = Math.round((homeEvents / totalEvents) * 100);
+                const awayPossession = 100 - homePossession;
+                document.getElementById('possessionText').textContent = `${homePossession}% - ${awayPossession}%`;
+                document.querySelector('.possession-fill').style.background = 
+                    `linear-gradient(to right, #3b82f6 ${homePossession}%, #ef4444 ${homePossession}%)`;
+            }
         }
 
-        // Update scores
-        function updateScores(eventType) {
-            // Simple logic for demo - in real app, would ask which team scored
+        // Update scores with team awareness
+        function updateScores(eventType, team) {
             if (eventType === 'Goal') {
-                scores.home.goals++;
+                scores[team].goals++;
             } else if (eventType === 'Point') {
-                scores.home.points++;
+                scores[team].points++;
             } else if (eventType === '2 Point') {
-                scores.home.points += 2;
+                scores[team].points += 2;
             }
             
             document.getElementById('homeScore').textContent = 
                 `${scores.home.goals}-${scores.home.points.toString().padStart(2, '0')}`;
             document.getElementById('awayScore').textContent = 
                 `${scores.away.goals}-${scores.away.points.toString().padStart(2, '0')}`;
+        }
+
+        // Update team names in scoreboard
+        function updateTeamNames() {
+            const homeTeamName = document.getElementById('homeTeam').value || 'Home';
+            const awayTeamName = document.getElementById('awayTeam').value || 'Away';
+            document.getElementById('homeTeamName').textContent = homeTeamName;
+            document.getElementById('awayTeamName').textContent = awayTeamName;
         }
 
         // Update event list
@@ -1042,13 +1505,13 @@
             
             eventList.innerHTML = events.slice(-5).reverse().map(event => `
                 <div class="event-item">
-                    <span>${event.type}</span>
+                    <span>${event.type}<span class="event-team">(${event.teamName})</span></span>
                     <span class="event-time">${event.timeString}</span>
                 </div>
             `).join('');
         }
 
-        // Update timeline
+        // Update timeline with smaller events
         function updateTimeline() {
             const timeline = document.getElementById('timeline');
             
@@ -1061,20 +1524,15 @@
             
             events.forEach(event => {
                 const marker = document.createElement('div');
-                marker.style.position = 'absolute';
-                marker.style.top = '10px';
-                marker.style.width = '4px';
-                marker.style.height = '40px';
-                marker.style.borderRadius = '2px';
-                marker.style.left = `${(event.time / duration) * 100}%`;
+                marker.className = `timeline-event ${event.team}`;
+                marker.style.left = `${(event.time / duration) * 95}%`;
+                marker.title = `${event.teamName} - ${event.type} (${event.timeString})`;
                 
-                switch(event.type) {
-                    case 'Goal': marker.style.background = '#10b981'; break;
-                    case 'Point': 
-                    case '2 Point': marker.style.background = '#f59e0b'; break;
-                    case 'Foul': marker.style.background = '#f97316'; break;
-                    default: marker.style.background = 'white';
-                }
+                marker.addEventListener('click', () => {
+                    if (currentVideo) {
+                        currentVideo.currentTime = event.time;
+                    }
+                });
                 
                 timeline.appendChild(marker);
             });
@@ -1090,8 +1548,14 @@
             const projectData = {
                 events: events,
                 stats: stats,
+                teamStats: teamStats,
                 scores: scores,
                 sport: currentSport,
+                activeTeam: activeTeam,
+                teamNames: {
+                    home: document.getElementById('homeTeam').value,
+                    away: document.getElementById('awayTeam').value
+                },
                 timestamp: new Date().toISOString()
             };
             
@@ -1116,9 +1580,11 @@
             }
             
             const csvContent = [
-                ['Event Type', 'Time (seconds)', 'Time (MM:SS)', 'Sport', 'Timestamp'],
+                ['Event Type', 'Team', 'Team Name', 'Time (seconds)', 'Time (MM:SS)', 'Sport', 'Timestamp'],
                 ...events.map(event => [
                     event.type,
+                    event.team,
+                    event.teamName,
                     event.time.toFixed(2),
                     event.timeString,
                     event.sport,
@@ -1136,12 +1602,12 @@
 
         // Export PDF function
         function exportPDF() {
-            alert('PDF export feature coming soon!');
+            alert('PDF export feature coming in Phase 2! This will generate a comprehensive match report.');
         }
 
         // Share link function
         function shareLink() {
-            alert('Share link feature coming soon!');
+            alert('Share link feature coming in Phase 2!');
         }
 
         // Keyboard shortcuts
@@ -1155,6 +1621,9 @@
                 case 's': tagEvent('Saved'); break;
                 case 'f': tagEvent('Foul'); break;
                 case 'c': tagEvent('Yellow Card'); break;
+                case '1': setActiveTeam('home'); break;
+                case '2': setActiveTeam('away'); break;
+                case 'u': undoLastEvent(); break;
                 case ' ': 
                     event.preventDefault();
                     togglePlayPause();
@@ -1162,11 +1631,16 @@
             }
         });
 
+        // Update team names when inputs change
+        document.getElementById('homeTeam').addEventListener('input', updateTeamNames);
+        document.getElementById('awayTeam').addEventListener('input', updateTeamNames);
+
         // Initialize the app when page loads
         window.addEventListener('DOMContentLoaded', function() {
             setSport('football');
+            setActiveTeam('home');
+            updateTeamNames();
         });
     </script>
 </body>
-
 </html>
