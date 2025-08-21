@@ -1,10 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+    <script src="https://js.stripe.com/v3/"></script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pricing - PáircPro | Professional GAA Video Analysis</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    const stripe = Stripe('pk_live_51RybZC3XC25HXCiQqsIzJTdCBnpHwtNTpTInwozichZwf2gGaM10p2alrdaw9GziOW8MyTFLbVyh13JSzWK07ucr00j81TnPIf');
+
+function buyPremiumMonthly() {
+  stripe.redirectToCheckout({
+    lineItems: [{price: 'price_1Ryc3l3XC25HXCiQFeJWJbIO', quantity: 1}],
+    mode: 'subscription',
+    successUrl: 'https://paircpro.ie/success.html',
+    cancelUrl: 'https://paircpro.ie/pricing.html',
+  });
+}
+
+function buyPremiumAnnual() {
+  stripe.redirectToCheckout({
+    lineItems: [{price: 'price_1RycnX3XC25HXCiQM17cB59a', quantity: 1}],
+    mode: 'subscription',
+    successUrl: 'https://paircpro.ie/success.html',
+    cancelUrl: 'https://paircpro.ie/pricing.html',
+  });
+}
+
+function buyEnterpriseMonthly() {
+  stripe.redirectToCheckout({
+    lineItems: [{price: 'price_1Rycsc3XC25HXCiQlGjJS70i', quantity: 1}],
+    mode: 'subscription',
+    successUrl: 'https://paircpro.ie/success.html',
+    cancelUrl: 'https://paircpro.ie/pricing.html',
+  });
+}
+
+function buyEnterpriseAnnual() {
+  stripe.redirectToCheckout({
+    lineItems: [{price: 'price_1RyctT3XC25HXCiQ7UI8Nhow', quantity: 1}],
+    mode: 'subscription',
+    successUrl: 'https://paircpro.ie/success.html',
+    cancelUrl: 'https://paircpro.ie/pricing.html',
+  });
+}
     <style>
         * {
             margin: 0;
@@ -1146,3 +1184,4 @@
 
                     <div class="faq-item">
                         <button class="faq-question"
+
