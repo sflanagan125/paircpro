@@ -12,16 +12,16 @@
         }
 
         body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', sans-serif;
-    background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
-    color: white;
-    overflow: hidden;
-    margin: 0;
-    padding-top: 28px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', sans-serif;
+            background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+            color: white;
+            overflow-x: hidden;
+            margin: 0;
+            padding-top: 28px;
         }
 
         .app-container {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
         }
 
@@ -32,6 +32,7 @@
             border-right: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             flex-direction: column;
+            flex-shrink: 0;
         }
 
         .logo {
@@ -105,6 +106,7 @@
             display: flex;
             flex-direction: column;
             background: rgba(255, 255, 255, 0.02);
+            min-width: 0;
         }
 
         .top-bar {
@@ -115,6 +117,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .page-title {
@@ -126,6 +130,7 @@
         .top-controls {
             display: flex;
             gap: 12px;
+            flex-wrap: wrap;
         }
 
         .btn {
@@ -256,7 +261,6 @@
             background: rgba(255, 255, 255, 0.15);
         }
 
-        /* Team Setup Section */
         .team-setup {
             margin-bottom: 20px;
         }
@@ -372,41 +376,6 @@
             transition: transform 0.1s;
         }
 
-        /* Neutral events with team indicators */
-        .neutral-event {
-            display: grid;
-            grid-template-columns: 25px 1fr 25px;
-            gap: 6px;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .team-mini-btn {
-            padding: 6px;
-            border: none;
-            border-radius: 4px;
-            font-weight: 700;
-            font-size: 10px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-        }
-
-        .team-mini-btn:hover {
-            transform: scale(1.1);
-        }
-
-        .team-mini-btn.home.active {
-            background: #3b82f6;
-            box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
-        }
-
-        .team-mini-btn.away.active {
-            background: #ef4444;
-            box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
-        }
-
         .goal-btn { background: #10b981; color: white; }
         .point-btn { background: #f59e0b; color: white; }
         .wide-btn { background: #ef4444; color: white; }
@@ -418,7 +387,7 @@
 
         .video-section {
             flex: 1;
-            min-width: 400px;
+            min-width: 0;
             display: flex;
             flex-direction: column;
             gap: 16px;
@@ -518,6 +487,7 @@
             gap: 16px;
             flex-shrink: 0;
             min-height: 80px;
+            flex-wrap: wrap;
         }
 
         .play-btn {
@@ -534,6 +504,7 @@
             justify-content: center;
             transition: all 0.2s ease;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            flex-shrink: 0;
         }
 
         .play-btn:hover {
@@ -546,6 +517,7 @@
             font-size: 16px;
             color: rgba(255, 255, 255, 0.8);
             font-weight: 600;
+            flex-shrink: 0;
         }
 
         .progress-container {
@@ -556,6 +528,7 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            min-width: 100px;
         }
 
         .progress-fill {
@@ -733,7 +706,6 @@
             margin-bottom: 8px;
         }
 
-        /* Force scrollbar to always show so users know content is scrollable */
         .left-panel::-webkit-scrollbar,
         .right-panel::-webkit-scrollbar {
             width: 8px;
@@ -756,45 +728,6 @@
             background: rgba(255, 255, 255, 0.6);
         }
 
-        /* Notification animations */
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideOut {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-        }
-            .content-area {
-                gap: 15px;
-                padding: 15px;
-            }
-            
-            .left-panel {
-                width: 280px;
-                min-width: 260px;
-            }
-            
-            .right-panel {
-                width: 320px;
-                min-width: 280px;
-            }
-        }
-
-        /* Feature Lock Overlay */
         .feature-lock-overlay {
             position: absolute;
             top: 0;
@@ -841,251 +774,521 @@
             background: #d97706;
             transform: translateY(-1px);
         }
+
+        /* Mobile hamburger menu */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .content-area {
+                gap: 12px;
+                padding: 12px;
+            }
+            
+            .left-panel {
+                width: 260px;
+                min-width: 240px;
+            }
+            
+            .right-panel {
+                width: 300px;
+                min-width: 280px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                overflow-x: hidden;
+                padding-top: 28px;
+            }
+
+            .app-container {
+                flex-direction: column;
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .sidebar {
+                position: fixed;
+                top: 28px;
+                left: -100%;
+                width: 280px;
+                height: calc(100vh - 28px);
+                z-index: 1000;
+                transition: left 0.3s ease;
+                background: rgba(0, 102, 204, 0.95);
+                backdrop-filter: blur(20px);
+            }
+
+            .sidebar.show {
+                left: 0;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .main-content {
+                width: 100%;
+                margin-left: 0;
+            }
+
+            .top-bar {
+                padding: 12px 16px;
+                justify-content: space-between;
+            }
+
+            .page-title {
+                font-size: 18px;
+            }
+
+            .top-controls {
+                gap: 8px;
+            }
+
+            .content-area {
+                flex-direction: column;
+                padding: 12px;
+                gap: 12px;
+                height: auto;
+            }
+
+            .left-panel,
+            .right-panel {
+                width: 100%;
+                max-width: none;
+                min-width: 0;
+                height: auto;
+                overflow-y: visible;
+            }
+
+            .video-section {
+                width: 100%;
+                min-width: 0;
+                height: auto;
+                order: -1;
+            }
+
+            .video-container {
+                min-height: 200px;
+                height: 50vw;
+                max-height: 300px;
+            }
+
+            .upload-area {
+                padding: 30px 20px;
+            }
+
+            .upload-area h3 {
+                font-size: 16px;
+            }
+
+            .controls-bar {
+                padding: 12px;
+                gap: 12px;
+                justify-content: center;
+            }
+
+            .play-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .time-display {
+                font-size: 14px;
+            }
+
+            .timeline-section {
+                height: 80px;
+                padding: 12px;
+            }
+
+            .timeline {
+                height: 40px;
+            }
+
+            .panel-content {
+                padding: 16px;
+            }
+
+            .event-grid {
+                gap: 8px;
+            }
+
+            .event-btn {
+                padding: 10px 8px;
+                font-size: 11px;
+            }
+
+            .score {
+                font-size: 24px;
+            }
+
+            .stats-grid {
+                gap: 8px;
+            }
+
+            .stat-item {
+                padding: 12px;
+            }
+
+            .stat-value {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .top-bar {
+                padding: 8px 12px;
+            }
+
+            .page-title {
+                font-size: 16px;
+            }
+
+            .btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .content-area {
+                padding: 8px;
+                gap: 8px;
+            }
+
+            .video-container {
+                min-height: 180px;
+            }
+
+            .controls-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+                padding: 8px;
+            }
+
+            .controls-bar > div {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .progress-container {
+                min-width: 120px;
+            }
+
+            .panel-content {
+                padding: 12px;
+            }
+
+            .event-grid.three-columns {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .event-btn {
+                padding: 8px 6px;
+                font-size: 10px;
+            }
+
+            .score-display {
+                padding: 12px;
+            }
+
+            .score {
+                font-size: 20px;
+            }
+
+            .vs {
+                margin: 0 12px;
+                font-size: 16px;
+            }
+        }
+
+        /* Overlay for mobile sidebar */
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .mobile-overlay.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-overlay.show {
+                display: block;
+            }
+        }
     </style>
     <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
-<div id="trialBanner" style="position:fixed;top:0;left:0;right:0;background:#f59e0b;color:white;padding:8px 20px;display:flex;justify-content:space-between;z-index:9999;">
+<div id="trialBanner" style="position:fixed;top:0;left:0;right:0;background:#f59e0b;color:white;padding:8px 20px;display:flex;justify-content:space-between;z-index:9999;font-size:14px;">
     <span>⏰ Coach Trial: <span id="trialDays">7</span> days remaining (<span id="projectCount">2</span>/3 projects used)</span>
     <button style="background:white;color:#f59e0b;border:none;padding:4px 12px;border-radius:12px;font-weight:bold;" onclick="upgradeAccount()">Upgrade</button>
 </div>
-    <div class="app-container">
-        <aside class="sidebar">
-            <a href="index.html" class="logo">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="160" height="42">
-                    <defs>
-                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" style="stop-color:#0066cc"/>
-                            <stop offset="100%" style="stop-color:#6366f1"/>
-                        </linearGradient>
-                    </defs>
-                    
-                    <!-- GAA Pitch Icon -->
-                    <g transform="translate(10, 10)">
-                        <rect x="0" y="0" width="40" height="40" rx="4" fill="url(#logoGradient)"/>
-                        <rect x="4" y="4" width="32" height="32" rx="2" fill="none" stroke="white" stroke-width="1.5"/>
-                        <circle cx="20" cy="20" r="6" fill="none" stroke="white" stroke-width="1.5"/>
-                        <rect x="4" y="14" width="8" height="12" fill="none" stroke="white" stroke-width="1"/>
-                        <rect x="28" y="14" width="8" height="12" fill="none" stroke="white" stroke-width="1"/>
-                        <rect x="4" y="17" width="2" height="6" fill="white"/>
-                        <rect x="34" y="17" width="2" height="6" fill="white"/>
-                        <circle cx="20" cy="20" r="4" fill="rgba(255,255,255,0.9)"/>
-                        <polygon points="17,17 17,23 23,20" fill="url(#logoGradient)"/>
-                    </g>
-                    
-                    <!-- Text Logo -->
-                    <g transform="translate(60, 10)">
-                        <text x="0" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="700" fill="white">
-                            Páirc<tspan fill="white">Pro</tspan>
-                        </text>
-                        <text x="0" y="38" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="500" fill="rgba(255,255,255,0.7)">
-                            GAA VIDEO ANALYSIS
-                        </text>
-                    </g>
-                    
-                    <circle cx="74" cy="12" r="1" fill="white"/>
-                </svg>
-            </a>
-            
-            <div class="nav-section">
-                <div class="nav-title">Analysis</div>
-                <div class="nav-item active">
-                    <span class="nav-icon">🎥</span>
-                    Video Analysis
-                </div>
-                <div class="nav-item" onclick="showProjects()">
-                    <span class="nav-icon">📁</span>
-                    Projects
-                </div>
-                <div class="nav-item locked" onclick="showUpgradeModal('PDF Reports')">
-                    <span class="nav-icon">📊</span>
-                    Reports
-                </div>
-            </div>
 
-            <div class="nav-section">
-                <div class="nav-title">Tools</div>
-                <div class="nav-item" onclick="showClipCreator()">
-                    <span class="nav-icon">✂️</span>
-                    Clip Creator
-                </div>
-                <div class="nav-item locked" onclick="showUpgradeModal('Heat Maps')">
-                    <span class="nav-icon">🔥</span>
-                    Heat Maps
-                </div>
-                <div class="nav-item locked" onclick="showUpgradeModal('Compare Feature')">
-                    <span class="nav-icon">⚖️</span>
-                    Compare
-                </div>
-            </div>
+<!-- Mobile overlay -->
+<div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
 
-            <div class="nav-section">
-                <div class="nav-title">Account</div>
-                <div class="nav-item">
-                    <span class="nav-icon">❓</span>
-                    Help
-                </div>
+<div class="app-container">
+    <aside class="sidebar" id="sidebar">
+        <a href="index.html" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="160" height="42">
+                <defs>
+                    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#0066cc"/>
+                        <stop offset="100%" style="stop-color:#6366f1"/>
+                    </linearGradient>
+                </defs>
+                
+                <!-- GAA Pitch Icon -->
+                <g transform="translate(10, 10)">
+                    <rect x="0" y="0" width="40" height="40" rx="4" fill="url(#logoGradient)"/>
+                    <rect x="4" y="4" width="32" height="32" rx="2" fill="none" stroke="white" stroke-width="1.5"/>
+                    <circle cx="20" cy="20" r="6" fill="none" stroke="white" stroke-width="1.5"/>
+                    <rect x="4" y="14" width="8" height="12" fill="none" stroke="white" stroke-width="1"/>
+                    <rect x="28" y="14" width="8" height="12" fill="none" stroke="white" stroke-width="1"/>
+                    <rect x="4" y="17" width="2" height="6" fill="white"/>
+                    <rect x="34" y="17" width="2" height="6" fill="white"/>
+                    <circle cx="20" cy="20" r="4" fill="rgba(255,255,255,0.9)"/>
+                    <polygon points="17,17 17,23 23,20" fill="url(#logoGradient)"/>
+                </g>
+                
+                <!-- Text Logo -->
+                <g transform="translate(60, 10)">
+                    <text x="0" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="700" fill="white">
+                        Páirc<tspan fill="white">Pro</tspan>
+                    </text>
+                    <text x="0" y="38" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="500" fill="rgba(255,255,255,0.7)">
+                        GAA VIDEO ANALYSIS
+                    </text>
+                </g>
+                
+                <circle cx="74" cy="12" r="1" fill="white"/>
+            </svg>
+        </a>
+        
+        <div class="nav-section">
+            <div class="nav-title">Analysis</div>
+            <div class="nav-item active">
+                <span class="nav-icon">🎥</span>
+                Video Analysis
             </div>
-        </aside>
+            <div class="nav-item" onclick="showProjects()">
+                <span class="nav-icon">📁</span>
+                Projects
+            </div>
+            <div class="nav-item locked" onclick="showUpgradeModal('PDF Reports')">
+                <span class="nav-icon">📊</span>
+                Reports
+            </div>
+        </div>
 
-        <main class="main-content">
-            <div class="top-bar">
+        <div class="nav-section">
+            <div class="nav-title">Tools</div>
+            <div class="nav-item" onclick="showClipCreator()">
+                <span class="nav-icon">✂️</span>
+                Clip Creator
+            </div>
+            <div class="nav-item locked" onclick="showUpgradeModal('Heat Maps')">
+                <span class="nav-icon">🔥</span>
+                Heat Maps
+            </div>
+            <div class="nav-item locked" onclick="showUpgradeModal('Compare Feature')">
+                <span class="nav-icon">⚖️</span>
+                Compare
+            </div>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-title">Account</div>
+            <div class="nav-item">
+                <span class="nav-icon">❓</span>
+                Help
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="top-bar">
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
                 <h1 class="page-title">Video Analysis</h1>
-                <div class="top-controls">
-                    <button class="btn btn-secondary" onclick="saveProject()" id="saveBtn">Save Project</button>
-                    <button class="btn btn-primary" onclick="exportAnalysis()" id="exportBtn">Export Analysis</button>
+            </div>
+            <div class="top-controls">
+                <button class="btn btn-secondary" onclick="saveProject()" id="saveBtn">Save Project</button>
+                <button class="btn btn-primary" onclick="exportAnalysis()" id="exportBtn">Export Analysis</button>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div class="left-panel">
+                <div class="panel">
+                    <div class="panel-header">Match Setup</div>
+                    <div class="panel-content">
+                        <div class="sport-tabs">
+                            <div class="sport-tab active" onclick="setSport('football')">Football</div>
+                            <div class="sport-tab" onclick="setSport('hurling')">Hurling</div>
+                        </div>
+                        
+                        <div class="team-setup">
+                            <div class="team-inputs">
+                                <input type="text" class="team-input" id="homeTeam" placeholder="Home Team" value="Kerry">
+                                <span class="vs-text">vs</span>
+                                <input type="text" class="team-input" id="awayTeam" placeholder="Away Team" value="Dublin">
+                            </div>
+                        </div>
+                        
+                        <input type="file" id="videoFile" class="file-input" accept="video/*" onchange="handleVideoUpload(event)">
+                        <button class="btn btn-secondary" style="width: 100%; margin-bottom: 12px;" onclick="document.getElementById('videoFile').click()">
+                            📁 Choose Match Video
+                        </button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header">Team Selection</div>
+                    <div class="panel-content">
+                        <div class="team-selector">
+                            <button class="team-btn active" id="homeBtn" onclick="setActiveTeam('home')">
+                                🏠 Home Active
+                            </button>
+                            <button class="team-btn" id="awayBtn" onclick="setActiveTeam('away')">
+                                ✈️ Away
+                            </button>
+                        </div>
+                        <button class="btn btn-secondary" style="width: 100%; margin-top: 12px; padding: 6px; font-size: 12px;" onclick="undoLastEvent()">
+                            ↶ Undo Last Event
+                        </button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header">Event Tagging</div>
+                    <div class="panel-content">
+                        <div class="event-category">
+                            <div class="category-title">Scoring</div>
+                            <div class="event-grid three-columns" id="scoringGrid">
+                                <button class="event-btn goal-btn" onclick="tagEvent('Goal')">Goal</button>
+                                <button class="event-btn point-btn" onclick="tagEvent('Point')">Point</button>
+                                <button class="event-btn point-btn" onclick="tagEvent('2 Point')" id="twoPointBtn">2 Point</button>
+                                <button class="event-btn wide-btn" onclick="tagEvent('Wide')">Wide</button>
+                                <button class="event-btn save-btn" onclick="tagEvent('Saved')">Saved</button>
+                                <button class="event-btn wide-btn" onclick="tagEvent('45')" id="football45">45</button>
+                                <button class="event-btn wide-btn" onclick="tagEvent('65')" id="hurling65" style="display: none;">65</button>
+                            </div>
+                        </div>
+
+                        <div class="event-category">
+                            <div class="category-title">Passing</div>
+                            <div class="event-grid" id="passingGrid">
+                                <button class="event-btn other-btn" onclick="tagEvent('Hand Pass')" id="handPass">Hand Pass</button>
+                                <button class="event-btn other-btn" onclick="tagEvent('Kick Pass')" id="kickPass">Kick Pass</button>
+                                <button class="event-btn other-btn" onclick="tagEvent('Hurl Pass')" id="hurlPass" style="display: none;">Hurl Pass</button>
+                            </div>
+                        </div>
+
+                        <div class="event-category">
+                            <div class="category-title">Own Kickouts</div>
+                            <div class="event-grid">
+                                <button class="event-btn free-btn" onclick="tagEvent('Own Kickout Won')">Won</button>
+                                <button class="event-btn foul-btn" onclick="tagEvent('Own Kickout Lost')">Lost</button>
+                            </div>
+                        </div>
+
+                        <div class="event-category">
+                            <div class="category-title">Opposition Kickouts</div>
+                            <div class="event-grid">
+                                <button class="event-btn free-btn" onclick="tagEvent('Opp Kickout Won')">Won</button>
+                                <button class="event-btn foul-btn" onclick="tagEvent('Opp Kickout Lost')">Lost</button>
+                            </div>
+                        </div>
+
+                        <div class="event-category">
+                            <div class="category-title">Other Restarts</div>
+                            <div class="event-grid">
+                                <button class="event-btn free-btn" onclick="tagEvent('Free Kick')">Free Kick</button>
+                                <button class="event-btn free-btn" onclick="tagEvent('Sideline')">Sideline</button>
+                                <button class="event-btn other-btn" onclick="tagEvent('Penalty')">Penalty</button>
+                                <button class="event-btn other-btn" onclick="tagEvent('Throw-in')">Throw-in</button>
+                            </div>
+                        </div>
+
+                        <div class="event-category">
+                            <div class="category-title">Fouls</div>
+                            <div class="event-grid">
+                                <button class="event-btn foul-btn" onclick="tagEvent('Foul')">Foul</button>
+                                <button class="event-btn card-btn" onclick="tagEvent('Yellow Card')">Yellow Card</button>
+                                <button class="event-btn card-btn" onclick="tagEvent('Red Card')">Red Card</button>
+                                <button class="event-btn card-btn" onclick="tagEvent('Black Card')">Black Card</button>
+                            </div>
+                        </div>
+
+                        <div class="event-category">
+                            <div class="category-title">Other</div>
+                            <div class="event-grid">
+                                <button class="event-btn other-btn" onclick="tagEvent('Substitution')">Substitution</button>
+                                <button class="event-btn other-btn" onclick="tagEvent('Turnover')">Turnover</button>
+                                <button class="event-btn other-btn" onclick="tagEvent('Injury')">Injury</button>
+                                <button class="event-btn other-btn" onclick="tagEvent('Custom')">Custom</button>
+                            </div>
+                        </div>
+
+                        <div class="shortcuts-info">
+                            <strong>Keyboard Shortcuts</strong>
+                            G - Goal | P - Point | W - Wide | S - Save<br>
+                            F - Foul | C - Card | Space - Play/Pause<br>
+                            1 - Home Team | 2 - Away Team | U - Undo
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="content-area">
-                <div class="left-panel">
-                    <div class="panel">
-                        <div class="panel-header">Match Setup</div>
-                        <div class="panel-content">
-                            <div class="sport-tabs">
-                                <div class="sport-tab active" onclick="setSport('football')">Football</div>
-                                <div class="sport-tab" onclick="setSport('hurling')">Hurling</div>
-                            </div>
-                            
-                            <div class="team-setup">
-                                <div class="team-inputs">
-                                    <input type="text" class="team-input" id="homeTeam" placeholder="Home Team" value="Kerry">
-                                    <span class="vs-text">vs</span>
-                                    <input type="text" class="team-input" id="awayTeam" placeholder="Away Team" value="Dublin">
-                                </div>
-                            </div>
-                            
-                            <input type="file" id="videoFile" class="file-input" accept="video/*" onchange="handleVideoUpload(event)">
-                            <button class="btn btn-secondary" style="width: 100%; margin-bottom: 12px;" onclick="document.getElementById('videoFile').click()">
-                                📁 Choose Match Video
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="panel">
-                        <div class="panel-header">Team Selection</div>
-                        <div class="panel-content">
-                            <div class="team-selector">
-                                <button class="team-btn active" id="homeBtn" onclick="setActiveTeam('home')">
-                                    🏠 Home Active
-                                </button>
-                                <button class="team-btn" id="awayBtn" onclick="setActiveTeam('away')">
-                                    ✈️ Away
-                                </button>
-                            </div>
-                            <button class="btn btn-secondary" style="width: 100%; margin-top: 12px; padding: 6px; font-size: 12px;" onclick="undoLastEvent()">
-                                ↶ Undo Last Event
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="panel">
-                        <div class="panel-header">Event Tagging</div>
-                        <div class="panel-content">
-                            <div class="event-category">
-                                <div class="category-title">Scoring</div>
-                                <div class="event-grid three-columns" id="scoringGrid">
-                                    <button class="event-btn goal-btn" onclick="tagEvent('Goal')">Goal</button>
-                                    <button class="event-btn point-btn" onclick="tagEvent('Point')">Point</button>
-                                    <button class="event-btn point-btn" onclick="tagEvent('2 Point')" id="twoPointBtn">2 Point</button>
-                                    <button class="event-btn wide-btn" onclick="tagEvent('Wide')">Wide</button>
-                                    <button class="event-btn save-btn" onclick="tagEvent('Saved')">Saved</button>
-                                    <button class="event-btn wide-btn" onclick="tagEvent('45')" id="football45">45</button>
-                                    <button class="event-btn wide-btn" onclick="tagEvent('65')" id="hurling65" style="display: none;">65</button>
-                                </div>
-                            </div>
-
-                            <div class="event-category">
-                                <div class="category-title">Passing</div>
-                                <div class="event-grid" id="passingGrid">
-                                    <button class="event-btn other-btn" onclick="tagEvent('Hand Pass')" id="handPass">Hand Pass</button>
-                                    <button class="event-btn other-btn" onclick="tagEvent('Kick Pass')" id="kickPass">Kick Pass</button>
-                                    <button class="event-btn other-btn" onclick="tagEvent('Hurl Pass')" id="hurlPass" style="display: none;">Hurl Pass</button>
-                                </div>
-                            </div>
-
-                            <div class="event-category">
-                                <div class="category-title">Own Kickouts</div>
-                                <div class="event-grid">
-                                    <button class="event-btn free-btn" onclick="tagEvent('Own Kickout Won')">Won</button>
-                                    <button class="event-btn foul-btn" onclick="tagEvent('Own Kickout Lost')">Lost</button>
-                                </div>
-                            </div>
-
-                            <div class="event-category">
-                                <div class="category-title">Opposition Kickouts</div>
-                                <div class="event-grid">
-                                    <button class="event-btn free-btn" onclick="tagEvent('Opp Kickout Won')">Won</button>
-                                    <button class="event-btn foul-btn" onclick="tagEvent('Opp Kickout Lost')">Lost</button>
-                                </div>
-                            </div>
-
-                            <div class="event-category">
-                                <div class="category-title">Other Restarts</div>
-                                <div class="event-grid">
-                                    <button class="event-btn free-btn" onclick="tagEvent('Free Kick')">Free Kick</button>
-                                    <button class="event-btn free-btn" onclick="tagEvent('Sideline')">Sideline</button>
-                                    <button class="event-btn other-btn" onclick="tagEvent('Penalty')">Penalty</button>
-                                    <button class="event-btn other-btn" onclick="tagEvent('Throw-in')">Throw-in</button>
-                                </div>
-                            </div>
-
-                            <div class="event-category">
-                                <div class="category-title">Fouls</div>
-                                <div class="event-grid">
-                                    <button class="event-btn foul-btn" onclick="tagEvent('Foul')">Foul</button>
-                                    <button class="event-btn card-btn" onclick="tagEvent('Yellow Card')">Yellow Card</button>
-                                    <button class="event-btn card-btn" onclick="tagEvent('Red Card')">Red Card</button>
-                                    <button class="event-btn card-btn" onclick="tagEvent('Black Card')">Black Card</button>
-                                </div>
-                            </div>
-
-                            <div class="event-category">
-                                <div class="category-title">Other</div>
-                                <div class="event-grid">
-                                    <button class="event-btn other-btn" onclick="tagEvent('Substitution')">Substitution</button>
-                                    <button class="event-btn other-btn" onclick="tagEvent('Turnover')">Turnover</button>
-                                    <button class="event-btn other-btn" onclick="tagEvent('Injury')">Injury</button>
-                                    <button class="event-btn other-btn" onclick="tagEvent('Custom')">Custom</button>
-                                </div>
-                            </div>
-
-                            <div class="shortcuts-info">
-                                <strong>Keyboard Shortcuts</strong>
-                                G - Goal | P - Point | W - Wide | S - Save<br>
-                                F - Foul | C - Card | Space - Play/Pause<br>
-                                1 - Home Team | 2 - Away Team | U - Undo
-                            </div>
-                        </div>
+            <div class="video-section">
+                <div class="video-container" id="videoContainer">
+                    <div class="upload-area" onclick="document.getElementById('videoFile').click()">
+                        <h3>Upload Match Video</h3>
+                        <p style="margin-top: 12px; opacity: 0.8;">Click to select or drag & drop</p>
+                        <p style="margin-top: 8px; font-size: 13px; opacity: 0.6;">MP4, AVI, MOV supported</p>
                     </div>
                 </div>
 
-                <div class="video-section">
-                    <div class="video-container" id="videoContainer">
-                        <div class="upload-area" onclick="document.getElementById('videoFile').click()">
-                            <h3>Upload Match Video</h3>
-                            <p style="margin-top: 12px; opacity: 0.8;">Click to select or drag & drop</p>
-                            <p style="margin-top: 8px; font-size: 13px; opacity: 0.6;">MP4, AVI, MOV supported</p>
+                <div class="timeline-section">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+                        <h4 style="font-weight: 700; font-size: 14px;">Event Timeline</h4>
+                        <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                            <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 11px;" onclick="skipVideo(-10)">⏮️ -10s</button>
+                            <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 11px;" onclick="skipVideo(-5)">⏪ -5s</button>
+                            <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 11px;" onclick="skipVideo(5)">⏩ +5s</button>
+                            <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 11px;" onclick="skipVideo(10)">⏭️ +10s</button>
                         </div>
                     </div>
-
-                    <div class="timeline-section">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                            <h4 style="font-weight: 700; font-size: 14px;">Event Timeline</h4>
-                            <div style="display: flex; gap: 6px;">
-                                <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 11px;" onclick="skipVideo(-10)">⏮️ -10s</button>
-                                <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 11px;" onclick="skipVideo(-5)">⏪ -5s</button>
-                                <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 11px;" onclick="skipVideo(5)">⏩ +5s</button>
-                                <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 11px;" onclick="skipVideo(10)">⏭️ +10s</button>
-                            </div>
-                        </div>
-                        <div class="timeline" id="timeline">
-                            <p style="text-align: center; line-height: 50px; color: rgba(255, 255, 255, 0.6); font-size: 12px;">No events tagged yet. Start tagging events in the video.</p>
-                        </div>
+                    <div class="timeline" id="timeline">
+                        <p style="text-align: center; line-height: 50px; color: rgba(255, 255, 255, 0.6); font-size: 12px;">No events tagged yet. Start tagging events in the video.</p>
                     </div>
+                </div>
 
-                    <div class="controls-bar">
-                        <button class="play-btn" id="playBtn" onclick="togglePlayPause()">▶</button>
+                <div class="controls-bar">
+                    <button class="play-btn" id="playBtn" onclick="togglePlayPause()">▶</button>
+                    <div style="display: flex; align-items: center; gap: 16px; flex: 1; min-width: 0;">
                         <span class="time-display" id="timeDisplay">00:00 / 00:00</span>
                         <div class="progress-container" onclick="seekVideo(event)">
                             <div class="progress-fill" id="progressFill"></div>
@@ -1093,1429 +1296,938 @@
                         <button class="btn btn-primary" onclick="markEvent()">Mark Event</button>
                     </div>
                 </div>
+            </div>
 
-                <div class="right-panel">
-                    <div class="score-display">
-                        <div class="team-score">
-                            <div class="team-name" id="homeTeamName">Kerry</div>
-                            <div class="score home active" id="homeScore">0-00</div>
-                        </div>
-                        <div class="vs">VS</div>
-                        <div class="team-score">
-                            <div class="team-name" id="awayTeamName">Dublin</div>
-                            <div class="score away" id="awayScore">0-00</div>
-                        </div>
+            <div class="right-panel">
+                <div class="score-display">
+                    <div class="team-score">
+                        <div class="team-name" id="homeTeamName">Kerry</div>
+                        <div class="score home active" id="homeScore">0-00</div>
                     </div>
+                    <div class="vs">VS</div>
+                    <div class="team-score">
+                        <div class="team-name" id="awayTeamName">Dublin</div>
+                        <div class="score away" id="awayScore">0-00</div>
+                    </div>
+                </div>
 
-                    <div class="panel">
-                        <div class="panel-header">Match Statistics</div>
-                        <div class="panel-content">
-                            <div class="possession-bar">
-                                <div class="possession-display">
-                                    <span style="color: rgba(255, 255, 255, 0.8);">Possession</span>
-                                    <span id="possessionText" style="color: white;">52% - 48%</span>
-                                </div>
-                                <div class="possession-progress">
-                                    <div class="possession-fill"></div>
-                                </div>
+                <div class="panel">
+                    <div class="panel-header">Match Statistics</div>
+                    <div class="panel-content">
+                        <div class="possession-bar">
+                            <div class="possession-display">
+                                <span style="color: rgba(255, 255, 255, 0.8);">Possession</span>
+                                <span id="possessionText" style="color: white;">52% - 48%</span>
                             </div>
-
-                            <div class="stats-grid">
-                                <div class="stat-item">
-                                    <div class="stat-label">Total Events</div>
-                                    <div class="stat-value" id="totalEvents">0</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-label">Goals</div>
-                                    <div class="stat-value" id="goalCount">0</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-label">Points</div>
-                                    <div class="stat-value" id="pointCount">0</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-label">Fouls</div>
-                                    <div class="stat-value" id="foulCount">0</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-label">Own K/O Won</div>
-                                    <div class="stat-value" id="ownKickoutWon">0</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-label">Opp K/O Won</div>
-                                    <div class="stat-value" id="oppKickoutWon">0</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-label">Home Events</div>
-                                    <div class="stat-value" id="homeEvents">0</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-label">Away Events</div>
-                                    <div class="stat-value" id="awayEvents">0</div>
-                                </div>
+                            <div class="possession-progress">
+                                <div class="possession-fill"></div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="panel" id="exportPanel">
-                        <div class="panel-header">Export Options</div>
-                        <div class="panel-content">
-                            <button class="btn btn-secondary" style="width: 100%; margin-bottom: 12px;" onclick="exportCSV()">
-                                📊 Export CSV
-                            </button>
-                            <button class="btn btn-secondary" style="width: 100%; margin-bottom: 12px;" onclick="checkFeatureAccess('pdfReport')" id="pdfBtn">
-                                📄 PDF Report
-                            </button>
-                            <button class="btn btn-secondary" style="width: 100%;" onclick="shareLink()">
-                                🔗 Share Link
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="panel locked" id="heatMapPanel">
-                        <div class="panel-header locked">Heat Map</div>
-                        <div class="panel-content">
-                            <div class="heat-map">
-                                Field Heat Map (Possession zones)
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-label">Total Events</div>
+                                <div class="stat-value" id="totalEvents">0</div>
                             </div>
-                            <div class="feature-lock-overlay">
-                                <div class="feature-lock-content">
-                                    <h3>🔒 Premium Feature</h3>
-                                    <p>Heat maps show player movement patterns and possession zones</p>
-                                    <button class="upgrade-btn" onclick="upgradeAccount()">Upgrade to Premium</button>
-                                </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Goals</div>
+                                <div class="stat-value" id="goalCount">0</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Points</div>
+                                <div class="stat-value" id="pointCount">0</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Fouls</div>
+                                <div class="stat-value" id="foulCount">0</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Own K/O Won</div>
+                                <div class="stat-value" id="ownKickoutWon">0</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Opp K/O Won</div>
+                                <div class="stat-value" id="oppKickoutWon">0</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Home Events</div>
+                                <div class="stat-value" id="homeEvents">0</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Away Events</div>
+                                <div class="stat-value" id="awayEvents">0</div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="panel">
-                        <div class="panel-header">Recent Events</div>
-                        <div class="panel-content">
-                            <div class="event-list" id="eventList">
-                                <p style="opacity: 0.6; font-size: 13px; text-align: center;">No events tagged yet</p>
+                <div class="panel" id="exportPanel">
+                    <div class="panel-header">Export Options</div>
+                    <div class="panel-content">
+                        <button class="btn btn-secondary" style="width: 100%; margin-bottom: 12px;" onclick="exportCSV()">
+                            📊 Export CSV
+                        </button>
+                        <button class="btn btn-secondary" style="width: 100%; margin-bottom: 12px;" onclick="checkFeatureAccess('pdfReport')" id="pdfBtn">
+                            📄 PDF Report
+                        </button>
+                        <button class="btn btn-secondary" style="width: 100%;" onclick="shareLink()">
+                            🔗 Share Link
+                        </button>
+                    </div>
+                </div>
+
+                <div class="panel locked" id="heatMapPanel">
+                    <div class="panel-header locked">Heat Map</div>
+                    <div class="panel-content">
+                        <div class="heat-map">
+                            Field Heat Map (Possession zones)
+                        </div>
+                        <div class="feature-lock-overlay">
+                            <div class="feature-lock-content">
+                                <h3>🔒 Premium Feature</h3>
+                                <p>Heat maps show player movement patterns and possession zones</p>
+                                <button class="upgrade-btn" onclick="upgradeAccount()">Upgrade to Premium</button>
                             </div>
-                            <div id="eventNotes" style="display: none; margin-top: 12px; padding: 12px; background: rgba(255,255,255,0.05); border-radius: 8px;">
-                                <strong id="selectedEventTitle">Event Notes</strong>
-                                <textarea id="notesTextarea" placeholder="Add notes for this event..." 
-                                         style="width: 100%; height: 60px; margin-top: 8px; padding: 8px; border-radius: 4px; border: none; resize: vertical; font-size: 12px;"></textarea>
-                                <button onclick="saveEventNote()" style="margin-top: 8px; padding: 6px 12px; background: #10b981; color: white; border: none; border-radius: 4px; font-size: 12px; cursor: pointer;">Save Note</button>
-                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header">Recent Events</div>
+                    <div class="panel-content">
+                        <div class="event-list" id="eventList">
+                            <p style="opacity: 0.6; font-size: 13px; text-align: center;">No events tagged yet</p>
+                        </div>
+                        <div id="eventNotes" style="display: none; margin-top: 12px; padding: 12px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                            <strong id="selectedEventTitle">Event Notes</strong>
+                            <textarea id="notesTextarea" placeholder="Add notes for this event..." 
+                                     style="width: 100%; height: 60px; margin-top: 8px; padding: 8px; border-radius: 4px; border: none; resize: vertical; font-size: 12px;"></textarea>
+                            <button onclick="saveEventNote()" style="margin-top: 8px; padding: 6px 12px; background: #10b981; color: white; border: none; border-radius: 4px; font-size: 12px; cursor: pointer;">Save Note</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </main>
-    </div>
+        </div>
+    </main>
+</div>
 
-    <script>
-        // User subscription state
-        let userPlan = 'coach_trial'; // coach_trial, premium, enterprise
-        let trialDaysRemaining = 7;
-        let projectsUsed = 2;
-        let trialExpired = false;
+<script>
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('mobileOverlay');
+        
+        sidebar.classList.toggle('show');
+        overlay.classList.toggle('show');
+    }
 
-        // Access control configuration
-        const featureAccess = {
-            coach_trial: {
-                features: ['basic_analysis', 'gaa_tagging', 'csv_export'],
-                storage: '10GB',
-                projects: 3,
-                users: 1
-            },
-            premium: {
-                features: ['basic_analysis', 'gaa_tagging', 'csv_export', 'live_analysis', 'pdf_reports', 'advanced_stats'],
-                storage: '25GB',
-                projects: 'unlimited',
-                users: 3
-            },
-            enterprise: {
-                features: ['basic_analysis', 'gaa_tagging', 'csv_export', 'live_analysis', 'pdf_reports', 'advanced_stats', 'team_collaboration', 'heat_maps', 'priority_support'],
-                storage: '100GB',
-                projects: 'unlimited',
-                users: 10
-            }
+    // User subscription state
+    let userPlan = 'coach_trial';
+    let trialDaysRemaining = 7;
+    let projectsUsed = 2;
+    let trialExpired = false;
+
+    // Access control configuration
+    const featureAccess = {
+        coach_trial: {
+            features: ['basic_analysis', 'gaa_tagging', 'csv_export'],
+            storage: '10GB',
+            projects: 3,
+            users: 1
+        },
+        premium: {
+            features: ['basic_analysis', 'gaa_tagging', 'csv_export', 'live_analysis', 'pdf_reports', 'advanced_stats'],
+            storage: '25GB',
+            projects: 'unlimited',
+            users: 3
+        },
+        enterprise: {
+            features: ['basic_analysis', 'gaa_tagging', 'csv_export', 'live_analysis', 'pdf_reports', 'advanced_stats', 'team_collaboration', 'heat_maps', 'priority_support'],
+            storage: '100GB',
+            projects: 'unlimited',
+            users: 10
+        }
+    };
+
+    function hasFeatureAccess(feature) {
+        if (trialExpired) return false;
+        return featureAccess[userPlan].features.includes(feature);
+    }
+
+    function checkFeatureAccess(feature) {
+        const featureMap = {
+            'projects': 'basic_analysis',
+            'clipCreator': 'live_analysis',
+            'pdfReport': 'pdf_reports'
         };
-
-        // Check if user has access to feature
-        function hasFeatureAccess(feature) {
-            if (trialExpired) return false;
-            return featureAccess[userPlan].features.includes(feature);
+        
+        const requiredFeature = featureMap[feature] || feature;
+        
+        if (!hasFeatureAccess(requiredFeature)) {
+            showUpgradeModal(getFeatureName(feature));
+            return false;
         }
+        return true;
+    }
 
-        // Check feature access and show upgrade modal if needed
-        function checkFeatureAccess(feature) {
-            const featureMap = {
-                'projects': 'basic_analysis',
-                'clipCreator': 'live_analysis',
-                'pdfReport': 'pdf_reports'
-            };
-            
-            const requiredFeature = featureMap[feature] || feature;
-            
-            if (!hasFeatureAccess(requiredFeature)) {
-                showUpgradeModal(getFeatureName(feature));
-                return false;
-            }
-            return true;
-        }
+    function getFeatureName(feature) {
+        const names = {
+            'projects': 'Project Management',
+            'clipCreator': 'Clip Creator',
+            'pdfReport': 'PDF Reports',
+            'heatMaps': 'Heat Maps'
+        };
+        return names[feature] || feature;
+    }
 
-        // Get user-friendly feature name
-        function getFeatureName(feature) {
-            const names = {
-                'projects': 'Project Management',
-                'clipCreator': 'Clip Creator',
-                'pdfReport': 'PDF Reports',
-                'heatMaps': 'Heat Maps'
-            };
-            return names[feature] || feature;
-        }
-
-        // Show upgrade modal
-        function showUpgradeModal(featureName) {
-            const modal = document.createElement('div');
-            modal.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(0, 0, 0, 0.8);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 9999;
-                backdrop-filter: blur(10px);
-            `;
-            
-            modal.innerHTML = `
-                <div style="background: linear-gradient(135deg, #0066cc 0%, #004499 100%); 
-                           border-radius: 16px; 
-                           padding: 40px; 
-                           text-align: center; 
-                           max-width: 400px; 
-                           border: 2px solid rgba(255, 255, 255, 0.2);">
-                    <h2 style="color: white; margin-bottom: 16px; font-size: 24px;">🔒 Premium Feature</h2>
-                    <p style="color: rgba(255, 255, 255, 0.9); margin-bottom: 24px; line-height: 1.5;">
-                        <strong>${featureName}</strong> is available with Premium or Enterprise plans.
-                        Upgrade now to unlock advanced GAA analysis tools!
-                    </p>
-                    <div style="display: flex; gap: 12px; justify-content: center;">
-                        <button onclick="this.parentNode.parentNode.parentNode.remove()" 
-                                style="background: rgba(255, 255, 255, 0.2); 
-                                       color: white; 
-                                       border: none; 
-                                       padding: 12px 24px; 
-                                       border-radius: 8px; 
-                                       cursor: pointer;">
-                            Cancel
-                        </button>
-                        <button onclick="upgradeAccount()" 
-                                style="background: #f59e0b; 
-                                       color: white; 
-                                       border: none; 
-                                       padding: 12px 24px; 
-                                       border-radius: 8px; 
-                                       cursor: pointer; 
-                                       font-weight: 600;">
-                            Upgrade Now
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            document.body.appendChild(modal);
-        }
-
-        // Update trial banner
-        function updateTrialBanner() {
-            const banner = document.getElementById('trialBanner');
-            const daysSpan = document.getElementById('trialDays');
-            const projectSpan = document.getElementById('projectCount');
-            
-            if (trialExpired) {
-                banner.style.background = '#dc2626';
-                banner.innerHTML = `
-                    <span>⚠️ Trial Expired - Subscribe to continue using PáircPro</span>
-                    <button style="background:white;color:#dc2626;border:none;padding:4px 12px;border-radius:12px;font-weight:bold;" onclick="upgradeAccount()">Subscribe Now</button>
-                `;
-                lockAllFeatures();
-            } else {
-                daysSpan.textContent = trialDaysRemaining;
-                projectSpan.textContent = projectsUsed;
-                
-                if (trialDaysRemaining <= 1) {
-                    banner.style.background = '#dc2626';
-                }
-            }
-        }
-
-        // Lock all features when trial expires
-        function lockAllFeatures() {
-            const mainContent = document.querySelector('.main-content');
-            const overlay = document.createElement('div');
-            overlay.style.cssText = `
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(0, 0, 0, 0.8);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 1000;
-                backdrop-filter: blur(10px);
-            `;
-            
-            overlay.innerHTML = `
-                <div style="background: linear-gradient(135deg, #0066cc 0%, #004499 100%); 
-                           border-radius: 16px; 
-                           padding: 40px; 
-                           text-align: center; 
-                           max-width: 500px; 
-                           border: 2px solid rgba(255, 255, 255, 0.2);">
-                    <h2 style="color: white; margin-bottom: 16px; font-size: 28px;">⚠️ Trial Expired</h2>
-                    <p style="color: rgba(255, 255, 255, 0.9); margin-bottom: 24px; line-height: 1.5; font-size: 16px;">
-                        Your 7-day Coach trial has ended. Subscribe to continue analyzing GAA matches with PáircPro!
-                    </p>
+    function showUpgradeModal(featureName) {
+        const modal = document.createElement('div');
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            backdrop-filter: blur(10px);
+        `;
+        
+        modal.innerHTML = `
+            <div style="background: linear-gradient(135deg, #0066cc 0%, #004499 100%); 
+                       border-radius: 16px; 
+                       padding: 40px; 
+                       text-align: center; 
+                       max-width: 400px; 
+                       border: 2px solid rgba(255, 255, 255, 0.2);">
+                <h2 style="color: white; margin-bottom: 16px; font-size: 24px;">🔒 Premium Feature</h2>
+                <p style="color: rgba(255, 255, 255, 0.9); margin-bottom: 24px; line-height: 1.5;">
+                    <strong>${featureName}</strong> is available with Premium or Enterprise plans.
+                    Upgrade now to unlock advanced GAA analysis tools!
+                </p>
+                <div style="display: flex; gap: 12px; justify-content: center;">
+                    <button onclick="this.parentNode.parentNode.parentNode.remove()" 
+                            style="background: rgba(255, 255, 255, 0.2); 
+                                   color: white; 
+                                   border: none; 
+                                   padding: 12px 24px; 
+                                   border-radius: 8px; 
+                                   cursor: pointer;">
+                        Cancel
+                    </button>
                     <button onclick="upgradeAccount()" 
                             style="background: #f59e0b; 
                                    color: white; 
                                    border: none; 
-                                   padding: 16px 32px; 
+                                   padding: 12px 24px; 
                                    border-radius: 8px; 
                                    cursor: pointer; 
-                                   font-weight: 600;
-                                   font-size: 16px;">
-                        Subscribe Now
+                                   font-weight: 600;">
+                        Upgrade Now
                     </button>
                 </div>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+    }
+
+    function updateTrialBanner() {
+        const banner = document.getElementById('trialBanner');
+        const daysSpan = document.getElementById('trialDays');
+        const projectSpan = document.getElementById('projectCount');
+        
+        if (trialExpired) {
+            banner.style.background = '#dc2626';
+            banner.innerHTML = `
+                <span>⚠️ Trial Expired - Subscribe to continue using PáircPro</span>
+                <button style="background:white;color:#dc2626;border:none;padding:4px 12px;border-radius:12px;font-weight:bold;" onclick="upgradeAccount()">Subscribe Now</button>
             `;
+            lockAllFeatures();
+        } else {
+            daysSpan.textContent = trialDaysRemaining;
+            projectSpan.textContent = projectsUsed;
             
-            mainContent.style.position = 'relative';
-            mainContent.appendChild(overlay);
+            if (trialDaysRemaining <= 1) {
+                banner.style.background = '#dc2626';
+            }
+        }
+    }
+
+    function lockAllFeatures() {
+        const mainContent = document.querySelector('.main-content');
+        const overlay = document.createElement('div');
+        overlay.style.cssText = `
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        `;
+        
+        overlay.innerHTML = `
+            <div style="background: linear-gradient(135deg, #0066cc 0%, #004499 100%); 
+                       border-radius: 16px; 
+                       padding: 40px; 
+                       text-align: center; 
+                       max-width: 500px; 
+                       border: 2px solid rgba(255, 255, 255, 0.2);">
+                <h2 style="color: white; margin-bottom: 16px; font-size: 28px;">⚠️ Trial Expired</h2>
+                <p style="color: rgba(255, 255, 255, 0.9); margin-bottom: 24px; line-height: 1.5; font-size: 16px;">
+                    Your 7-day Coach trial has ended. Subscribe to continue analyzing GAA matches with PáircPro!
+                </p>
+                <button onclick="upgradeAccount()" 
+                        style="background: #f59e0b; 
+                               color: white; 
+                               border: none; 
+                               padding: 16px 32px; 
+                               border-radius: 8px; 
+                               cursor: pointer; 
+                               font-weight: 600;
+                               font-size: 16px;">
+                    Subscribe Now
+                </button>
+            </div>
+        `;
+        
+        mainContent.style.position = 'relative';
+        mainContent.appendChild(overlay);
+    }
+
+    function applyFeatureRestrictions() {
+        if (!hasFeatureAccess('pdf_reports')) {
+            const pdfBtn = document.getElementById('pdfBtn');
+            pdfBtn.style.opacity = '0.5';
+            pdfBtn.onclick = () => showUpgradeModal('PDF Reports');
         }
 
-        // Apply feature restrictions
-        function applyFeatureRestrictions() {
-            // Lock PDF reports for trial users
-            if (!hasFeatureAccess('pdf_reports')) {
-                const pdfBtn = document.getElementById('pdfBtn');
-                pdfBtn.style.opacity = '0.5';
-                pdfBtn.onclick = () => showUpgradeModal('PDF Reports');
-            }
-
-            // Lock heat maps panel
-            if (!hasFeatureAccess('heat_maps')) {
-                const heatMapPanel = document.getElementById('heatMapPanel');
-                heatMapPanel.classList.add('locked');
-            }
-
-            // Update nav items based on access
-            updateNavigationAccess();
+        if (!hasFeatureAccess('heat_maps')) {
+            const heatMapPanel = document.getElementById('heatMapPanel');
+            heatMapPanel.classList.add('locked');
         }
 
-        // Update navigation access
-        function updateNavigationAccess() {
-            const navItems = document.querySelectorAll('.nav-item');
+        updateNavigationAccess();
+    }
+
+    function updateNavigationAccess() {
+        const navItems = document.querySelectorAll('.nav-item');
+        
+        navItems.forEach(item => {
+            const text = item.textContent.trim();
             
-            navItems.forEach(item => {
-                const text = item.textContent.trim();
-                
-                if (text.includes('Reports') && !hasFeatureAccess('pdf_reports')) {
-                    item.classList.add('locked');
-                } else if (text.includes('Heat Maps') && !hasFeatureAccess('heat_maps')) {
-                    item.classList.add('locked');
-                } else if (text.includes('Compare') && !hasFeatureAccess('team_collaboration')) {
-                    item.classList.add('locked');
-                }
-            });
-        }
-
-        // Upgrade account function
-        function upgradeAccount() {
-            window.location.href = 'pricing.html';
-        }
-
-        // Global variables
-        let currentVideo = null;
-        let events = [];
-        let isPlaying = false;
-        let currentTime = 0;
-        let duration = 0;
-        let currentSport = 'football';
-        let activeTeam = 'home';
-
-        // Statistics
-        let stats = {
-            Goal: 0, Point: 0, '2 Point': 0, Wide: 0, Saved: 0, '45': 0, '65': 0,
-            'Hand Pass': 0, 'Kick Pass': 0, 'Hurl Pass': 0,
-            'Own Kickout Won': 0, 'Own Kickout Lost': 0, 'Opp Kickout Won': 0, 'Opp Kickout Lost': 0,
-            'Free Kick': 0, Sideline: 0, Penalty: 0, 'Throw-in': 0,
-            Foul: 0, 'Yellow Card': 0, 'Red Card': 0, 'Black Card': 0,
-            Substitution: 0, Turnover: 0, Injury: 0, Custom: 0
-        };
-
-        let teamStats = { home: {}, away: {} };
-        let scores = { home: { goals: 0, points: 0 }, away: { goals: 0, points: 0 } };
-
-        // Initialize team stats
-        Object.keys(stats).forEach(key => {
-            teamStats.home[key] = 0;
-            teamStats.away[key] = 0;
+            if (text.includes('Reports') && !hasFeatureAccess('pdf_reports')) {
+                item.classList.add('locked');
+            } else if (text.includes('Heat Maps') && !hasFeatureAccess('heat_maps')) {
+                item.classList.add('locked');
+            } else if (text.includes('Compare') && !hasFeatureAccess('team_collaboration')) {
+                item.classList.add('locked');
+            }
         });
+    }
 
-        // Set active team function
-        function setActiveTeam(team) {
-            activeTeam = team;
-            
-            document.getElementById('homeBtn').classList.toggle('active', team === 'home');
-            document.getElementById('awayBtn').classList.toggle('active', team === 'away');
-            document.getElementById('homeScore').classList.toggle('active', team === 'home');
-            document.getElementById('awayScore').classList.toggle('active', team === 'away');
-            
-            document.getElementById('homeBtn').innerHTML = team === 'home' ? '🏠 Home Active' : '🏠 Home';
-            document.getElementById('awayBtn').innerHTML = team === 'away' ? '✈️ Away Active' : '✈️ Away';
-        }
+    function upgradeAccount() {
+        window.location.href = 'pricing.html';
+    }
 
-        // Set sport function
-        function setSport(sport) {
-            currentSport = sport;
-            
-            document.querySelectorAll('.sport-tab').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.sport-tab').forEach(tab => {
-                if (tab.textContent.toLowerCase() === sport.toLowerCase()) {
-                    tab.classList.add('active');
-                }
-            });
-            
-            const twoPointBtn = document.getElementById('twoPointBtn');
-            const football45 = document.getElementById('football45');
-            const hurling65 = document.getElementById('hurling65');
-            const handPass = document.getElementById('handPass');
-            const kickPass = document.getElementById('kickPass');
-            const hurlPass = document.getElementById('hurlPass');
-            
-            if (sport === 'football') {
-                twoPointBtn.style.display = 'block';
-                football45.style.display = 'block';
-                hurling65.style.display = 'none';
-                handPass.style.display = 'block';
-                kickPass.style.display = 'block';
-                hurlPass.style.display = 'none';
-            } else {
-                twoPointBtn.style.display = 'none';
-                football45.style.display = 'none';
-                hurling65.style.display = 'block';
-                handPass.style.display = 'block';
-                kickPass.style.display = 'none';
-                hurlPass.style.display = 'block';
+    // Global variables
+    let currentVideo = null;
+    let events = [];
+    let isPlaying = false;
+    let currentTime = 0;
+    let duration = 0;
+    let currentSport = 'football';
+    let activeTeam = 'home';
+
+    let stats = {
+        Goal: 0, Point: 0, '2 Point': 0, Wide: 0, Saved: 0, '45': 0, '65': 0,
+        'Hand Pass': 0, 'Kick Pass': 0, 'Hurl Pass': 0,
+        'Own Kickout Won': 0, 'Own Kickout Lost': 0, 'Opp Kickout Won': 0, 'Opp Kickout Lost': 0,
+        'Free Kick': 0, Sideline: 0, Penalty: 0, 'Throw-in': 0,
+        Foul: 0, 'Yellow Card': 0, 'Red Card': 0, 'Black Card': 0,
+        Substitution: 0, Turnover: 0, Injury: 0, Custom: 0
+    };
+
+    let teamStats = { home: {}, away: {} };
+    let scores = { home: { goals: 0, points: 0 }, away: { goals: 0, points: 0 } };
+
+    Object.keys(stats).forEach(key => {
+        teamStats.home[key] = 0;
+        teamStats.away[key] = 0;
+    });
+
+    function setActiveTeam(team) {
+        activeTeam = team;
+        
+        document.getElementById('homeBtn').classList.toggle('active', team === 'home');
+        document.getElementById('awayBtn').classList.toggle('active', team === 'away');
+        document.getElementById('homeScore').classList.toggle('active', team === 'home');
+        document.getElementById('awayScore').classList.toggle('active', team === 'away');
+        
+        document.getElementById('homeBtn').innerHTML = team === 'home' ? '🏠 Home Active' : '🏠 Home';
+        document.getElementById('awayBtn').innerHTML = team === 'away' ? '✈️ Away Active' : '✈️ Away';
+    }
+
+    function setSport(sport) {
+        currentSport = sport;
+        
+        document.querySelectorAll('.sport-tab').forEach(tab => tab.classList.remove('active'));
+        document.querySelectorAll('.sport-tab').forEach(tab => {
+            if (tab.textContent.toLowerCase() === sport.toLowerCase()) {
+                tab.classList.add('active');
             }
+        });
+        
+        const twoPointBtn = document.getElementById('twoPointBtn');
+        const football45 = document.getElementById('football45');
+        const hurling65 = document.getElementById('hurling65');
+        const handPass = document.getElementById('handPass');
+        const kickPass = document.getElementById('kickPass');
+        const hurlPass = document.getElementById('hurlPass');
+        
+        if (sport === 'football') {
+            twoPointBtn.style.display = 'block';
+            football45.style.display = 'block';
+            hurling65.style.display = 'none';
+            handPass.style.display = 'block';
+            kickPass.style.display = 'block';
+            hurlPass.style.display = 'none';
+        } else {
+            twoPointBtn.style.display = 'none';
+            football45.style.display = 'none';
+            hurling65.style.display = 'block';
+            handPass.style.display = 'block';
+            kickPass.style.display = 'none';
+            hurlPass.style.display = 'block';
         }
+    }
 
-        // Video upload function
-        function handleVideoUpload(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const videoUrl = URL.createObjectURL(file);
-                const videoContainer = document.getElementById('videoContainer');
-                
-                videoContainer.innerHTML = `
-                    <video id="mainVideo" width="100%" height="100%" controls style="border-radius: 12px;">
-                        <source src="${videoUrl}" type="${file.type}">
-                        Your browser does not support the video tag.
-                    </video>
-                `;
-                
-                currentVideo = document.getElementById('mainVideo');
-                currentVideo.addEventListener('loadedmetadata', () => {
-                    duration = currentVideo.duration;
-                    updateTimeDisplay();
-                });
-                
-                currentVideo.addEventListener('timeupdate', () => {
-                    currentTime = currentVideo.currentTime;
-                    updateTimeDisplay();
-                    updateProgressBar();
-                });
-            }
-        }
-
-        // Play/pause function
-        function togglePlayPause() {
-            if (!currentVideo) return;
+    function handleVideoUpload(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const videoUrl = URL.createObjectURL(file);
+            const videoContainer = document.getElementById('videoContainer');
             
-            if (isPlaying) {
-                currentVideo.pause();
-                document.getElementById('playBtn').textContent = '▶';
-                isPlaying = false;
-            } else {
-                currentVideo.play();
-                document.getElementById('playBtn').textContent = '⏸';
-                isPlaying = true;
-            }
-        }
-
-        // Update time display
-        function updateTimeDisplay() {
-            const timeDisplay = document.getElementById('timeDisplay');
-            const current = formatTime(currentTime);
-            const total = formatTime(duration);
-            timeDisplay.textContent = `${current} / ${total}`;
-        }
-
-        // Update progress bar
-        function updateProgressBar() {
-            if (duration > 0) {
-                const percentage = (currentTime / duration) * 100;
-                document.getElementById('progressFill').style.width = `${percentage}%`;
-            }
-        }
-
-        // Seek video function
-        function seekVideo(event) {
-            if (!currentVideo) return;
-            
-            const progressBar = event.currentTarget;
-            const rect = progressBar.getBoundingClientRect();
-            const clickX = event.clientX - rect.left;
-            const percentage = clickX / rect.width;
-            const newTime = percentage * duration;
-            
-            currentVideo.currentTime = newTime;
-            currentTime = newTime;
-        }
-
-        // Format time helper
-        function formatTime(seconds) {
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-        }
-
-        // Skip video function
-        function skipVideo(seconds) {
-            if (!currentVideo) return;
-            
-            const newTime = Math.max(0, Math.min(duration, currentTime + seconds));
-            currentVideo.currentTime = newTime;
-            currentTime = newTime;
-        }
-
-        // Tag event function
-        function tagEvent(eventType, team = null) {
-            const targetTeam = team || activeTeam;
-            const homeTeamName = document.getElementById('homeTeam').value || 'Home';
-            const awayTeamName = document.getElementById('awayTeam').value || 'Away';
-            const teamName = targetTeam === 'home' ? homeTeamName : awayTeamName;
-            
-            const timestamp = currentTime;
-            const event = {
-                type: eventType,
-                team: targetTeam,
-                teamName: teamName,
-                time: timestamp,
-                timeString: formatTime(timestamp),
-                sport: currentSport,
-                id: Date.now()
-            };
-            
-            events.push(event);
-            events.sort((a, b) => a.time - b.time);
-            
-            updateStatistics(eventType, targetTeam);
-            updateEventList();
-            updateTimeline();
-            updateScores(eventType, targetTeam);
-            updateTeamNames();
-            
-            if (eventType === 'Turnover') {
-                setTimeout(() => {
-                    setActiveTeam(targetTeam === 'home' ? 'away' : 'home');
-                }, 300);
-            }
-        }
-
-        // Update statistics
-        function updateStatistics(eventType, team) {
-            stats[eventType]++;
-            teamStats[team][eventType]++;
-            
-            document.getElementById('totalEvents').textContent = events.length;
-            document.getElementById('goalCount').textContent = stats.Goal;
-            document.getElementById('pointCount').textContent = stats.Point + stats['2 Point'];
-            document.getElementById('foulCount').textContent = stats.Foul + stats['Yellow Card'] + stats['Red Card'] + stats['Black Card'];
-            document.getElementById('ownKickoutWon').textContent = stats['Own Kickout Won'];
-            document.getElementById('oppKickoutWon').textContent = stats['Opp Kickout Won'];
-            
-            const homeEvents = events.filter(e => e.team === 'home').length;
-            const awayEvents = events.filter(e => e.team === 'away').length;
-            document.getElementById('homeEvents').textContent = homeEvents;
-            document.getElementById('awayEvents').textContent = awayEvents;
-            
-            const totalEvents = homeEvents + awayEvents;
-            if (totalEvents > 0) {
-                const homePossession = Math.round((homeEvents / totalEvents) * 100);
-                const awayPossession = 100 - homePossession;
-                document.getElementById('possessionText').textContent = `${homePossession}% - ${awayPossession}%`;
-                document.querySelector('.possession-fill').style.background = 
-                    `linear-gradient(to right, #3b82f6 ${homePossession}%, #ef4444 ${homePossession}%)`;
-            }
-        }
-
-        // Update scores
-        function updateScores(eventType, team) {
-            if (eventType === 'Goal') {
-                scores[team].goals++;
-            } else if (eventType === 'Point') {
-                scores[team].points++;
-            } else if (eventType === '2 Point') {
-                scores[team].points += 2;
-            }
-            
-            document.getElementById('homeScore').textContent = 
-                `${scores.home.goals}-${scores.home.points.toString().padStart(2, '0')}`;
-            document.getElementById('awayScore').textContent = 
-                `${scores.away.goals}-${scores.away.points.toString().padStart(2, '0')}`;
-        }
-
-        // Update team names
-        function updateTeamNames() {
-            const homeTeamName = document.getElementById('homeTeam').value || 'Home';
-            const awayTeamName = document.getElementById('awayTeam').value || 'Away';
-            document.getElementById('homeTeamName').textContent = homeTeamName;
-            document.getElementById('awayTeamName').textContent = awayTeamName;
-        }
-
-        // Update event list
-        function updateEventList() {
-            const eventList = document.getElementById('eventList');
-            
-            if (events.length === 0) {
-                eventList.innerHTML = '<p style="opacity: 0.6; font-size: 13px; text-align: center;">No events tagged yet</p>';
-                return;
-            }
-            
-            eventList.innerHTML = events.slice(-5).reverse().map((event, index) => `
-                <div class="event-item" onclick="selectEvent(${events.length - 1 - index})" style="cursor: pointer;">
-                    <span>${event.type}<span class="event-team">(${event.teamName})</span></span>
-                    <span class="event-time">${event.timeString}</span>
-                    ${event.notes ? '<span style="color: #f59e0b; font-size: 10px;">📝</span>' : ''}
-                </div>
-            `).join('');
-        }
-
-        let selectedEventIndex = null;
-
-        function selectEvent(eventIndex) {
-            selectedEventIndex = eventIndex;
-            const event = events[eventIndex];
-            const notesDiv = document.getElementById('eventNotes');
-            const titleSpan = document.getElementById('selectedEventTitle');
-            const textarea = document.getElementById('notesTextarea');
-            
-            titleSpan.textContent = `${event.type} - ${event.teamName} (${event.timeString})`;
-            textarea.value = event.notes || '';
-            notesDiv.style.display = 'block';
-            
-            // Jump to event time in video
-            if (currentVideo) {
-                currentVideo.currentTime = event.time;
-            }
-        }
-
-        function saveEventNote() {
-            if (selectedEventIndex !== null) {
-                const note = document.getElementById('notesTextarea').value;
-                events[selectedEventIndex].notes = note;
-                updateEventList();
-                
-                if (note.trim()) {
-                    alert('Note saved!');
-                } else {
-                    alert('Note removed!');
-                }
-            }
-        }
-
-        function showHeatMap() {
-            if (!hasFeatureAccess('heat_maps')) {
-                showUpgradeModal('Heat Maps');
-                return;
-            }
-            
-            const modal = document.createElement('div');
-            modal.style.cssText = `position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.8); display: flex; align-items: center; justify-content: center; z-index: 9999;`;
-            
-            // Simple heat map visualization based on events
-            const homeEvents = events.filter(e => e.team === 'home');
-            const awayEvents = events.filter(e => e.team === 'away');
-            
-            modal.innerHTML = `
-                <div style="background: linear-gradient(135deg, #0066cc 0%, #004499 100%); border-radius: 16px; padding: 40px; max-width: 600px; color: white;">
-                    <h2 style="margin-bottom: 20px;">🔥 Event Heat Map</h2>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
-                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
-                            <h3 style="color: #3b82f6; margin-bottom: 10px;">🏠 ${document.getElementById('homeTeam').value}</h3>
-                            <div>Events: ${homeEvents.length}</div>
-                            <div>Goals: ${homeEvents.filter(e => e.type === 'Goal').length}</div>
-                            <div>Points: ${homeEvents.filter(e => e.type === 'Point' || e.type === '2 Point').length}</div>
-                            <div>Activity: ${homeEvents.length > awayEvents.length ? 'HIGH' : 'MEDIUM'}</div>
-                        </div>
-                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
-                            <h3 style="color: #ef4444; margin-bottom: 10px;">✈️ ${document.getElementById('awayTeam').value}</h3>
-                            <div>Events: ${awayEvents.length}</div>
-                            <div>Goals: ${awayEvents.filter(e => e.type === 'Goal').length}</div>
-                            <div>Points: ${awayEvents.filter(e => e.type === 'Point' || e.type === '2 Point').length}</div>
-                            <div>Activity: ${awayEvents.length > homeEvents.length ? 'HIGH' : 'MEDIUM'}</div>
-                        </div>
-                    </div>
-                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                        <strong>Event Distribution:</strong><br>
-                        First Half: ${events.filter(e => e.time < duration/2).length} events<br>
-                        Second Half: ${events.filter(e => e.time >= duration/2).length} events
-                    </div>
-                    <button onclick="this.parentNode.parentNode.remove()" style="background: white; color: #0066cc; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer;">Close</button>
-                </div>
+            videoContainer.innerHTML = `
+                <video id="mainVideo" width="100%" height="100%" controls style="border-radius: 12px;">
+                    <source src="${videoUrl}" type="${file.type}">
+                    Your browser does not support the video tag.
+                </video>
             `;
             
-            document.body.appendChild(modal);
-        }
-
-        function showCompare() {
-            if (!hasFeatureAccess('team_collaboration')) {
-                showUpgradeModal('Team Comparison');
-                return;
-            }
+            currentVideo = document.getElementById('mainVideo');
+            currentVideo.addEventListener('loadedmetadata', () => {
+                duration = currentVideo.duration;
+                updateTimeDisplay();
+            });
             
-            const modal = document.createElement('div');
-            modal.style.cssText = `position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.8); display: flex; align-items: center; justify-content: center; z-index: 9999;`;
-            
-            const homeTeam = document.getElementById('homeTeam').value;
-            const awayTeam = document.getElementById('awayTeam').value;
-            
-            modal.innerHTML = `
-                <div style="background: linear-gradient(135deg, #0066cc 0%, #004499 100%); border-radius: 16px; padding: 40px; max-width: 700px; color: white;">
-                    <h2 style="margin-bottom: 20px;">⚖️ Team Comparison</h2>
-                    <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 20px; text-align: center;">
-                        <div>
-                            <h3 style="color: #3b82f6; margin-bottom: 15px;">${homeTeam}</h3>
-                            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
-                                <div>Score: ${scores.home.goals}-${scores.home.points.toString().padStart(2, '0')}</div>
-                                <div>Events: ${events.filter(e => e.team === 'home').length}</div>
-                                <div>Goals: ${teamStats.home.Goal || 0}</div>
-                                <div>Points: ${(teamStats.home.Point || 0) + (teamStats.home['2 Point'] || 0)}</div>
-                                <div>Fouls: ${(teamStats.home.Foul || 0) + (teamStats.home['Yellow Card'] || 0)}</div>
-                                <div>Kickouts Won: ${teamStats.home['Own Kickout Won'] || 0}</div>
-                            </div>
-                        </div>
-                        <div style="align-self: center; font-size: 24px;">VS</div>
-                        <div>
-                            <h3 style="color: #ef4444; margin-bottom: 15px;">${awayTeam}</h3>
-                            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
-                                <div>Score: ${scores.away.goals}-${scores.away.points.toString().padStart(2, '0')}</div>
-                                <div>Events: ${events.filter(e => e.team === 'away').length}</div>
-                                <div>Goals: ${teamStats.away.Goal || 0}</div>
-                                <div>Points: ${(teamStats.away.Point || 0) + (teamStats.away['2 Point'] || 0)}</div>
-                                <div>Fouls: ${(teamStats.away.Foul || 0) + (teamStats.away['Yellow Card'] || 0)}</div>
-                                <div>Kickouts Won: ${teamStats.away['Own Kickout Won'] || 0}</div>
-                            </div>
-                        </div>
-                    </div>
-                    <button onclick="this.parentNode.parentNode.remove()" style="background: white; color: #0066cc; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; margin-top: 20px;">Close</button>
-                </div>
-            `;
-            
-            document.body.appendChild(modal);
-        }
-
-        function shareLink() {
-            const projectData = {
-                events, stats, teamStats, scores, sport: currentSport, activeTeam,
-                teamNames: { home: document.getElementById('homeTeam').value, away: document.getElementById('awayTeam').value }
-            };
-            
-            const encodedData = btoa(JSON.stringify(projectData));
-            const shareUrl = `${window.location.origin}/app.html?data=${encodedData}`;
-            
-            navigator.clipboard.writeText(shareUrl).then(() => {
-                alert('Share link copied to clipboard! Send this link to share your analysis.');
-            }).catch(() => {
-                prompt('Copy this link to share your analysis:', shareUrl);
+            currentVideo.addEventListener('timeupdate', () => {
+                currentTime = currentVideo.currentTime;
+                updateTimeDisplay();
+                updateProgressBar();
             });
         }
+    }
 
-        // Admin mode for testing
-        function enableAdminMode() {
-            const adminKey = prompt('Enter admin key:');
-            if (adminKey !== 'paircpro2025admin') {
-                alert('Invalid admin key');
-                return;
-            }
-            
-            userPlan = 'enterprise';
-            trialExpired = false;
-            trialDaysRemaining = 999;
-            updateTrialBanner();
-            applyFeatureRestrictions();
-            
-            // Update banner
-            const banner = document.getElementById('trialBanner');
-            banner.style.background = '#10b981';
-            banner.innerHTML = '<span>🔓 ADMIN MODE - Full Access Enabled</span>';
-            
-            alert('Admin mode enabled! You now have full Enterprise access.');
+    function togglePlayPause() {
+        if (!currentVideo) return;
+        
+        if (isPlaying) {
+            currentVideo.pause();
+            document.getElementById('playBtn').textContent = '▶';
+            isPlaying = false;
+        } else {
+            currentVideo.play();
+            document.getElementById('playBtn').textContent = '⏸';
+            isPlaying = true;
         }
+    }
 
-        // Call this in console: enableAdminMode()
-        window.enableAdminMode = enableAdminMode;
+    function updateTimeDisplay() {
+        const timeDisplay = document.getElementById('timeDisplay');
+        const current = formatTime(currentTime);
+        const total = formatTime(duration);
+        timeDisplay.textContent = `${current} / ${total}`;
+    }
 
-        // Update timeline
-        function updateTimeline() {
-            const timeline = document.getElementById('timeline');
-            
-            if (events.length === 0 || duration === 0) {
-                timeline.innerHTML = '<p style="text-align: center; line-height: 50px; color: rgba(255, 255, 255, 0.6); font-size: 12px;">No events tagged yet. Start tagging events in the video.</p>';
-                return;
-            }
-            
-            timeline.innerHTML = '';
-            
-            events.forEach(event => {
-                const marker = document.createElement('div');
-                marker.className = `timeline-event ${event.team}`;
-                marker.style.left = `${(event.time / duration) * 95}%`;
-                marker.title = `${event.teamName} - ${event.type} (${event.timeString})`;
-                
-                marker.addEventListener('click', () => {
-                    if (currentVideo) {
-                        currentVideo.currentTime = event.time;
-                    }
-                });
-                
-                timeline.appendChild(marker);
-            });
+    function updateProgressBar() {
+        if (duration > 0) {
+            const percentage = (currentTime / duration) * 100;
+            document.getElementById('progressFill').style.width = `${percentage}%`;
         }
+    }
 
-        // Undo last event
-        function undoLastEvent() {
-            if (events.length === 0) {
-                alert('No events to undo');
-                return;
-            }
-            
-            const lastEvent = events.pop();
-            
-            stats[lastEvent.type]--;
-            teamStats[lastEvent.team][lastEvent.type]--;
-            
-            if (lastEvent.type === 'Goal') {
-                scores[lastEvent.team].goals--;
-            } else if (lastEvent.type === 'Point') {
-                scores[lastEvent.team].points--;
-            } else if (lastEvent.type === '2 Point') {
-                scores[lastEvent.team].points -= 2;
-            }
-            
-            refreshAllStats();
-            updateEventList();
-            updateTimeline();
-            refreshScoreboard();
+    function seekVideo(event) {
+        if (!currentVideo) return;
+        
+        const progressBar = event.currentTarget;
+        const rect = progressBar.getBoundingClientRect();
+        const clickX = event.clientX - rect.left;
+        const percentage = clickX / rect.width;
+        const newTime = percentage * duration;
+        
+        currentVideo.currentTime = newTime;
+        currentTime = newTime;
+    }
+
+    function formatTime(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    function skipVideo(seconds) {
+        if (!currentVideo) return;
+        
+        const newTime = Math.max(0, Math.min(duration, currentTime + seconds));
+        currentVideo.currentTime = newTime;
+        currentTime = newTime;
+    }
+
+    function tagEvent(eventType, team = null) {
+        const targetTeam = team || activeTeam;
+        const homeTeamName = document.getElementById('homeTeam').value || 'Home';
+        const awayTeamName = document.getElementById('awayTeam').value || 'Away';
+        const teamName = targetTeam === 'home' ? homeTeamName : awayTeamName;
+        
+        const timestamp = currentTime;
+        const event = {
+            type: eventType,
+            team: targetTeam,
+            teamName: teamName,
+            time: timestamp,
+            timeString: formatTime(timestamp),
+            sport: currentSport,
+            id: Date.now()
+        };
+        
+        events.push(event);
+        events.sort((a, b) => a.time - b.time);
+        
+        updateStatistics(eventType, targetTeam);
+        updateEventList();
+        updateTimeline();
+        updateScores(eventType, targetTeam);
+        updateTeamNames();
+        
+        if (eventType === 'Turnover') {
+            setTimeout(() => {
+                setActiveTeam(targetTeam === 'home' ? 'away' : 'home');
+            }, 300);
         }
+    }
 
-        function refreshAllStats() {
-            document.getElementById('totalEvents').textContent = events.length;
-            document.getElementById('goalCount').textContent = stats.Goal;
-            document.getElementById('pointCount').textContent = stats.Point + stats['2 Point'];
-            document.getElementById('foulCount').textContent = stats.Foul + stats['Yellow Card'] + stats['Red Card'] + stats['Black Card'];
-            document.getElementById('ownKickoutWon').textContent = stats['Own Kickout Won'];
-            document.getElementById('oppKickoutWon').textContent = stats['Opp Kickout Won'];
-            
-            const homeEvents = events.filter(e => e.team === 'home').length;
-            const awayEvents = events.filter(e => e.team === 'away').length;
-            document.getElementById('homeEvents').textContent = homeEvents;
-            document.getElementById('awayEvents').textContent = awayEvents;
-            
-            const totalEvents = homeEvents + awayEvents;
-            if (totalEvents > 0) {
-                const homePossession = Math.round((homeEvents / totalEvents) * 100);
-                const awayPossession = 100 - homePossession;
-                document.getElementById('possessionText').textContent = `${homePossession}% - ${awayPossession}%`;
-                document.querySelector('.possession-fill').style.background = 
-                    `linear-gradient(to right, #3b82f6 ${homePossession}%, #ef4444 ${homePossession}%)`;
-            } else {
-                document.getElementById('possessionText').textContent = '0% - 0%';
-                document.querySelector('.possession-fill').style.background = 'rgba(255, 255, 255, 0.2)';
-            }
+    function updateStatistics(eventType, team) {
+        stats[eventType]++;
+        teamStats[team][eventType]++;
+        
+        document.getElementById('totalEvents').textContent = events.length;
+        document.getElementById('goalCount').textContent = stats.Goal;
+        document.getElementById('pointCount').textContent = stats.Point + stats['2 Point'];
+        document.getElementById('foulCount').textContent = stats.Foul + stats['Yellow Card'] + stats['Red Card'] + stats['Black Card'];
+        document.getElementById('ownKickoutWon').textContent = stats['Own Kickout Won'];
+        document.getElementById('oppKickoutWon').textContent = stats['Opp Kickout Won'];
+        
+        const homeEvents = events.filter(e => e.team === 'home').length;
+        const awayEvents = events.filter(e => e.team === 'away').length;
+        document.getElementById('homeEvents').textContent = homeEvents;
+        document.getElementById('awayEvents').textContent = awayEvents;
+        
+        const totalEvents = homeEvents + awayEvents;
+        if (totalEvents > 0) {
+            const homePossession = Math.round((homeEvents / totalEvents) * 100);
+            const awayPossession = 100 - homePossession;
+            document.getElementById('possessionText').textContent = `${homePossession}% - ${awayPossession}%`;
+            document.querySelector('.possession-fill').style.background = 
+                `linear-gradient(to right, #3b82f6 ${homePossession}%, #ef4444 ${homePossession}%)`;
         }
+    }
 
-        function refreshScoreboard() {
-            document.getElementById('homeScore').textContent = 
-                `${scores.home.goals}-${scores.home.points.toString().padStart(2, '0')}`;
-            document.getElementById('awayScore').textContent = 
-                `${scores.away.goals}-${scores.away.points.toString().padStart(2, '0')}`;
-        }
-
-        function markEvent() { tagEvent('Mark'); }
-        function saveProject() {
-            const projectData = {
-                events, stats, teamStats, scores, sport: currentSport, activeTeam,
-                teamNames: { home: document.getElementById('homeTeam').value, away: document.getElementById('awayTeam').value },
-                timestamp: new Date().toISOString()
-            };
-            
-            const blob = new Blob([JSON.stringify(projectData, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `paircpro-project-${Date.now()}.json`;
-            a.click();
-        }
-
-        function exportAnalysis() { exportCSV(); }
-        function exportCSV() {
-            if (events.length === 0) { alert('No events to export'); return; }
-            
-            const csvContent = [
-                ['Event Type', 'Team', 'Team Name', 'Time (seconds)', 'Time (MM:SS)', 'Sport', 'Timestamp'],
-                ...events.map(event => [event.type, event.team, event.teamName, event.time.toFixed(2), event.timeString, event.sport, new Date().toISOString()])
-            ].map(row => row.join(',')).join('\n');
-            
-            const blob = new Blob([csvContent], { type: 'text/csv' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `paircpro-events-${Date.now()}.csv`;
-            a.click();
-        }
-
-        function exportPDF() {
-            if (events.length === 0) {
-                alert('No events to export to PDF');
-                return;
-            }
-            
-            // Create comprehensive PDF data
-            const homeTeamName = document.getElementById('homeTeam').value || 'Home';
-            const awayTeamName = document.getElementById('awayTeam').value || 'Away';
-            const matchDate = new Date().toLocaleDateString();
-            
-            const pdfContent = `
-PÁIRCPRO MATCH ANALYSIS REPORT
-Generated: ${new Date().toLocaleString()}
-
-MATCH DETAILS
-${homeTeamName} vs ${awayTeamName}
-Date: ${matchDate}
-Sport: ${currentSport.charAt(0).toUpperCase() + currentSport.slice(1)}
-
-FINAL SCORE
-${homeTeamName}: ${scores.home.goals}-${scores.home.points.toString().padStart(2, '0')}
-${awayTeamName}: ${scores.away.goals}-${scores.away.points.toString().padStart(2, '0')}
-
-MATCH STATISTICS
-Total Events: ${events.length}
-Goals: ${stats.Goal}
-Points: ${stats.Point + stats['2 Point']}
-Fouls: ${stats.Foul + stats['Yellow Card'] + stats['Red Card'] + stats['Black Card']}
-Own Kickouts Won: ${stats['Own Kickout Won']}
-Opposition Kickouts Won: ${stats['Opp Kickout Won']}
-
-EVENT TIMELINE
-${events.map(event => `${event.timeString} - ${event.teamName} - ${event.type}`).join('\n')}
-
-POSSESSION BREAKDOWN
-${homeTeamName}: ${events.filter(e => e.team === 'home').length} events
-${awayTeamName}: ${events.filter(e => e.team === 'away').length} events
-
-Report generated by PáircPro - Professional GAA Analysis Platform
-Visit: https://paircpro.ie
-            `.trim();
-            
-            const blob = new Blob([pdfContent], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `paircpro-report-${homeTeamName}-vs-${awayTeamName}-${Date.now()}.txt`;
-            a.click();
+    function updateScores(eventType, team) {
+        if (eventType === 'Goal') {
+            scores[team].goals++;
+        } else if (eventType === 'Point') {
+            scores[team].points++;
+        } else if (eventType === '2 Point') {
+            scores[team].points += 2;
         }
         
-        function showProjects() {
-            const modal = document.createElement('div');
-            modal.style.cssText = `
-                position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-                background: rgba(0, 0, 0, 0.8); display: flex; align-items: center;
-                justify-content: center; z-index: 9999; backdrop-filter: blur(10px);
-            `;
+        document.getElementById('homeScore').textContent = 
+            `${scores.home.goals}-${scores.home.points.toString().padStart(2, '0')}`;
+        document.getElementById('awayScore').textContent = 
+            `${scores.away.goals}-${scores.away.points.toString().padStart(2, '0')}`;
+    }
+
+    function updateTeamNames() {
+        const homeTeamName = document.getElementById('homeTeam').value || 'Home';
+        const awayTeamName = document.getElementById('awayTeam').value || 'Away';
+        document.getElementById('homeTeamName').textContent = homeTeamName;
+        document.getElementById('awayTeamName').textContent = awayTeamName;
+    }
+
+    function updateEventList() {
+        const eventList = document.getElementById('eventList');
+        
+        if (events.length === 0) {
+            eventList.innerHTML = '<p style="opacity: 0.6; font-size: 13px; text-align: center;">No events tagged yet</p>';
+            return;
+        }
+        
+        eventList.innerHTML = events.slice(-5).reverse().map((event, index) => `
+            <div class="event-item" onclick="selectEvent(${events.length - 1 - index})" style="cursor: pointer;">
+                <span>${event.type}<span class="event-team">(${event.teamName})</span></span>
+                <span class="event-time">${event.timeString}</span>
+                ${event.notes ? '<span style="color: #f59e0b; font-size: 10px;">📝</span>' : ''}
+            </div>
+        `).join('');
+    }
+
+    let selectedEventIndex = null;
+
+    function selectEvent(eventIndex) {
+        selectedEventIndex = eventIndex;
+        const event = events[eventIndex];
+        const notesDiv = document.getElementById('eventNotes');
+        const titleSpan = document.getElementById('selectedEventTitle');
+        const textarea = document.getElementById('notesTextarea');
+        
+        titleSpan.textContent = `${event.type} - ${event.teamName} (${event.timeString})`;
+        textarea.value = event.notes || '';
+        notesDiv.style.display = 'block';
+        
+        if (currentVideo) {
+            currentVideo.currentTime = event.time;
+        }
+    }
+
+    function saveEventNote() {
+        if (selectedEventIndex !== null) {
+            const note = document.getElementById('notesTextarea').value;
+            events[selectedEventIndex].notes = note;
+            updateEventList();
             
-            modal.innerHTML = `
-                <div style="background: linear-gradient(135deg, #0066cc 0%, #004499 100%); 
-                           border-radius: 16px; padding: 40px; max-width: 500px; color: white;">
-                    <h2 style="margin-bottom: 20px;">📁 Projects</h2>
-                    <div style="margin-bottom: 20px;">
-                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin-bottom: 10px;">
-                            <strong>Current Project</strong><br>
-                            Kerry vs Dublin Analysis<br>
-                            <small>Last saved: ${new Date().toLocaleString()}</small>
-                        </div>
-                        <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 10px; opacity: 0.7;">
-                            <strong>Cork vs Tipperary</strong><br>
-                            <small>Saved: Yesterday</small>
-                        </div>
-                        <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; opacity: 0.7;">
-                            <strong>Galway vs Mayo</strong><br>
-                            <small>Saved: 3 days ago</small>
-                        </div>
+            if (note.trim()) {
+                alert('Note saved!');
+            } else {
+                alert('Note removed!');
+            }
+        }
+    }
+
+    function updateTimeline() {
+        const timeline = document.getElementById('timeline');
+        
+        if (events.length === 0 || duration === 0) {
+            timeline.innerHTML = '<p style="text-align: center; line-height: 50px; color: rgba(255, 255, 255, 0.6); font-size: 12px;">No events tagged yet. Start tagging events in the video.</p>';
+            return;
+        }
+        
+        timeline.innerHTML = '';
+        
+        events.forEach(event => {
+            const marker = document.createElement('div');
+            marker.className = `timeline-event ${event.team}`;
+            marker.style.left = `${(event.time / duration) * 95}%`;
+            marker.title = `${event.teamName} - ${event.type} (${event.timeString})`;
+            
+            marker.addEventListener('click', () => {
+                if (currentVideo) {
+                    currentVideo.currentTime = event.time;
+                }
+            });
+            
+            timeline.appendChild(marker);
+        });
+    }
+
+    function undoLastEvent() {
+        if (events.length === 0) {
+            alert('No events to undo');
+            return;
+        }
+        
+        const lastEvent = events.pop();
+        
+        stats[lastEvent.type]--;
+        teamStats[lastEvent.team][lastEvent.type]--;
+        
+        if (lastEvent.type === 'Goal') {
+            scores[lastEvent.team].goals--;
+        } else if (lastEvent.type === 'Point') {
+            scores[lastEvent.team].points--;
+        } else if (lastEvent.type === '2 Point') {
+            scores[lastEvent.team].points -= 2;
+        }
+        
+        refreshAllStats();
+        updateEventList();
+        updateTimeline();
+        refreshScoreboard();
+    }
+
+    function refreshAllStats() {
+        document.getElementById('totalEvents').textContent = events.length;
+        document.getElementById('goalCount').textContent = stats.Goal;
+        document.getElementById('pointCount').textContent = stats.Point + stats['2 Point'];
+        document.getElementById('foulCount').textContent = stats.Foul + stats['Yellow Card'] + stats['Red Card'] + stats['Black Card'];
+        document.getElementById('ownKickoutWon').textContent = stats['Own Kickout Won'];
+        document.getElementById('oppKickoutWon').textContent = stats['Opp Kickout Won'];
+        
+        const homeEvents = events.filter(e => e.team === 'home').length;
+        const awayEvents = events.filter(e => e.team === 'away').length;
+        document.getElementById('homeEvents').textContent = homeEvents;
+        document.getElementById('awayEvents').textContent = awayEvents;
+        
+        const totalEvents = homeEvents + awayEvents;
+        if (totalEvents > 0) {
+            const homePossession = Math.round((homeEvents / totalEvents) * 100);
+            const awayPossession = 100 - homePossession;
+            document.getElementById('possessionText').textContent = `${homePossession}% - ${awayPossession}%`;
+            document.querySelector('.possession-fill').style.background = 
+                `linear-gradient(to right, #3b82f6 ${homePossession}%, #ef4444 ${homePossession}%)`;
+        } else {
+            document.getElementById('possessionText').textContent = '0% - 0%';
+            document.querySelector('.possession-fill').style.background = 'rgba(255, 255, 255, 0.2)';
+        }
+    }
+
+    function refreshScoreboard() {
+        document.getElementById('homeScore').textContent = 
+            `${scores.home.goals}-${scores.home.points.toString().padStart(2, '0')}`;
+        document.getElementById('awayScore').textContent = 
+            `${scores.away.goals}-${scores.away.points.toString().padStart(2, '0')}`;
+    }
+
+    function markEvent() { tagEvent('Mark'); }
+    
+    function saveProject() {
+        const projectData = {
+            events, stats, teamStats, scores, sport: currentSport, activeTeam,
+            teamNames: { home: document.getElementById('homeTeam').value, away: document.getElementById('awayTeam').value },
+            timestamp: new Date().toISOString()
+        };
+        
+        const blob = new Blob([JSON.stringify(projectData, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `paircpro-project-${Date.now()}.json`;
+        a.click();
+    }
+
+    function exportAnalysis() { exportCSV(); }
+    
+    function exportCSV() {
+        if (events.length === 0) { alert('No events to export'); return; }
+        
+        const csvContent = [
+            ['Event Type', 'Team', 'Team Name', 'Time (seconds)', 'Time (MM:SS)', 'Sport', 'Timestamp'],
+            ...events.map(event => [event.type, event.team, event.teamName, event.time.toFixed(2), event.timeString, event.sport, new Date().toISOString()])
+        ].map(row => row.join(',')).join('\n');
+        
+        const blob = new Blob([csvContent], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `paircpro-events-${Date.now()}.csv`;
+        a.click();
+    }
+
+    function shareLink() {
+        const projectData = {
+            events, stats, teamStats, scores, sport: currentSport, activeTeam,
+            teamNames: { home: document.getElementById('homeTeam').value, away: document.getElementById('awayTeam').value }
+        };
+        
+        const encodedData = btoa(JSON.stringify(projectData));
+        const shareUrl = `${window.location.origin}/app.html?data=${encodedData}`;
+        
+        navigator.clipboard.writeText(shareUrl).then(() => {
+            alert('Share link copied to clipboard! Send this link to share your analysis.');
+        }).catch(() => {
+            prompt('Copy this link to share your analysis:', shareUrl);
+        });
+    }
+
+    function showProjects() {
+        const modal = document.createElement('div');
+        modal.style.cssText = `
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.8); display: flex; align-items: center;
+            justify-content: center; z-index: 9999; backdrop-filter: blur(10px);
+        `;
+        
+        modal.innerHTML = `
+            <div style="background: linear-gradient(135deg, #0066cc 0%, #004499 100%); 
+                       border-radius: 16px; padding: 40px; max-width: 500px; color: white;">
+                <h2 style="margin-bottom: 20px;">📁 Projects</h2>
+                <div style="margin-bottom: 20px;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin-bottom: 10px;">
+                        <strong>Current Project</strong><br>
+                        Kerry vs Dublin Analysis<br>
+                        <small>Last saved: ${new Date().toLocaleString()}</small>
                     </div>
-                    <button onclick="this.parentNode.parentNode.remove()" 
-                            style="background: white; color: #0066cc; border: none; 
+                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 10px; opacity: 0.7;">
+                        <strong>Cork vs Tipperary</strong><br>
+                        <small>Saved: Yesterday</small>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; opacity: 0.7;">
+                        <strong>Galway vs Mayo</strong><br>
+                        <small>Saved: 3 days ago</small>
+                    </div>
+                </div>
+                <button onclick="this.parentNode.parentNode.remove()" 
+                        style="background: white; color: #0066cc; border: none; 
+                               padding: 12px 24px; border-radius: 8px; cursor: pointer;">
+                    Close
+                </button>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+    }
+
+    function showClipCreator() {
+        if (!currentVideo) {
+            alert('Please upload a video first to create clips');
+            return;
+        }
+        
+        const modal = document.createElement('div');
+        modal.style.cssText = `
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.8); display: flex; align-items: center;
+            justify-content: center; z-index: 9999; backdrop-filter: blur(10px);
+        `;
+        
+        modal.innerHTML = `
+            <div style="background: linear-gradient(135deg, #0066cc 0%, #004499 100%); 
+                       border-radius: 16px; padding: 40px; max-width: 600px; color: white;">
+                <h2 style="margin-bottom: 20px;">✂️ Clip Creator</h2>
+                <p style="margin-bottom: 20px;">Current time: ${formatTime(currentTime)}</p>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 10px;">Start Time:</label>
+                    <input type="number" id="clipStart" value="${Math.max(0, currentTime - 10)}" 
+                           style="width: 100px; padding: 8px; border-radius: 4px; border: none; margin-right: 10px;">
+                    <label style="display: block; margin: 10px 0;">End Time:</label>
+                    <input type="number" id="clipEnd" value="${currentTime + 10}" 
+                           style="width: 100px; padding: 8px; border-radius: 4px; border: none;">
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 10px;">Clip Name:</label>
+                    <input type="text" id="clipName" placeholder="Goal sequence, Great save, etc." 
+                           style="width: 100%; padding: 8px; border-radius: 4px; border: none;">
+                </div>
+                <div style="display: flex; gap: 12px;">
+                    <button onclick="createClip()" 
+                            style="background: #10b981; color: white; border: none; 
                                    padding: 12px 24px; border-radius: 8px; cursor: pointer;">
-                        Close
+                        Create Clip
+                    </button>
+                    <button onclick="this.parentNode.parentNode.parentNode.remove()" 
+                            style="background: rgba(255,255,255,0.2); color: white; border: none; 
+                                   padding: 12px 24px; border-radius: 8px; cursor: pointer;">
+                        Cancel
                     </button>
                 </div>
-            `;
-            
-            document.body.appendChild(modal);
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+    }
+
+    function createClip() {
+        const startTime = parseFloat(document.getElementById('clipStart').value);
+        const endTime = parseFloat(document.getElementById('clipEnd').value);
+        const clipName = document.getElementById('clipName').value || 'Unnamed Clip';
+        
+        if (startTime >= endTime) {
+            alert('End time must be after start time');
+            return;
         }
-
-        function showClipCreator() {
-            if (!currentVideo) {
-                alert('Please upload a video first to create clips');
-                return;
-            }
-            
-            const modal = document.createElement('div');
-            modal.style.cssText = `
-                position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-                background: rgba(0, 0, 0, 0.8); display: flex; align-items: center;
-                justify-content: center; z-index: 9999; backdrop-filter: blur(10px);
-            `;
-            
-            modal.innerHTML = `
-                <div style="background: linear-gradient(135deg, #0066cc 0%, #004499 100%); 
-                           border-radius: 16px; padding: 40px; max-width: 600px; color: white;">
-                    <h2 style="margin-bottom: 20px;">✂️ Clip Creator</h2>
-                    <p style="margin-bottom: 20px;">Current time: ${formatTime(currentTime)}</p>
-                    <div style="margin-bottom: 20px;">
-                        <label style="display: block; margin-bottom: 10px;">Start Time:</label>
-                        <input type="number" id="clipStart" value="${Math.max(0, currentTime - 10)}" 
-                               style="width: 100px; padding: 8px; border-radius: 4px; border: none; margin-right: 10px;">
-                        <label style="display: block; margin: 10px 0;">End Time:</label>
-                        <input type="number" id="clipEnd" value="${currentTime + 10}" 
-                               style="width: 100px; padding: 8px; border-radius: 4px; border: none;">
-                    </div>
-                    <div style="margin-bottom: 20px;">
-                        <label style="display: block; margin-bottom: 10px;">Clip Name:</label>
-                        <input type="text" id="clipName" placeholder="Goal sequence, Great save, etc." 
-                               style="width: 100%; padding: 8px; border-radius: 4px; border: none;">
-                    </div>
-                    <div style="display: flex; gap: 12px;">
-                        <button onclick="createClip()" 
-                                style="background: #10b981; color: white; border: none; 
-                                       padding: 12px 24px; border-radius: 8px; cursor: pointer;">
-                            Create Clip
-                        </button>
-                        <button onclick="this.parentNode.parentNode.parentNode.remove()" 
-                                style="background: rgba(255,255,255,0.2); color: white; border: none; 
-                                       padding: 12px 24px; border-radius: 8px; cursor: pointer;">
-                            Cancel
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            document.body.appendChild(modal);
-        }
-
-        function createClip() {
-            const startTime = parseFloat(document.getElementById('clipStart').value);
-            const endTime = parseFloat(document.getElementById('clipEnd').value);
-            const clipName = document.getElementById('clipName').value || 'Unnamed Clip';
-            
-            if (startTime >= endTime) {
-                alert('End time must be after start time');
-                return;
-            }
-            
-            const clipData = {
-                name: clipName,
-                startTime: startTime,
-                endTime: endTime,
-                duration: endTime - startTime,
-                events: events.filter(e => e.time >= startTime && e.time <= endTime),
-                created: new Date().toISOString()
-            };
-            
-            const blob = new Blob([JSON.stringify(clipData, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `clip-${clipName.replace(/\s+/g, '-')}-${Date.now()}.json`;
-            a.click();
-            
-            alert(`Clip "${clipName}" created! Duration: ${(endTime - startTime).toFixed(1)}s`);
-            
-            // Close modal
-            document.querySelector('div[style*="position: fixed"]').remove();
-        }
-
-        // Keyboard shortcuts
-        document.addEventListener('keydown', (event) => {
-            if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') return;
-            
-            switch(event.key.toLowerCase()) {
-                case 'g': tagEvent('Goal'); break;
-                case 'p': tagEvent('Point'); break;
-                case 'w': tagEvent('Wide'); break;
-                case 's': tagEvent('Saved'); break;
-                case 'f': tagEvent('Foul'); break;
-                case 'c': tagEvent('Yellow Card'); break;
-                case '1': setActiveTeam('home'); break;
-                case '2': setActiveTeam('away'); break;
-                case 'u': undoLastEvent(); break;
-                case ' ': event.preventDefault(); togglePlayPause(); break;
-            }
-        });
-
-        // Event listeners
-        document.getElementById('homeTeam').addEventListener('input', updateTeamNames);
-        document.getElementById('awayTeam').addEventListener('input', updateTeamNames);
-
-        // Initialize
-        window.addEventListener('DOMContentLoaded', function() {
-            setSport('football');
-            setActiveTeam('home');
-            updateTeamNames();
-            updateTrialBanner();
-            applyFeatureRestrictions();
-        });
-    </script> center;">
-                        <button onclick="this.parentNode.parentNode.parentNode.remove()" 
-                                style="background: rgba(255, 255, 255, 0.2); 
-                                       color: white; 
-                                       border: none; 
-                                       padding: 12px 24px; 
-                                       border-radius: 8px; 
-                                       cursor: pointer;">
-                            Cancel
-                        </button>
-                        <button onclick="upgradeAccount()" 
-                                style="background: #f59e0b; 
-                                       color: white; 
-                                       border: none; 
-                                       padding: 12px 24px; 
-                                       border-radius: 8px; 
-                                       cursor: pointer; 
-                                       font-weight: 600;">
-                            Upgrade Now
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            document.body.appendChild(modal);
-        }
-
-        // Update trial banner
-        function updateTrialBanner() {
-            const banner = document.getElementById('trialBanner');
-            const daysSpan = document.getElementById('trialDays');
-            const projectSpan = document.getElementById('projectCount');
-            
-            if (trialExpired) {
-                banner.style.background = '#dc2626';
-                banner.innerHTML = `
-                    <span>⚠️ Trial Expired - Subscribe to continue using PáircPro</span>
-                    <button style="background:white;color:#dc2626;border:none;padding:4px 12px;border-radius:12px;font-weight:bold;" onclick="upgradeAccount()">Subscribe Now</button>
-                `;
-                lockAllFeatures();
-            } else {
-                daysSpan.textContent = trialDaysRemaining;
-                projectSpan.textContent = projectsUsed;
-                
-                if (trialDaysRemaining <= 1) {
-                    banner.style.background = '#dc2626';
-                }
-            }
-        }
-
-        // Lock all features when trial expires
-        function lockAllFeatures() {
-            const mainContent = document.querySelector('.main-content');
-            const overlay = document.createElement('div');
-            overlay.style.cssText = `
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(0, 0, 0, 0.8);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 1000;
-                backdrop-filter: blur(10px);
-            `;
-            
-            overlay.innerHTML = `
-                <div style="background: linear-gradient(135deg, #0066cc 0%, #004499 100%); 
-                           border-radius: 16px; 
-                           padding: 40px; 
-                           text-align: center; 
-                           max-width: 500px; 
-                           border: 2px solid rgba(255, 255, 255, 0.2);">
-                    <h2 style="color: white; margin-bottom: 16px; font-size: 28px;">⚠️ Trial Expired</h2>
-                    <p style="color: rgba(255, 255, 255, 0.9); margin-bottom: 24px; line-height: 1.5; font-size: 16px;">
-                        Your 7-day Coach trial has ended. Subscribe to continue analyzing GAA matches with PáircPro!
-                    </p>
-                    <button onclick="upgradeAccount()" 
-                            style="background: #f59e0b; 
-                                   color: white; 
-                                   border: none; 
-                                   padding: 16px 32px; 
-                                   border-radius: 8px; 
-                                   cursor: pointer; 
-                                   font-weight: 600;
-                                   font-size: 16px;">
-                        Subscribe Now
-                    </button>
-                </div>
-            `;
-            
-            mainContent.style.position = 'relative';
-            mainContent.appendChild(overlay);
-        }
-
-        // Apply feature restrictions
-        function applyFeatureRestrictions() {
-            // Lock PDF reports for trial users
-            if (!hasFeatureAccess('pdf_reports')) {
-                const pdfBtn = document.getElementById('pdfBtn');
-                pdfBtn.style.opacity = '0.5';
-                pdfBtn.onclick = () => showUpgradeModal('PDF Reports');
-            }
-
-            // Lock heat maps panel
-            if (!hasFeatureAccess('heat_maps')) {
-                const heatMapPanel = document.getElementById('heatMapPanel');
-                heatMapPanel.classList.add('locked');
-            }
-
-            // Update nav items based on access
-            updateNavigationAccess();
-        }
-
-        // Update navigation access
-        function updateNavigationAccess() {
-            const navItems = document.querySelectorAll('.nav-item');
-            
-            navItems.forEach(item => {
-                const text = item.textContent.trim();
-                
-                if (text.includes('Reports') && !hasFeatureAccess('pdf_reports')) {
-                    item.classList.add('locked');
-                } else if (text.includes('Heat Maps') && !hasFeatureAccess('heat_maps')) {
-                    item.classList.add('locked');
-                } else if (text.includes('Compare') && !hasFeatureAccess('team_collaboration')) {
-                    item.classList.add('locked');
-                }
-            });
-        }
-
-        // Upgrade account function
-        function upgradeAccount() {
-            window.location.href = 'pricing.html';
-        }
-
-        // Global variables
-        let currentVideo = null;
-        let events = [];
-        let isPlaying = false;
-        let currentTime = 0;
-        let duration = 0;
-        let currentSport = 'football';
-        let activeTeam = 'home';
-
-        // Statistics
-        let stats = {
-            Goal: 0,
-            Point: 0,
-            '2 Point': 0,
-            Wide: 0,
-            Saved: 0,
-            '45': 0,
-            '65': 0,
-            'Hand Pass': 0,
-            'Kick Pass': 0,
-            'Hurl Pass': 0,
-            'Own Kickout Won': 0,
-            'Own Kickout Lost': 0,
-            'Opp Kickout Won': 0,
-            'Opp Kickout Lost': 0,
-            'Free Kick': 0,
-            Sideline: 0,
-            Penalty: 0,
-            'Throw-in': 0,
-            Foul: 0,
-            'Yellow Card': 0,
-            'Red Card': 0,
-            'Black Card': 0,
-            Substitution: 0,
-            Turnover: 0,
-            Injury: 0,
-            Custom: 0
+        
+        const clipData = {
+            name: clipName,
+            startTime: startTime,
+            endTime: endTime,
+            duration: endTime - startTime,
+            events: events.filter(e => e.time >= startTime && e.time <= endTime),
+            created: new Date().toISOString()
         };
+        
+        const blob = new Blob([JSON.stringify(clipData, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `clip-${clipName.replace(/\s+/g, '-')}-${Date.now()}.json`;
+        a.click();
+        
+        alert(`Clip "${clipName}" created! Duration: ${(endTime - startTime).toFixed(1)}s`);
+        
+        document.querySelector('div[style*="position: fixed"]').remove();
+    }
 
-        let teamStats = {
-            home: {},
-            away: {}
-        };
-
-        let scores = {
-            home: { goals: 0, points: 0 },
-            away: { goals: 0, points: 0 }
-        };
-
-        // Initialize team stats
-        Object.keys(stats).forEach(key => {
-            teamStats.home[key] = 0;
-            teamStats.away[key] = 0;
-        });
-
-        // Set active team function
-        function setActiveTeam(team) {
-            activeTeam = team;
-            
-            // Update button states
-            document.getElementById('homeBtn').classList.toggle('active', team === 'home');
-            document.getElementById('awayBtn').classList.toggle('active', team === 'away');
-            
-            // Update score highlighting
-            document.getElementById('homeScore').classList.toggle('active', team === 'home');
-            document.getElementById('awayScore').classList.toggle('active', team === 'away');
-            
-            // Update button text
-            document.getElementById('homeBtn').innerHTML = team === 'home' ? '🏠 Home Active' : '🏠 Home';
-            document.getElementById('awayBtn').innerHTML = team === 'away' ? '✈️ Away Active' : '✈️ Away';
-            
-            // Update mini button highlighting
-            updateMiniButtonHighlighting();
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (event) => {
+        if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') return;
+        
+        switch(event.key.toLowerCase()) {
+            case 'g': tagEvent('Goal'); break;
+            case 'p': tagEvent('Point'); break;
+            case 'w': tagEvent('Wide'); break;
+            case 's': tagEvent('Saved'); break;
+            case 'f': tagEvent('Foul'); break;
+            case 'c': tagEvent('Yellow Card'); break;
+            case '1': setActiveTeam('home'); break;
+            case '2': setActiveTeam('away'); break;
+            case 'u': undoLastEvent(); break;
+            case ' ': event.preventDefault(); togglePlayPause(); break;
         }
+    });
 
-        function updateMiniButtonHighlighting() {
-            // Remove all active classes
-            document.querySelectorAll('.team-mini-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            // Add active class to current team's mini buttons
-            document.querySelectorAll(`.team-mini-btn.${activeTeam}`).forEach(btn => {
-                btn.classList.add('active');
-            });
+    // Event listeners
+    document.getElementById('homeTeam').addEventListener('input', updateTeamNames);
+    document.getElementById('awayTeam').addEventListener('input', updateTeamNames);
+
+    // Initialize
+    window.addEventListener('DOMContentLoaded', function() {
+        setSport('football');
+        setActiveTeam('home');
+        updateTeamNames();
+        updateTrialBanner();
+        applyFeatureRestrictions();
+    });
+
+    // Admin mode for testing
+    function enableAdminMode() {
+        const adminKey = prompt('Enter admin key:');
+        if (adminKey !== 'paircpro2025admin') {
+            alert('Invalid admin key');
+            return;
         }
+        
+        userPlan = 'enterprise';
+        trialExpired = false;
+        trialDaysRemaining = 999;
+        updateTrialBanner();
+        applyFeatureRestrictions();
+        
+        const banner = document.getElementById('trialBanner');
+        banner.style.background = '#10b981';
+        banner.innerHTML = '<span>🔓 ADMIN MODE - Full Access Enabled</span>';
+        
+        alert('Admin mode enabled! You now have full Enterprise access.');
+    }
 
-        // Set sport function
-        function setSport(sport) {
-            currentSport = sport;
-            
-            // Remove active class from all tabs
-            document.querySelectorAll('.sport-tab').forEach(tab => tab.classList.remove('active'));
-            
-            // Add active class to clicked tab
-            document.querySelectorAll('.sport-tab').forEach(tab => {
-                if (tab.textContent.toLowerCase() === sport.toLowerCase()) {
-                    tab.classList.add('active');
-                }
-            });
-            
-            // Show/hide sport-specific buttons
-            const twoPointBtn = document.getElementById('twoPointBtn');
-            const football45 = document.getElementById('football45');
-            const hurling65 = document.getElementById('hurling65');
-            const handPass = document.getElementById('handPass');
-            const kickPass = document.getElementById('kickPass');
-            const hurlPass = document.getElementById('hurlPass');
-            
-            if (sport === 'football') {
-                twoPointBtn.style.display = 'block';
-                football45.style.display = 'block';
-                hurling65.style.display = 'none';
-                handPass.style.display = 'block';
-                kickPass.style.display = 'block';
-                hurlPass.style.display = 'none';
-            } else {
-                twoPointBtn.style.display = 'none';
-                football45.style.display = 'none';
-                hurling65.style.display = 'block';
-                handPass.style.display = 'block';
-                kickPass.style.display = 'none';
-                hurlPass.style.display = 'block';
-            }
-        }
-
-        // Video upload function
-        function handleVideoUpload(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const videoUrl = URL.createObjectURL(file);
-                const videoContainer = document.getElementById('videoContainer');
-                
-                videoContainer.innerHTML = `
-                    <video id="mainVideo" width="100%" height="100%" controls style="border-radius: 12px;">
-                        <source src="${videoUrl}" type="${file.type}">
-                        Your browser does not support the video tag.
-                    </video>
-                `;
-                
-                currentVideo = document.getElementById('mainVideo');
-                currentVideo.addEventListener('loadedmetadata', () => {
-                    duration = currentVideo.duration;
-                    updateTimeDisplay();
-                });
-                
-                currentVideo.addEventListener('timeupdate', () => {
-                    currentTime = currentVideo.currentTime;
-                    updateTimeDisplay();
-                    updateProgressBar();
-                });
-            }
-        }
-
-        // Play/pause function
-        function togglePlayPause() {
-            if (!currentVideo) return;
-            
-            if (isPlaying) {
-                currentVideo.pause();
-                document.getElementById('playBtn').textContent = '▶';
-                isPlaying = false;
-            } else {
-                currentVideo.play();
-                document.getElementById('playBtn').textContent = '⏸';
-                isPlaying = true;
-            }
-        }
-
-        // Update time display
-        function updateTimeDisplay() {
-            const timeDisplay = document.getElementById('timeDisplay');
-            const current = formatTime(currentTime);
-            const total = formatTime(duration);
-            timeDisplay.textContent = `${current} / ${total}`;
-        }
-
-        // Update progress bar
-        function updateProgressBar() {
-            if (duration > 0) {
-                const percentage = (currentTime / duration) * 100;
-                document.getElementById('progressFill').style.width = `${percentage}%`;
-            }
-        }
-
-        // Seek video function
-        function seekVideo(event) {
-            icon">⚙️</span>
-                    Settings
-                </div>
-                <div class="nav-item">
-                    <span class="nav-
+    window.enableAdminMode = enableAdminMode;
+</script>
+</body>
+</html>
