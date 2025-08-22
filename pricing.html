@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pricing - PáircPro | Professional GAA Video Analysis</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="https://js.stripe.com/v3/"></script>
+    <title>Privacy Policy - PáircPro | Professional GAA Video Analysis</title>
     <style>
         * {
             margin: 0;
@@ -41,8 +39,13 @@
         }
 
         .logo {
+            display: flex;
+            align-items: center;
             text-decoration: none;
-            color: white;
+        }
+
+        .logo svg {
+            margin-right: 0.5rem;
         }
 
         .nav-links {
@@ -58,25 +61,7 @@
             transition: opacity 0.3s;
         }
 
-        .nav-links a:hover, .nav-links a.active {
-            opacity: 0.8;
-        }
-
-        .auth-buttons {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .login-btn {
-            color: white !important;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            transition: opacity 0.3s;
-        }
-
-        .login-btn:hover {
+        .nav-links a:hover {
             opacity: 0.8;
         }
 
@@ -95,360 +80,108 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
-        .account-dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: white;
-            min-width: 160px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            z-index: 1001;
-            border: 1px solid #e2e8f0;
-            margin-top: 8px;
-        }
-
-        .dropdown-menu.show {
-            display: block;
-        }
-
-        .dropdown-menu a {
-            color: #64748b;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            transition: background-color 0.2s;
-            font-weight: 500;
-        }
-
-        .dropdown-menu a:hover {
-            background-color: #f8fafc;
-            color: #1e293b;
-        }
-
-        .dropdown-menu a:last-child {
-            border-top: 1px solid #e2e8f0;
-            color: #dc2626;
-        }
-
-        .dropdown-menu a:last-child:hover {
-            background-color: #fef2f2;
-        }
-
         /* Main Content */
         .main-content {
             margin-top: 80px;
+            padding: 4rem 0;
+            min-height: calc(100vh - 160px);
         }
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
-            color: white;
-            padding: 6rem 0 4rem;
-            text-align: center;
-        }
-
-        .hero-container {
+        .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 0 2rem;
         }
 
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-bottom: 2rem;
-        }
-
-        .billing-toggle {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .toggle-switch {
-            position: relative;
-            width: 60px;
-            height: 30px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .toggle-switch.annual {
-            background: white;
-        }
-
-        .toggle-knob {
-            position: absolute;
-            top: 3px;
-            left: 3px;
-            width: 24px;
-            height: 24px;
-            background: white;
-            border-radius: 50%;
-            transition: all 0.3s;
-        }
-
-        .toggle-switch.annual .toggle-knob {
-            left: 33px;
-            background: #0066cc;
-        }
-
-        .billing-label {
-            font-weight: 600;
-            opacity: 0.8;
-        }
-
-        .billing-label.active {
-            opacity: 1;
-        }
-
-        .savings-badge {
-            background: #10b981;
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-left: 0.5rem;
-        }
-
-        /* Pricing Section */
-        .pricing-section {
-            padding: 6rem 0;
-            background: #f8fafc;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .pricing-card {
-            background: white;
-            border: 2px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 2rem;
+        .page-header {
             text-align: center;
-            transition: all 0.3s;
-            position: relative;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-radius: 12px;
         }
 
-        .pricing-card:hover {
-            border-color: #0066cc;
-            transform: translateY(-4px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-        }
-
-        .pricing-card.featured {
-            border-color: #0066cc;
-            transform: scale(1.02);
-            box-shadow: 0 8px 30px rgba(0, 102, 204, 0.15);
-        }
-
-        .popular-badge {
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, #0066cc, #6366f1);
-            color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 20px;
-            font-size: 0.875rem;
-            font-weight: 600;
-        }
-
-        .plan-name {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: #1e293b;
-            margin-bottom: 0.5rem;
-        }
-
-        .plan-description {
-            color: #64748b;
-            margin-bottom: 1.5rem;
-            font-size: 0.9rem;
-        }
-
-        .plan-price {
-            font-size: 3rem;
-            font-weight: 700;
-            color: #1e293b;
-            margin-bottom: 0.5rem;
-        }
-
-        .plan-price .currency {
-            font-size: 1.2rem;
-            vertical-align: top;
-        }
-
-        .plan-period {
-            color: #64748b;
-            margin-bottom: 1.5rem;
-            font-size: 0.9rem;
-        }
-
-        .original-price {
-            text-decoration: line-through;
-            color: #94a3b8;
-            font-size: 1rem;
-            margin-right: 0.5rem;
-        }
-
-        .savings {
-            color: #10b981;
-            font-weight: 600;
-            font-size: 0.8rem;
-            display: block;
-            margin-top: 0.25rem;
-        }
-
-        .plan-features {
-            list-style: none;
-            text-align: left;
-            margin-bottom: 2rem;
-        }
-
-        .plan-features li {
-            display: flex;
-            align-items: center;
-            color: #475569;
-            margin-bottom: 0.75rem;
-            padding-left: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .plan-features li::before {
-            content: "✓";
-            color: #10b981;
-            font-weight: bold;
-            margin-right: 0.75rem;
-            flex-shrink: 0;
-            font-size: 1rem;
-        }
-
-        .plan-features .unavailable {
-            color: #94a3b8;
-        }
-
-        .plan-features .unavailable::before {
-            content: "−";
-            color: #94a3b8;
-        }
-
-        .btn-plan {
-            width: 100%;
-            padding: 1rem 1.5rem;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .btn-plan-primary {
-            background: linear-gradient(135deg, #0066cc, #6366f1);
-            color: white;
-        }
-
-        .btn-plan-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
-        }
-
-        .btn-plan-secondary {
-            background: white;
-            color: #0066cc;
-            border: 2px solid #0066cc;
-        }
-
-        .btn-plan-secondary:hover {
-            background: #0066cc;
-            color: white;
-        }
-
-        .btn-plan-contact {
-            background: #1e293b;
-            color: white;
-        }
-
-        .btn-plan-contact:hover {
-            background: #334155;
-            transform: translateY(-2px);
-        }
-
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
-            color: white;
-            padding: 6rem 0;
-            text-align: center;
-        }
-
-        .cta-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .cta-title {
+        .page-title {
             font-size: 2.5rem;
             font-weight: 700;
-            margin-bottom: 1.5rem;
+            color: #1e293b;
+            margin-bottom: 1rem;
         }
 
-        .cta-description {
-            font-size: 1.2rem;
-            opacity: 0.9;
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: #64748b;
+        }
+
+        .last-updated {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .content-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             margin-bottom: 2rem;
         }
 
-        .btn-primary {
-            background: white;
-            color: #0066cc;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            display: inline-block;
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        .subsection-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #475569;
+            margin: 1.5rem 0 0.5rem 0;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #475569;
+        }
+
+        ul, ol {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            color: #475569;
+        }
+
+        .highlight-box {
+            background: #f1f5f9;
+            border-left: 4px solid #0066cc;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, #0066cc, #6366f1);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 1rem;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: underline;
         }
 
         /* Footer */
@@ -456,6 +189,7 @@
             background: #1e293b;
             color: white;
             padding: 3rem 0 1rem;
+            margin-top: 4rem;
         }
 
         .footer-content {
@@ -467,6 +201,7 @@
 
         .footer p {
             opacity: 0.8;
+            color: white;
         }
 
         /* Mobile Responsive */
@@ -475,17 +210,12 @@
                 display: none;
             }
 
-            .hero h1 {
+            .page-title {
                 font-size: 2rem;
             }
 
-            .pricing-card.featured {
-                transform: none;
-            }
-
-            .pricing-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
+            .content-section {
+                padding: 1.5rem;
             }
         }
     </style>
@@ -498,14 +228,14 @@
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="160" height="48">
                     <defs>
                         <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" style="stop-color:#0066cc"/>
-                            <stop offset="100%" style="stop-color:#6366f1"/>
+                            <stop offset="0%" style="stop-color:#ffffff"/>
+                            <stop offset="100%" style="stop-color:#ffffff"/>
                         </linearGradient>
                     </defs>
                     
                     <!-- GAA Pitch Icon -->
                     <g transform="translate(10, 10)">
-                        <rect x="0" y="0" width="40" height="40" rx="4" fill="url(#logoGradient)"/>
+                        <rect x="0" y="0" width="40" height="40" rx="4" fill="rgba(255,255,255,0.2)"/>
                         <rect x="4" y="4" width="32" height="32" rx="2" fill="none" stroke="white" stroke-width="1.5"/>
                         <circle cx="20" cy="20" r="6" fill="none" stroke="white" stroke-width="1.5"/>
                         <rect x="4" y="14" width="8" height="12" fill="none" stroke="white" stroke-width="1"/>
@@ -513,168 +243,237 @@
                         <rect x="4" y="17" width="2" height="6" fill="white"/>
                         <rect x="34" y="17" width="2" height="6" fill="white"/>
                         <circle cx="20" cy="20" r="4" fill="rgba(255,255,255,0.9)"/>
-                        <polygon points="17,17 17,23 23,20" fill="url(#logoGradient)"/>
+                        <polygon points="17,17 17,23 23,20" fill="#0066cc"/>
                     </g>
                     
                     <!-- Text Logo -->
                     <g transform="translate(60, 10)">
                         <text x="0" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="700" fill="white">
-                            Páirc<tspan fill="white">Pro</tspan>
+                            Páirc<tspan fill="rgba(255,255,255,0.9)">Pro</tspan>
                         </text>
-                        <text x="0" y="38" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="500" fill="rgba(255,255,255,0.7)">
+                        <text x="0" y="38" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="500" fill="rgba(255,255,255,0.8)">
                             GAA VIDEO ANALYSIS
                         </text>
                     </g>
-                    
-                    <circle cx="74" cy="12" r="1" fill="white"/>
                 </svg>
             </a>
             <nav class="nav-links">
                 <a href="features.html">Features</a>
-                <a href="pricing.html" class="active">Pricing</a>
+                <a href="pricing.html">Pricing</a>
                 <a href="contact.html">Contact</a>
             </nav>
-            <div class="auth-buttons" id="authButtons">
-                <a href="auth.html?mode=login" class="login-btn">Log in</a>
-                <a href="auth.html" class="cta-button">Get started</a>
-            </div>
+            <a href="app.html" class="cta-button">Launch App</a>
         </div>
     </header>
 
     <!-- Main Content -->
     <main class="main-content">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-container">
-                <h1>Simple, Transparent Pricing</h1>
-                <p>Start with a 7-day free trial of Coach plan, or subscribe to Premium/Enterprise immediately.</p>
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">Privacy Policy</h1>
+                <p class="page-subtitle">Your privacy is important to us. This policy explains how we collect, use, and protect your information.</p>
+                <p class="last-updated">Last updated: January 2025</p>
+            </div>
+
+            <!-- Introduction -->
+            <div class="content-section">
+                <h2 class="section-title">1. Introduction</h2>
+                <p>Welcome to PáircPro. We are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, store, and protect your data when you use our GAA video analysis platform.</p>
                 
-                <div class="billing-toggle">
-                    <span class="billing-label active" id="monthlyLabel">Monthly</span>
-                    <div class="toggle-switch" id="billingToggle" onclick="toggleBilling()">
-                        <div class="toggle-knob"></div>
-                    </div>
-                    <span class="billing-label" id="annualLabel">Annual</span>
-                    <span class="savings-badge">Save up to 50%</span>
+                <div class="highlight-box">
+                    <strong>Quick Summary:</strong> We only collect data necessary to provide our service, never sell your information, and give you control over your data at all times.
+                </div>
+                
+                <p>By using PáircPro, you agree to the collection and use of information in accordance with this policy. If you disagree with any part of this policy, please do not use our service.</p>
+            </div>
+
+            <!-- Information We Collect -->
+            <div class="content-section">
+                <h2 class="section-title">2. Information We Collect</h2>
+                
+                <h3 class="subsection-title">Account Information</h3>
+                <ul>
+                    <li>Name and email address (required for registration)</li>
+                    <li>Profile information you choose to provide</li>
+                    <li>Billing information (processed securely by Stripe)</li>
+                    <li>Communication preferences</li>
+                </ul>
+
+                <h3 class="subsection-title">Usage Data</h3>
+                <ul>
+                    <li>Video files you upload for analysis</li>
+                    <li>Match analysis data and statistics</li>
+                    <li>Event tags and annotations you create</li>
+                    <li>App usage patterns and performance metrics</li>
+                </ul>
+
+                <h3 class="subsection-title">Technical Information</h3>
+                <ul>
+                    <li>IP address and device information</li>
+                    <li>Browser type and version</li>
+                    <li>Operating system and screen resolution</li>
+                    <li>Cookies and similar tracking technologies</li>
+                </ul>
+            </div>
+
+            <!-- How We Use Your Information -->
+            <div class="content-section">
+                <h2 class="section-title">3. How We Use Your Information</h2>
+                
+                <p>We use your information solely to provide and improve our service:</p>
+                
+                <ul>
+                    <li><strong>Service Delivery:</strong> To provide video analysis features and store your match data</li>
+                    <li><strong>Account Management:</strong> To create and manage your account, process payments, and provide support</li>
+                    <li><strong>Communication:</strong> To send important updates, security alerts, and respond to your inquiries</li>
+                    <li><strong>Improvement:</strong> To analyze usage patterns and improve our platform (anonymized data only)</li>
+                    <li><strong>Security:</strong> To detect fraud, abuse, and ensure platform security</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <strong>We never:</strong> Sell your data to third parties, use your video content for training AI models, or share your analysis data with other users without permission.
                 </div>
             </div>
-        </section>
 
-        <!-- Pricing Section -->
-        <section class="pricing-section">
-            <div class="container">
-                <div class="pricing-grid">
-                    <!-- Coach Plan -->
-                    <div class="pricing-card">
-                        <div class="plan-name">Coach</div>
-                        <div class="plan-description">Ideal for individual coaches and small teams</div>
-                        <div class="plan-price">
-                            <span class="currency">€</span><span id="coachPrice">97</span>
-                        </div>
-                        <div class="plan-period">
-                            <span id="coachPeriod">per month</span>
-                            <div id="coachSavings" style="display: none;">
-                                <span class="original-price">€1,164/year</span>
-                                <span class="savings">Save 30% annually</span>
-                            </div>
-                        </div>
-                        
-                        <ul class="plan-features">
-                            <li>Basic video analysis</li>
-                            <li>Unlimited matches</li>
-                            <li>GAA-specific event tagging</li>
-                            <li>Basic statistics</li>
-                            <li>10GB video storage</li>
-                            <li>Email support</li>
-                            <li>CSV export</li>
-                            <li class="unavailable">Live match analysis</li>
-                            <li class="unavailable">Advanced analytics</li>
-                            <li class="unavailable">Team collaboration</li>
-                        </ul>
-                        
-                        <button class="btn-plan btn-plan-secondary" onclick="buyCoachMonthly()">Start 7-Day Free Trial</button>
-                    </div>
+            <!-- Data Storage and Security -->
+            <div class="content-section">
+                <h2 class="section-title">4. Data Storage and Security</h2>
+                
+                <h3 class="subsection-title">Where Your Data is Stored</h3>
+                <ul>
+                    <li>Video files: Secure cloud storage with Cloudflare R2 (EU servers)</li>
+                    <li>Analysis data: Supabase database (EU region)</li>
+                    <li>All data stored within the European Union for GDPR compliance</li>
+                </ul>
 
-                    <!-- Premium Plan -->
-                    <div class="pricing-card featured">
-                        <div class="popular-badge">Most Popular</div>
-                        <div class="plan-name">Premium</div>
-                        <div class="plan-description">For professional coaches and advanced analysis</div>
-                        <div class="plan-price">
-                            <span class="currency">€</span><span id="premiumPrice">147</span>
-                        </div>
-                        <div class="plan-period">
-                            <span id="premiumPeriod">per month</span>
-                            <div id="premiumSavings" style="display: none;">
-                                <span class="original-price">€1,764/year</span>
-                                <span class="savings">Save 40% annually</span>
-                            </div>
-                        </div>
-                        
-                        <ul class="plan-features">
-                            <li>Everything in Coach</li>
-                            <li>Live match analysis</li>
-                            <li>Advanced statistics & heat maps</li>
-                            <li>Professional PDF reports</li>
-                            <li>25GB video storage</li>
-                            <li>Priority email support</li>
-                            <li>Data export options</li>
-                            <li>Possession zone analysis</li>
-                            <li>Performance trends</li>
-                            <li>Up to 3 team members</li>
-                            <li class="unavailable">Team collaboration tools</li>
-                            <li class="unavailable">Advanced team features</li>
-                        </ul>
-                        
-                        <button class="btn-plan btn-plan-primary" onclick="buyPremiumMonthly()">Subscribe to Premium</button>
-                    </div>
+                <h3 class="subsection-title">Security Measures</h3>
+                <ul>
+                    <li>End-to-end encryption for all data transmission</li>
+                    <li>Encrypted storage for video files and analysis data</li>
+                    <li>Regular security audits and vulnerability assessments</li>
+                    <li>Multi-factor authentication available for accounts</li>
+                    <li>SOC 2 compliant infrastructure partners</li>
+                </ul>
 
-                    <!-- Enterprise Plan -->
-                    <div class="pricing-card">
-                        <div class="plan-name">Enterprise</div>
-                        <div class="plan-description">For organizations and large teams</div>
-                        <div class="plan-price">
-                            <span class="currency">€</span><span id="enterprisePrice">497</span>
-                        </div>
-                        <div class="plan-period">
-                            <span id="enterprisePeriod">per month</span>
-                            <div id="enterpriseSavings" style="display: none;">
-                                <span class="original-price">€5,964/year</span>
-                                <span class="savings">Save 50% annually</span>
-                            </div>
-                        </div>
-                        
-                        <ul class="plan-features">
-                            <li>Everything in Premium</li>
-                            <li>100GB video storage</li>
-                            <li>Up to 10 team members</li>
-                            <li>Team collaboration tools</li>
-                            <li>Shared projects & comments</li>
-                            <li>Priority support</li>
-                            <li>Opposition analysis tools</li>
-                            <li>Custom report templates</li>
-                            <li>Data export options</li>
-                            <li>Training sessions included</li>
-                            <li>White-label reports</li>
-                            <li class="unavailable">API access (coming 2025)</li>
-                        </ul>
-                        
-                        <button class="btn-plan btn-plan-contact" onclick="buyEnterpriseMonthly()">Subscribe to Enterprise</button>
-                    </div>
+                <h3 class="subsection-title">Data Retention</h3>
+                <ul>
+                    <li>Active accounts: Data retained as long as your account is active</li>
+                    <li>Deleted accounts: Data permanently deleted within 30 days</li>
+                    <li>Video files: Automatically deleted 90 days after account deletion</li>
+                    <li>Backup data: Securely deleted within 6 months</li>
+                </ul>
+            </div>
+
+            <!-- Your Rights -->
+            <div class="content-section">
+                <h2 class="section-title">5. Your Rights and Choices</h2>
+                
+                <p>Under GDPR and other privacy laws, you have the following rights:</p>
+                
+                <ul>
+                    <li><strong>Access:</strong> Request a copy of all personal data we hold about you</li>
+                    <li><strong>Rectification:</strong> Correct any inaccurate or incomplete data</li>
+                    <li><strong>Erasure:</strong> Request deletion of your personal data ("right to be forgotten")</li>
+                    <li><strong>Portability:</strong> Export your data in a machine-readable format</li>
+                    <li><strong>Restriction:</strong> Limit how we process your data</li>
+                    <li><strong>Objection:</strong> Object to processing based on legitimate interests</li>
+                    <li><strong>Withdraw Consent:</strong> Withdraw consent for data processing at any time</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <strong>Exercise Your Rights:</strong> Contact us at privacy@paircpro.ie or use the data export/deletion tools in your account settings.
                 </div>
             </div>
-        </section>
 
-        <!-- CTA Section -->
-        <section class="cta-section">
-            <div class="container">
-                <div class="cta-content">
-                    <h2 class="cta-title">Ready to Get Started?</h2>
-                    <p class="cta-description">Join coaches and analysts already using PáircPro to improve their GAA analysis.</p>
-                    <a href="auth.html" class="btn-primary">Start Your Free Trial</a>
-                </div>
+            <!-- Sharing and Third Parties -->
+            <div class="content-section">
+                <h2 class="section-title">6. Information Sharing</h2>
+                
+                <p>We only share your information in limited circumstances:</p>
+                
+                <h3 class="subsection-title">Service Providers</h3>
+                <ul>
+                    <li><strong>Supabase:</strong> Database and authentication services</li>
+                    <li><strong>Cloudflare:</strong> Video storage and content delivery</li>
+                    <li><strong>Stripe:</strong> Payment processing (they never see your video data)</li>
+                    <li><strong>Vercel:</strong> Web application hosting</li>
+                </ul>
+
+                <h3 class="subsection-title">Legal Requirements</h3>
+                <p>We may disclose information if required by law, court order, or to protect rights, property, or safety. We will notify you unless legally prohibited.</p>
+
+                <h3 class="subsection-title">Business Transfers</h3>
+                <p>In the event of a merger, acquisition, or sale, your data may be transferred. You will be notified with choices about your data.</p>
             </div>
-        </section>
+
+            <!-- Cookies and Tracking -->
+            <div class="content-section">
+                <h2 class="section-title">7. Cookies and Tracking</h2>
+                
+                <p>We use cookies and similar technologies to improve your experience:</p>
+                
+                <ul>
+                    <li><strong>Essential Cookies:</strong> Required for login and basic functionality</li>
+                    <li><strong>Performance Cookies:</strong> Anonymous analytics to improve our service</li>
+                    <li><strong>Preference Cookies:</strong> Remember your settings and preferences</li>
+                </ul>
+
+                <p>You can control cookies through your browser settings. Disabling essential cookies may limit functionality.</p>
+            </div>
+
+            <!-- International Transfers -->
+            <div class="content-section">
+                <h2 class="section-title">8. International Data Transfers</h2>
+                
+                <p>Your data is primarily stored within the European Union. When data is transferred outside the EU, we ensure:</p>
+                
+                <ul>
+                    <li>Adequate protection through adequacy decisions or appropriate safeguards</li>
+                    <li>Standard Contractual Clauses (SCCs) with service providers</li>
+                    <li>Regular reviews of data protection measures</li>
+                </ul>
+            </div>
+
+            <!-- Children's Privacy -->
+            <div class="content-section">
+                <h2 class="section-title">9. Children's Privacy</h2>
+                
+                <p>PáircPro is not intended for children under 16. We do not knowingly collect personal information from children under 16. If you believe we have collected such information, please contact us immediately for deletion.</p>
+                
+                <p>For GAA youth teams, we recommend adult coaches or managers create and manage accounts with appropriate consent from parents/guardians.</p>
+            </div>
+
+            <!-- Changes to This Policy -->
+            <div class="content-section">
+                <h2 class="section-title">10. Changes to This Policy</h2>
+                
+                <p>We may update this Privacy Policy periodically. When we do:</p>
+                
+                <ul>
+                    <li>We'll notify you via email for significant changes</li>
+                    <li>Update the "Last updated" date at the top of this policy</li>
+                    <li>Post the updated policy on our website</li>
+                    <li>Give you 30 days notice for material changes affecting your rights</li>
+                </ul>
+
+                <p>Continued use of PáircPro after changes constitutes acceptance of the new policy.</p>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="contact-info">
+                <h3>Questions About Privacy?</h3>
+                <p>If you have any questions about this Privacy Policy or our data practices, please contact us:</p>
+                <p>
+                    <strong>Email:</strong> <a href="mailto:privacy@paircpro.ie">privacy@paircpro.ie</a><br>
+                    <strong>Address:</strong> PáircPro, Ireland<br>
+                    <strong>Data Protection Officer:</strong> <a href="mailto:dpo@paircpro.ie">dpo@paircpro.ie</a>
+                </p>
+                <p style="margin-top: 1rem; font-size: 0.9rem;">
+                    You also have the right to lodge a complaint with the Irish Data Protection Commission if you believe we have not handled your data properly.
+                </p>
+            </div>
+        </div>
     </main>
 
     <!-- Footer -->
@@ -683,163 +482,6 @@
             <p>&copy; 2025 PáircPro. All rights reserved. | <a href="privacy.html" style="color: white;">Privacy Policy</a> | <a href="terms.html" style="color: white;">Terms of Service</a></p>
         </div>
     </footer>
-
-    <script>
-        let isAnnual = false;
-        
-        const stripe = Stripe('pk_live_51RybZC3XC25HXCiQqsIzJTdCBnpHwtNTpTInwozichZwf2gGaM10p2alrdaw9GziOW8MyTFLbVyh13JSzWK07ucr00j81TnPIf');
-
-        // Initialize Supabase
-        const supabaseUrl = 'https://gkcgngqdsmyutvbzepsn.supabase.co'
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdrY2duZ3Fkc215dXR2YnplcHNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU3MDU5NTAsImV4cCI6MjA3MTI4MTk1MH0.rDTTUn_McI1sSfZH12o5FLrS1iSXNEo14Pxce6YI3qA'
-        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
-
-        // Stripe payment functions
-        function buyCoachMonthly() {
-            if (isAnnual) {
-                stripe.redirectToCheckout({
-                    lineItems: [{price: 'price_1RyuKA3XC25HXCiQsKjv7Akn', quantity: 1}],
-                    mode: 'subscription',
-                    successUrl: 'https://paircpro.ie/success.html',
-                    cancelUrl: 'https://paircpro.ie/pricing.html',
-                });
-            } else {
-                stripe.redirectToCheckout({
-                    lineItems: [{price: 'price_1RyuL73XC25HXCiQ2U3FIIUB', quantity: 1}],
-                    mode: 'subscription',
-                    successUrl: 'https://paircpro.ie/success.html',
-                    cancelUrl: 'https://paircpro.ie/pricing.html',
-                });
-            }
-        }
-
-        function buyPremiumMonthly() {
-            if (isAnnual) {
-                stripe.redirectToCheckout({
-                    lineItems: [{price: 'price_1RycnX3XC25HXCiQM17cB59a', quantity: 1}],
-                    mode: 'subscription',
-                    successUrl: 'https://paircpro.ie/success.html',
-                    cancelUrl: 'https://paircpro.ie/pricing.html',
-                });
-            } else {
-                stripe.redirectToCheckout({
-                    lineItems: [{price: 'price_1RyuNw3XC25HXCiQV4PxzD4x', quantity: 1}],
-                    mode: 'subscription',
-                    successUrl: 'https://paircpro.ie/success.html',
-                    cancelUrl: 'https://paircpro.ie/pricing.html',
-                });
-            }
-        }
-
-        function buyEnterpriseMonthly() {
-            if (isAnnual) {
-                stripe.redirectToCheckout({
-                    lineItems: [{price: 'price_1RyctT3XC25HXCiQ7UI8Nhow', quantity: 1}],
-                    mode: 'subscription',
-                    successUrl: 'https://paircpro.ie/success.html',
-                    cancelUrl: 'https://paircpro.ie/pricing.html',
-                });
-            } else {
-                stripe.redirectToCheckout({
-                    lineItems: [{price: 'price_1Rycsc3XC25HXCiQlGjJS70i', quantity: 1}],
-                    mode: 'subscription',
-                    successUrl: 'https://paircpro.ie/success.html',
-                    cancelUrl: 'https://paircpro.ie/pricing.html',
-                });
-            }
-        }
-
-        function toggleBilling() {
-            isAnnual = !isAnnual;
-            const toggle = document.getElementById('billingToggle');
-            const monthlyLabel = document.getElementById('monthlyLabel');
-            const annualLabel = document.getElementById('annualLabel');
-            
-            if (isAnnual) {
-                toggle.classList.add('annual');
-                monthlyLabel.classList.remove('active');
-                annualLabel.classList.add('active');
-                
-                // Coach pricing (30% off)
-                document.getElementById('coachPrice').textContent = '68';
-                document.getElementById('coachPeriod').textContent = 'per month, billed annually';
-                document.getElementById('coachSavings').style.display = 'block';
-                
-                // Premium pricing (40% off)
-                document.getElementById('premiumPrice').textContent = '88';
-                document.getElementById('premiumPeriod').textContent = 'per month, billed annually';
-                document.getElementById('premiumSavings').style.display = 'block';
-                
-                // Enterprise pricing (50% off)
-                document.getElementById('enterprisePrice').textContent = '249';
-                document.getElementById('enterprisePeriod').textContent = 'per month, billed annually';
-                document.getElementById('enterpriseSavings').style.display = 'block';
-            } else {
-                toggle.classList.remove('annual');
-                monthlyLabel.classList.add('active');
-                annualLabel.classList.remove('active');
-                
-                document.getElementById('coachPrice').textContent = '97';
-                document.getElementById('coachPeriod').textContent = 'per month';
-                document.getElementById('coachSavings').style.display = 'none';
-                
-                document.getElementById('premiumPrice').textContent = '147';
-                document.getElementById('premiumPeriod').textContent = 'per month';
-                document.getElementById('premiumSavings').style.display = 'none';
-                
-                document.getElementById('enterprisePrice').textContent = '497';
-                document.getElementById('enterprisePeriod').textContent = 'per month';
-                document.getElementById('enterpriseSavings').style.display = 'none';
-            }
-        }
-
-        async function updateNavigation() {
-            const { data: { user } } = await supabase.auth.getUser()
-            const authButtons = document.getElementById('authButtons');
-            
-            if (user) {
-                const userData = user.user_metadata;
-                const userName = userData.full_name || 'User';
-                
-                authButtons.innerHTML = `
-                    <a href="app.html" class="login-btn">Launch App</a>
-                    <div class="account-dropdown">
-                        <button class="cta-button" onclick="toggleAccountMenu()">${userName} ▼</button>
-                        <div class="dropdown-menu" id="accountMenu">
-                            <a href="app.html">Dashboard</a>
-                            <a href="pricing.html">Subscription</a>
-                            <a href="#" onclick="window.open('mailto:support@paircpro.ie')">Support</a>
-                            <a href="#" onclick="signOut()">Sign Out</a>
-                        </div>
-                    </div>
-                `;
-            }
-        }
-
-        function toggleAccountMenu() {
-            const menu = document.getElementById('accountMenu');
-            menu.classList.toggle('show');
-        }
-
-        async function signOut() {
-            await supabase.auth.signOut();
-            window.location.reload();
-        }
-
-        // Close dropdown when clicking outside
-        window.addEventListener('click', function(event) {
-            if (!event.target.matches('.cta-button')) {
-                const dropdowns = document.getElementsByClassName('dropdown-menu');
-                for (let i = 0; i < dropdowns.length; i++) {
-                    dropdowns[i].classList.remove('show');
-                }
-            }
-        });
-
-        window.addEventListener('DOMContentLoaded', updateNavigation);
-        supabase.auth.onAuthStateChange(() => {
-            updateNavigation();
-        });
-    </script>
 </body>
+
 </html>
