@@ -41,10 +41,13 @@
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
+            display: flex;
+            align-items: center;
             text-decoration: none;
-            color: #0066cc;
+        }
+
+        .logo svg {
+            margin-right: 0.5rem;
         }
 
         .nav-links {
@@ -98,107 +101,6 @@
             box-shadow: 0 4px 12px rgba(0, 102, 204, 0.25);
         }
 
-        /* Account Dropdown */
-        .account-menu {
-            position: relative;
-        }
-
-        .account-button {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            color: #1e293b;
-        }
-
-        .account-button:hover {
-            background: #f1f5f9;
-            border-color: #cbd5e1;
-        }
-
-        .account-avatar {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: #0066cc;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .account-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            min-width: 200px;
-            z-index: 1000;
-            margin-top: 0.5rem;
-            display: none;
-        }
-
-        .account-dropdown.show {
-            display: block;
-        }
-
-        .dropdown-header {
-            padding: 1rem;
-            border-bottom: 1px solid #f1f5f9;
-        }
-
-        .dropdown-email {
-            font-size: 0.875rem;
-            color: #64748b;
-            margin-top: 0.25rem;
-        }
-
-        .dropdown-plan {
-            font-size: 0.75rem;
-            color: #0066cc;
-            font-weight: 600;
-            margin-top: 0.25rem;
-        }
-
-        .dropdown-item {
-            display: block;
-            padding: 0.75rem 1rem;
-            color: #374151;
-            text-decoration: none;
-            transition: background 0.2s;
-            border-bottom: 1px solid #f9fafb;
-        }
-
-        .dropdown-item:hover {
-            background: #f8fafc;
-        }
-
-        .dropdown-item:last-child {
-            border-bottom: none;
-            color: #dc2626;
-        }
-
-        .trial-banner {
-            background: #fef3c7;
-            border: 1px solid #f59e0b;
-            color: #92400e;
-            padding: 0.5rem 1rem;
-            text-align: center;
-            font-size: 0.875rem;
-            font-weight: 500;
-        }
-
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, #fafbfc 0%, #f1f5f9 100%);
@@ -208,17 +110,6 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(0,102,204,0.05)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            opacity: 0.5;
         }
 
         .hero-container {
@@ -307,70 +198,6 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         }
 
-        /* Demo Video */
-        .demo-video {
-            max-width: 900px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
-            border: 1px solid #e2e8f0;
-        }
-
-        .video-placeholder {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            border: 2px dashed #cbd5e1;
-            border-radius: 12px;
-            height: 400px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #64748b;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .video-placeholder::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #0066cc, #6366f1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .video-placeholder::after {
-            content: '▶';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-45%, -50%);
-            color: white;
-            font-size: 28px;
-            z-index: 1;
-        }
-
-        .video-text {
-            margin-top: 6rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #475569;
-        }
-
-        .video-subtext {
-            font-size: 0.9rem;
-            color: #94a3b8;
-            margin-top: 0.5rem;
-        }
-
         /* Features Section */
         .features {
             padding: 6rem 0;
@@ -455,9 +282,9 @@
 
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1000px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
             margin: 3rem auto 0;
         }
 
@@ -465,7 +292,7 @@
             background: white;
             border: 2px solid #e2e8f0;
             border-radius: 16px;
-            padding: 2.5rem;
+            padding: 2rem;
             text-align: center;
             transition: all 0.3s;
             position: relative;
@@ -479,7 +306,7 @@
 
         .pricing-card.featured {
             border-color: #0066cc;
-            transform: scale(1.05);
+            transform: scale(1.02);
         }
 
         .popular-badge {
@@ -570,7 +397,64 @@
             color: white;
         }
 
-        /* CTA Section */
+        .billing-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: rgba(0, 102, 204, 0.2);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .toggle-switch.annual {
+            background: #0066cc;
+        }
+
+        .toggle-knob {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .toggle-switch.annual .toggle-knob {
+            left: 33px;
+        }
+
+        .billing-label {
+            font-weight: 600;
+            color: #64748b;
+            opacity: 0.8;
+        }
+
+        .billing-label.active {
+            opacity: 1;
+            color: #1e293b;
+        }
+
+        .savings-badge {
+            background: #10b981;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
         .cta-section {
             background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
             color: white;
@@ -628,17 +512,8 @@
                 display: none;
             }
 
-            .auth-buttons {
-                gap: 0.5rem;
-            }
-
             .hero-title {
                 font-size: 2.5rem;
-            }
-
-            .hero-actions {
-                flex-direction: column;
-                align-items: center;
             }
 
             .pricing-card.featured {
@@ -651,7 +526,41 @@
     <!-- Header -->
     <header class="header">
         <div class="nav-container">
-            <a href="index.html" class="logo">PáircPro</a>
+            <a href="index.html" class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="160" height="48">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#0066cc"/>
+                            <stop offset="100%" style="stop-color:#6366f1"/>
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- GAA Pitch Icon -->
+                    <g transform="translate(10, 10)">
+                        <rect x="0" y="0" width="40" height="40" rx="4" fill="url(#logoGradient)"/>
+                        <rect x="4" y="4" width="32" height="32" rx="2" fill="none" stroke="white" stroke-width="1.5"/>
+                        <circle cx="20" cy="20" r="6" fill="none" stroke="white" stroke-width="1.5"/>
+                        <rect x="4" y="14" width="8" height="12" fill="none" stroke="white" stroke-width="1"/>
+                        <rect x="28" y="14" width="8" height="12" fill="none" stroke="white" stroke-width="1"/>
+                        <rect x="4" y="17" width="2" height="6" fill="white"/>
+                        <rect x="34" y="17" width="2" height="6" fill="white"/>
+                        <circle cx="20" cy="20" r="4" fill="rgba(255,255,255,0.9)"/>
+                        <polygon points="17,17 17,23 23,20" fill="url(#logoGradient)"/>
+                    </g>
+                    
+                    <!-- Text Logo -->
+                    <g transform="translate(60, 10)">
+                        <text x="0" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="700" fill="url(#logoGradient)">
+                            Páirc<tspan fill="#1e293b">Pro</tspan>
+                        </text>
+                        <text x="0" y="38" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="500" fill="#64748b">
+                            GAA VIDEO ANALYSIS
+                        </text>
+                    </g>
+                    
+                    <circle cx="74" cy="12" r="1" fill="url(#logoGradient)"/>
+                </svg>
+            </a>
             <nav class="nav-links">
                 <a href="features.html">Features</a>
                 <a href="pricing.html">Pricing</a>
@@ -671,7 +580,7 @@
             <h1 class="hero-title">Revolutionize Your GAA Analysis</h1>
             <p class="hero-subtitle">
                 Advanced video analysis software designed specifically for GAA teams. 
-                From multi-angle video analysis to AI-powered insights, everything you need to elevate your team's performance.
+                From professional event tagging to AI-powered insights, everything you need to elevate your team's performance.
             </p>
             
             <div class="hero-actions" id="heroActions">
@@ -681,13 +590,6 @@
                 <a href="contact.html" class="btn-secondary">
                     Book Demo
                 </a>
-            </div>
-
-            <div class="demo-video">
-                <div class="video-placeholder">
-                    <div class="video-text">Watch PáircPro in Action</div>
-                    <div class="video-subtext">See how easy it is to analyze GAA matches with our professional tools</div>
-                </div>
             </div>
         </div>
     </section>
@@ -703,8 +605,8 @@
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">🎥</div>
-                    <h3 class="feature-title">Multi-Angle Video Analysis</h3>
-                    <p class="feature-description">Upload multiple camera angles and analyze them simultaneously with frame-by-frame precision and variable playback speeds.</p>
+                    <h3 class="feature-title">Professional Video Analysis</h3>
+                    <p class="feature-description">Upload match videos and analyze them with frame-by-frame precision, variable playback speeds, and comprehensive event tagging.</p>
                 </div>
 
                 <div class="feature-card">
@@ -745,50 +647,71 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Simple, Transparent Pricing</h2>
-                <p class="section-subtitle">Choose the plan that's right for your team</p>
+                <p class="section-subtitle">Start with a 7-day free trial on any plan</p>
+                
+                <div class="billing-toggle">
+                    <span class="billing-label active" id="indexMonthlyLabel">Monthly</span>
+                    <div class="toggle-switch" id="indexBillingToggle" onclick="toggleIndexBilling()">
+                        <div class="toggle-knob"></div>
+                    </div>
+                    <span class="billing-label" id="indexAnnualLabel">Annual</span>
+                    <span class="savings-badge">Save up to 50%</span>
+                </div>
             </div>
 
             <div class="pricing-grid">
                 <div class="pricing-card">
-                    <div class="plan-name">Free</div>
-                    <div class="plan-price">€0</div>
-                    <div class="plan-period">Forever free</div>
+                    <div class="plan-name">Coach</div>
+                    <div class="plan-price">€<span id="indexCoachPrice">97</span></div>
+                    <div class="plan-period" id="indexCoachPeriod">per month</div>
+                    <div id="indexCoachSavings" style="display: none; margin-top: 0.5rem;">
+                        <span style="text-decoration: line-through; color: #94a3b8; font-size: 0.9rem;">€1,164/year</span>
+                        <span style="color: #10b981; font-weight: 600; font-size: 0.8rem; display: block;">Save 30% annually</span>
+                    </div>
                     <ul class="plan-features">
                         <li>Basic video analysis</li>
-                        <li>Manual event tagging</li>
-                        <li>Up to 3 matches per month</li>
-                        <li>CSV export</li>
+                        <li>Unlimited matches</li>
+                        <li>GAA-specific tagging</li>
+                        <li>10GB storage</li>
+                        <li>Email support</li>
                     </ul>
-                    <a href="auth.html" class="btn-plan btn-plan-secondary">Get Started Free</a>
+                    <a href="auth.html" class="btn-plan btn-plan-secondary">Start Free Trial</a>
                 </div>
 
                 <div class="pricing-card featured">
                     <div class="popular-badge">Most Popular</div>
                     <div class="plan-name">Premium</div>
-                    <div class="plan-price">€199</div>
-                    <div class="plan-period">per month</div>
+                    <div class="plan-price">€<span id="indexPremiumPrice">147</span></div>
+                    <div class="plan-period" id="indexPremiumPeriod">per month</div>
+                    <div id="indexPremiumSavings" style="display: none; margin-top: 0.5rem;">
+                        <span style="text-decoration: line-through; color: #94a3b8; font-size: 0.9rem;">€1,764/year</span>
+                        <span style="color: #10b981; font-weight: 600; font-size: 0.8rem; display: block;">Save 40% annually</span>
+                    </div>
                     <ul class="plan-features">
-                        <li>Multi-angle video analysis</li>
-                        <li>GAA-specific event tagging</li>
                         <li>Live match analysis</li>
                         <li>Advanced statistics</li>
                         <li>PDF reports</li>
                         <li>25GB video storage</li>
+                        <li>Up to 3 team members</li>
                     </ul>
                     <a href="auth.html" class="btn-plan btn-plan-primary">Start Free Trial</a>
                 </div>
 
                 <div class="pricing-card">
                     <div class="plan-name">Enterprise</div>
-                    <div class="plan-price">€499</div>
-                    <div class="plan-period">per month</div>
+                    <div class="plan-price">€<span id="indexEnterprisePrice">497</span></div>
+                    <div class="plan-period" id="indexEnterprisePeriod">per month</div>
+                    <div id="indexEnterpriseSavings" style="display: none; margin-top: 0.5rem;">
+                        <span style="text-decoration: line-through; color: #94a3b8; font-size: 0.9rem;">€5,964/year</span>
+                        <span style="color: #10b981; font-weight: 600; font-size: 0.8rem; display: block;">Save 50% annually</span>
+                    </div>
                     <ul class="plan-features">
                         <li>Everything in Premium</li>
-                        <li>Unlimited video storage</li>
-                        <li>Multi-user accounts</li>
+                        <li>100GB video storage</li>
+                        <li>Up to 10 team members</li>
                         <li>Team collaboration</li>
-                        <li>API access</li>
-                        <li>Dedicated support</li>
+                        <li>Priority support</li>
+                        <li>Custom reports</li>
                     </ul>
                     <a href="contact.html" class="btn-plan btn-plan-secondary">Contact Sales</a>
                 </div>
@@ -815,12 +738,57 @@
     </footer>
 
     <script>
+        let indexIsAnnual = false;
+        
         // Initialize Supabase
-        const supabaseUrl = 'YOUR_PROJECT_URL'
-        const supabaseKey = 'YOUR_ANON_KEY'
+        const supabaseUrl = 'https://gkcgngqdsmyutvbzepsn.supabase.co'
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdrY2duZ3Fkc215dXR2YnplcHNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU3MDU5NTAsImV4cCI6MjA3MTI4MTk1MH0.rDTTUn_McI1sSfZH12o5FLrS1iSXNEo14Pxce6YI3qA'
         const supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
 
-        // Check authentication status and update navigation
+        function toggleIndexBilling() {
+            indexIsAnnual = !indexIsAnnual;
+            const toggle = document.getElementById('indexBillingToggle');
+            const monthlyLabel = document.getElementById('indexMonthlyLabel');
+            const annualLabel = document.getElementById('indexAnnualLabel');
+            
+            if (indexIsAnnual) {
+                toggle.classList.add('annual');
+                monthlyLabel.classList.remove('active');
+                annualLabel.classList.add('active');
+                
+                // Coach pricing (30% off)
+                document.getElementById('indexCoachPrice').textContent = '68';
+                document.getElementById('indexCoachPeriod').textContent = 'per month, billed annually';
+                document.getElementById('indexCoachSavings').style.display = 'block';
+                
+                // Premium pricing (40% off)
+                document.getElementById('indexPremiumPrice').textContent = '88';
+                document.getElementById('indexPremiumPeriod').textContent = 'per month, billed annually';
+                document.getElementById('indexPremiumSavings').style.display = 'block';
+                
+                // Enterprise pricing (50% off)
+                document.getElementById('indexEnterprisePrice').textContent = '249';
+                document.getElementById('indexEnterprisePeriod').textContent = 'per month, billed annually';
+                document.getElementById('indexEnterpriseSavings').style.display = 'block';
+            } else {
+                toggle.classList.remove('annual');
+                monthlyLabel.classList.add('active');
+                annualLabel.classList.remove('active');
+                
+                document.getElementById('indexCoachPrice').textContent = '97';
+                document.getElementById('indexCoachPeriod').textContent = 'per month';
+                document.getElementById('indexCoachSavings').style.display = 'none';
+                
+                document.getElementById('indexPremiumPrice').textContent = '147';
+                document.getElementById('indexPremiumPeriod').textContent = 'per month';
+                document.getElementById('indexPremiumSavings').style.display = 'none';
+                
+                document.getElementById('indexEnterprisePrice').textContent = '497';
+                document.getElementById('indexEnterprisePeriod').textContent = 'per month';
+                document.getElementById('indexEnterpriseSavings').style.display = 'none';
+            }
+        }
+
         async function updateNavigation() {
             const { data: { user } } = await supabase.auth.getUser()
             const authButtons = document.getElementById('authButtons');
@@ -830,38 +798,12 @@
             if (user) {
                 const userData = user.user_metadata;
                 const userName = userData.full_name || 'User';
-                const userEmail = user.email;
                 
-                // Show trial banner
-                const trialBanner = document.createElement('div');
-                trialBanner.className = 'trial-banner';
-                trialBanner.innerHTML = `Trial: 14 days left - <a href="pricing.html" style="color: #92400e; text-decoration: underline;">Upgrade now</a>`;
-                document.body.insertBefore(trialBanner, document.body.firstChild);
-
-                // Update header navigation with account menu
                 authButtons.innerHTML = `
                     <a href="app.html" class="login-btn">Launch App</a>
-                    <div class="account-menu">
-                        <div class="account-button" onclick="toggleAccountDropdown()">
-                            <div class="account-avatar">${userName.charAt(0)}</div>
-                            <span style="font-weight: 500;">${userName.split(' ')[0]}</span>
-                            <span style="font-size: 12px;">▼</span>
-                        </div>
-                        <div class="account-dropdown" id="accountDropdown">
-                            <div class="dropdown-header">
-                                <div style="font-weight: 600;">${userName}</div>
-                                <div class="dropdown-email">${userEmail}</div>
-                                <div class="dropdown-plan">Premium Trial</div>
-                            </div>
-                            <a href="#" class="dropdown-item" onclick="alert('Account settings coming soon!')">Account Settings</a>
-                            <a href="pricing.html" class="dropdown-item">Billing & Plans</a>
-                            <a href="#" class="dropdown-item" onclick="alert('Support coming soon!')">Support</a>
-                            <a href="#" class="dropdown-item" onclick="logout()">Sign Out</a>
-                        </div>
-                    </div>
+                    <a href="app.html" class="cta-button">Launch App</a>
                 `;
                 
-                // Update hero section
                 heroActions.innerHTML = `
                     <a href="app.html" class="btn-primary">
                         Launch App →
@@ -871,39 +813,12 @@
                     </a>
                 `;
                 
-                // Update CTA button
                 ctaButton.href = 'app.html';
                 ctaButton.textContent = 'Launch App';
             }
         }
 
-        // Toggle account dropdown
-        function toggleAccountDropdown() {
-            const dropdown = document.getElementById('accountDropdown');
-            dropdown.classList.toggle('show');
-        }
-
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(event) {
-            const accountMenu = document.querySelector('.account-menu');
-            if (accountMenu && !accountMenu.contains(event.target)) {
-                const dropdown = document.getElementById('accountDropdown');
-                if (dropdown) {
-                    dropdown.classList.remove('show');
-                }
-            }
-        });
-
-        // Logout function
-        async function logout() {
-            await supabase.auth.signOut();
-            location.reload();
-        }
-
-        // Initialize navigation on page load
         window.addEventListener('DOMContentLoaded', updateNavigation);
-
-        // Listen for auth state changes
         supabase.auth.onAuthStateChange(() => {
             updateNavigation();
         });
