@@ -1,48 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-    <script src="https://js.stripe.com/v3/"></script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pricing - PáircPro | Professional GAA Video Analysis</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    const stripe = Stripe('pk_live_51RybZC3XC25HXCiQqsIzJTdCBnpHwtNTpTInwozichZwf2gGaM10p2alrdaw9GziOW8MyTFLbVyh13JSzWK07ucr00j81TnPIf');
-
-function buyPremiumMonthly() {
-  stripe.redirectToCheckout({
-    lineItems: [{price: 'price_1Ryc3l3XC25HXCiQFeJWJbIO', quantity: 1}],
-    mode: 'subscription',
-    successUrl: 'https://paircpro.ie/success.html',
-    cancelUrl: 'https://paircpro.ie/pricing.html',
-  });
-}
-
-function buyPremiumAnnual() {
-  stripe.redirectToCheckout({
-    lineItems: [{price: 'price_1RycnX3XC25HXCiQM17cB59a', quantity: 1}],
-    mode: 'subscription',
-    successUrl: 'https://paircpro.ie/success.html',
-    cancelUrl: 'https://paircpro.ie/pricing.html',
-  });
-}
-
-function buyEnterpriseMonthly() {
-  stripe.redirectToCheckout({
-    lineItems: [{price: 'price_1Rycsc3XC25HXCiQlGjJS70i', quantity: 1}],
-    mode: 'subscription',
-    successUrl: 'https://paircpro.ie/success.html',
-    cancelUrl: 'https://paircpro.ie/pricing.html',
-  });
-}
-
-function buyEnterpriseAnnual() {
-  stripe.redirectToCheckout({
-    lineItems: [{price: 'price_1RyctT3XC25HXCiQ7UI8Nhow', quantity: 1}],
-    mode: 'subscription',
-    successUrl: 'https://paircpro.ie/success.html',
-    cancelUrl: 'https://paircpro.ie/pricing.html',
-  });
-}
+    <script src="https://js.stripe.com/v3/"></script>
     <style>
         * {
             margin: 0;
@@ -119,10 +82,6 @@ function buyEnterpriseAnnual() {
             opacity: 0.8;
         }
 
-        .login-btn:visited {
-            color: white !important;
-        }
-
         .cta-button {
             background: white;
             color: #0066cc;
@@ -136,107 +95,6 @@ function buyEnterpriseAnnual() {
         .cta-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Account Dropdown */
-        .account-menu {
-            position: relative;
-        }
-
-        .account-button {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            color: white;
-        }
-
-        .account-button:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .account-avatar {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: white;
-            color: #0066cc;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .account-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            min-width: 200px;
-            z-index: 1000;
-            margin-top: 0.5rem;
-            display: none;
-        }
-
-        .account-dropdown.show {
-            display: block;
-        }
-
-        .dropdown-header {
-            padding: 1rem;
-            border-bottom: 1px solid #f1f5f9;
-        }
-
-        .dropdown-email {
-            font-size: 0.875rem;
-            color: #64748b;
-            margin-top: 0.25rem;
-        }
-
-        .dropdown-plan {
-            font-size: 0.75rem;
-            color: #0066cc;
-            font-weight: 600;
-            margin-top: 0.25rem;
-        }
-
-        .dropdown-item {
-            display: block;
-            padding: 0.75rem 1rem;
-            color: #374151;
-            text-decoration: none;
-            transition: background 0.2s;
-            border-bottom: 1px solid #f9fafb;
-        }
-
-        .dropdown-item:hover {
-            background: #f8fafc;
-        }
-
-        .dropdown-item:last-child {
-            border-bottom: none;
-            color: #dc2626;
-        }
-
-        .trial-banner {
-            background: #fef3c7;
-            border: 1px solid #f59e0b;
-            color: #92400e;
-            padding: 0.5rem 1rem;
-            text-align: center;
-            font-size: 0.875rem;
-            font-weight: 500;
         }
 
         /* Main Content */
@@ -342,9 +200,9 @@ function buyEnterpriseAnnual() {
 
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            max-width: 1100px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -352,7 +210,7 @@ function buyEnterpriseAnnual() {
             background: white;
             border: 2px solid #e2e8f0;
             border-radius: 16px;
-            padding: 2.5rem;
+            padding: 2rem;
             text-align: center;
             transition: all 0.3s;
             position: relative;
@@ -385,7 +243,7 @@ function buyEnterpriseAnnual() {
         }
 
         .plan-name {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 700;
             color: #1e293b;
             margin-bottom: 0.5rem;
@@ -393,53 +251,56 @@ function buyEnterpriseAnnual() {
 
         .plan-description {
             color: #64748b;
-            margin-bottom: 2rem;
-            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
         }
 
         .plan-price {
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: 700;
             color: #1e293b;
             margin-bottom: 0.5rem;
         }
 
         .plan-price .currency {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             vertical-align: top;
         }
 
         .plan-period {
             color: #64748b;
-            margin-bottom: 2rem;
-            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
         }
 
         .original-price {
             text-decoration: line-through;
             color: #94a3b8;
-            font-size: 1.2rem;
+            font-size: 1rem;
             margin-right: 0.5rem;
         }
 
         .savings {
             color: #10b981;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
+            display: block;
+            margin-top: 0.25rem;
         }
 
         .plan-features {
             list-style: none;
             text-align: left;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
         }
 
         .plan-features li {
             display: flex;
             align-items: center;
             color: #475569;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             padding-left: 0.5rem;
+            font-size: 0.9rem;
         }
 
         .plan-features li::before {
@@ -448,7 +309,7 @@ function buyEnterpriseAnnual() {
             font-weight: bold;
             margin-right: 0.75rem;
             flex-shrink: 0;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
         .plan-features .unavailable {
@@ -503,166 +364,6 @@ function buyEnterpriseAnnual() {
         .btn-plan-contact:hover {
             background: #334155;
             transform: translateY(-2px);
-        }
-
-        /* Features Comparison */
-        .comparison-section {
-            padding: 6rem 0;
-            background: white;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #1e293b;
-            margin-bottom: 1rem;
-        }
-
-        .section-subtitle {
-            font-size: 1.2rem;
-            color: #64748b;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .comparison-table {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            border: 1px solid #e2e8f0;
-        }
-
-        .table-header {
-            background: #f8fafc;
-            padding: 2rem;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 2rem;
-            align-items: center;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .feature-column {
-            font-weight: 700;
-            color: #1e293b;
-        }
-
-        .plan-column {
-            text-align: center;
-        }
-
-        .plan-column h4 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #1e293b;
-            margin-bottom: 0.5rem;
-        }
-
-        .plan-column p {
-            color: #64748b;
-            font-size: 0.9rem;
-        }
-
-        .table-row {
-            padding: 1.5rem 2rem;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 2rem;
-            align-items: center;
-            border-bottom: 1px solid #f1f5f9;
-        }
-
-        .table-row:last-child {
-            border-bottom: none;
-        }
-
-        .feature-name {
-            font-weight: 600;
-            color: #374151;
-        }
-
-        .feature-check {
-            text-align: center;
-            font-size: 1.2rem;
-        }
-
-        .check-yes {
-            color: #10b981;
-        }
-
-        .check-no {
-            color: #94a3b8;
-        }
-
-        .check-limited {
-            color: #f59e0b;
-        }
-
-        /* FAQ Section */
-        .faq-section {
-            padding: 6rem 0;
-            background: #f8fafc;
-        }
-
-        .faq-grid {
-            display: grid;
-            gap: 1rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-
-        .faq-question {
-            padding: 1.5rem;
-            background: white;
-            border: none;
-            width: 100%;
-            text-align: left;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #1e293b;
-            cursor: pointer;
-            transition: background 0.3s;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .faq-question:hover {
-            background: #f8fafc;
-        }
-
-        .faq-question::after {
-            content: '+';
-            font-size: 1.5rem;
-            color: #0066cc;
-            transition: transform 0.3s;
-        }
-
-        .faq-question.active::after {
-            transform: rotate(45deg);
-        }
-
-        .faq-answer {
-            padding: 0 1.5rem 1.5rem;
-            color: #64748b;
-            display: none;
-        }
-
-        .faq-answer.active {
-            display: block;
         }
 
         /* CTA Section */
@@ -738,15 +439,9 @@ function buyEnterpriseAnnual() {
                 transform: none;
             }
 
-            .table-header,
-            .table-row {
+            .pricing-grid {
                 grid-template-columns: 1fr;
                 gap: 1rem;
-            }
-
-            .plan-column,
-            .feature-check {
-                text-align: left;
             }
         }
     </style>
@@ -774,7 +469,7 @@ function buyEnterpriseAnnual() {
         <section class="hero">
             <div class="hero-container">
                 <h1>Simple, Transparent Pricing</h1>
-                <p>Choose the plan that's right for your team. Start with our free plan and upgrade as you grow.</p>
+                <p>Start with a 7-day free trial of Coach plan, or subscribe to Premium/Enterprise immediately.</p>
                 
                 <div class="billing-toggle">
                     <span class="billing-label active" id="monthlyLabel">Monthly</span>
@@ -782,7 +477,7 @@ function buyEnterpriseAnnual() {
                         <div class="toggle-knob"></div>
                     </div>
                     <span class="billing-label" id="annualLabel">Annual</span>
-                    <span class="savings-badge">Save 20%</span>
+                    <span class="savings-badge">Save up to 50%</span>
                 </div>
             </div>
         </section>
@@ -791,63 +486,69 @@ function buyEnterpriseAnnual() {
         <section class="pricing-section">
             <div class="container">
                 <div class="pricing-grid">
-                    <!-- Free Plan -->
+                    <!-- Coach Plan -->
                     <div class="pricing-card">
-                        <div class="plan-name">Free</div>
-                        <div class="plan-description">Perfect for getting started with GAA analysis</div>
+                        <div class="plan-name">Coach</div>
+                        <div class="plan-description">Ideal for individual coaches and small teams</div>
                         <div class="plan-price">
-                            <span class="currency">€</span>0
+                            <span class="currency">€</span><span id="coachPrice">97</span>
                         </div>
-                        <div class="plan-period">Forever free</div>
+                        <div class="plan-period">
+                            <span id="coachPeriod">per month</span>
+                            <div id="coachSavings" style="display: none;">
+                                <span class="original-price">€1,164/year</span>
+                                <span class="savings">Save 30% annually</span>
+                            </div>
+                        </div>
                         
                         <ul class="plan-features">
                             <li>Basic video analysis</li>
-                            <li>Manual event tagging</li>
-                            <li>Up to 3 matches per month</li>
-                            <li>CSV export</li>
+                            <li>Unlimited matches</li>
+                            <li>GAA-specific event tagging</li>
                             <li>Basic statistics</li>
-                            <li>1GB video storage</li>
-                            <li class="unavailable">Multi-angle analysis</li>
-                            <li class="unavailable">Live match tagging</li>
-                            <li class="unavailable">PDF reports</li>
+                            <li>10GB video storage</li>
+                            <li>Email support</li>
+                            <li>CSV export</li>
+                            <li class="unavailable">Live match analysis</li>
+                            <li class="unavailable">Advanced analytics</li>
                             <li class="unavailable">Team collaboration</li>
                         </ul>
                         
-                        <a href="auth.html" class="btn-plan btn-plan-secondary">Get Started Free</a>
+                        <button class="btn-plan btn-plan-secondary" onclick="buyCoachMonthly()">Start 7-Day Free Trial</button>
                     </div>
 
                     <!-- Premium Plan -->
                     <div class="pricing-card featured">
                         <div class="popular-badge">Most Popular</div>
                         <div class="plan-name">Premium</div>
-                        <div class="plan-description">For coaches and analysts who need advanced features</div>
+                        <div class="plan-description">For professional coaches and advanced analysis</div>
                         <div class="plan-price">
-                            <span class="currency">€</span><span id="premiumPrice">199</span>
+                            <span class="currency">€</span><span id="premiumPrice">147</span>
                         </div>
                         <div class="plan-period">
                             <span id="premiumPeriod">per month</span>
                             <div id="premiumSavings" style="display: none;">
-                                <span class="original-price">€2,388/year</span>
-                                <div class="savings">Save €480 annually</div>
+                                <span class="original-price">€1,764/year</span>
+                                <span class="savings">Save 40% annually</span>
                             </div>
                         </div>
                         
                         <ul class="plan-features">
-                            <li>Everything in Free</li>
-                            <li>Multi-angle video analysis</li>
-                            <li>GAA-specific event tagging</li>
+                            <li>Everything in Coach</li>
                             <li>Live match analysis</li>
-                            <li>Advanced statistics</li>
-                            <li>PDF reports</li>
+                            <li>Advanced statistics & heat maps</li>
+                            <li>Professional PDF reports</li>
                             <li>25GB video storage</li>
-                            <li>Email support</li>
+                            <li>Priority email support</li>
                             <li>Export to Power BI</li>
-                            <li class="unavailable">Unlimited video storage</li>
-                            <li class="unavailable">Multi-user accounts</li>
-                            <li class="unavailable">API access</li>
+                            <li>Possession zone analysis</li>
+                            <li>Performance trends</li>
+                            <li>Up to 3 team members</li>
+                            <li class="unavailable">Team collaboration tools</li>
+                            <li class="unavailable">Advanced team features</li>
                         </ul>
                         
-                        <a href="auth.html" class="btn-plan btn-plan-primary">Start Free Trial</a>
+                        <button class="btn-plan btn-plan-primary" onclick="buyPremiumMonthly()">Subscribe to Premium</button>
                     </div>
 
                     <!-- Enterprise Plan -->
@@ -855,171 +556,32 @@ function buyEnterpriseAnnual() {
                         <div class="plan-name">Enterprise</div>
                         <div class="plan-description">For organizations and large teams</div>
                         <div class="plan-price">
-                            <span class="currency">€</span><span id="enterprisePrice">499</span>
+                            <span class="currency">€</span><span id="enterprisePrice">497</span>
                         </div>
                         <div class="plan-period">
                             <span id="enterprisePeriod">per month</span>
                             <div id="enterpriseSavings" style="display: none;">
-                                <span class="original-price">€5,988/year</span>
-                                <div class="savings">Save €1,200 annually</div>
+                                <span class="original-price">€5,964/year</span>
+                                <span class="savings">Save 50% annually</span>
                             </div>
                         </div>
                         
                         <ul class="plan-features">
                             <li>Everything in Premium</li>
-                            <li>Unlimited video storage</li>
-                            <li>Multi-user accounts (up to 20)</li>
+                            <li>100GB video storage</li>
+                            <li>Up to 10 team members</li>
                             <li>Team collaboration tools</li>
-                            <li>API access</li>
-                            <li>Dedicated support</li>
-                            <li>Custom integrations</li>
-                            <li>Advanced analytics</li>
-                            <li>White-label options</li>
-                            <li>Training sessions</li>
-                            <li>Custom reporting</li>
-                            <li>Priority feature requests</li>
+                            <li>Shared projects & comments</li>
+                            <li>Priority support</li>
+                            <li>Opposition analysis tools</li>
+                            <li>Custom report templates</li>
+                            <li>Data export options</li>
+                            <li>Training sessions included</li>
+                            <li>White-label reports</li>
+                            <li class="unavailable">API access (coming 2025)</li>
                         </ul>
                         
-                        <a href="contact.html" class="btn-plan btn-plan-contact">Contact Sales</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Features Comparison -->
-        <section class="comparison-section">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Feature Comparison</h2>
-                    <p class="section-subtitle">See exactly what's included in each plan</p>
-                </div>
-
-                <div class="comparison-table">
-                    <div class="table-header">
-                        <div class="feature-column">Features</div>
-                        <div class="plan-column">
-                            <h4>Free</h4>
-                            <p>€0/month</p>
-                        </div>
-                        <div class="plan-column">
-                            <h4>Premium</h4>
-                            <p>€199/month</p>
-                        </div>
-                        <div class="plan-column">
-                            <h4>Enterprise</h4>
-                            <p>€499/month</p>
-                        </div>
-                    </div>
-
-                    <div class="table-row">
-                        <div class="feature-name">Video Upload & Analysis</div>
-                        <div class="feature-check check-limited">Basic</div>
-                        <div class="feature-check check-yes">✓</div>
-                        <div class="feature-check check-yes">✓</div>
-                    </div>
-
-                    <div class="table-row">
-                        <div class="feature-name">Multi-Angle Support</div>
-                        <div class="feature-check check-no">−</div>
-                        <div class="feature-check check-yes">✓</div>
-                        <div class="feature-check check-yes">✓</div>
-                    </div>
-
-                    <div class="table-row">
-                        <div class="feature-name">Live Match Tagging</div>
-                        <div class="feature-check check-no">−</div>
-                        <div class="feature-check check-yes">✓</div>
-                        <div class="feature-check check-yes">✓</div>
-                    </div>
-
-                    <div class="table-row">
-                        <div class="feature-name">Monthly Match Limit</div>
-                        <div class="feature-check">3</div>
-                        <div class="feature-check">Unlimited</div>
-                        <div class="feature-check">Unlimited</div>
-                    </div>
-
-                    <div class="table-row">
-                        <div class="feature-name">Video Storage</div>
-                        <div class="feature-check">1GB</div>
-                        <div class="feature-check">25GB</div>
-                        <div class="feature-check">Unlimited</div>
-                    </div>
-
-                    <div class="table-row">
-                        <div class="feature-name">PDF Reports</div>
-                        <div class="feature-check check-no">−</div>
-                        <div class="feature-check check-yes">✓</div>
-                        <div class="feature-check check-yes">✓</div>
-                    </div>
-
-                    <div class="table-row">
-                        <div class="feature-name">Team Collaboration</div>
-                        <div class="feature-check check-no">−</div>
-                        <div class="feature-check check-no">−</div>
-                        <div class="feature-check check-yes">✓</div>
-                    </div>
-
-                    <div class="table-row">
-                        <div class="feature-name">API Access</div>
-                        <div class="feature-check check-no">−</div>
-                        <div class="feature-check check-no">−</div>
-                        <div class="feature-check check-yes">✓</div>
-                    </div>
-
-                    <div class="table-row">
-                        <div class="feature-name">Support Level</div>
-                        <div class="feature-check">Community</div>
-                        <div class="feature-check">Email</div>
-                        <div class="feature-check">Dedicated</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FAQ Section -->
-        <section class="faq-section">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Frequently Asked Questions</h2>
-                    <p class="section-subtitle">Everything you need to know about our pricing</p>
-                </div>
-
-                <div class="faq-grid">
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">
-                            Is there a free trial for Premium plans?
-                        </button>
-                        <div class="faq-answer">
-                            Yes! Premium plans include a 14-day free trial with full access to all features. No credit card required to start.
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">
-                            What payment methods do you accept?
-                        </button>
-                        <div class="faq-answer">
-                            We accept all major credit cards, PayPal, and SEPA direct debit for European customers. All payments are processed securely through Stripe.
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">
-                            Can I cancel my subscription anytime?
-                        </button>
-                        <div class="faq-answer">
-                            Absolutely. You can cancel your subscription at any time from your account settings. Your access continues until the end of your billing period.
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">
-                            Do you offer refunds?
-                        </button>
-                        <div class="faq-answer">
-                            We offer a full refund within 14 days of purchase if you're not satisfied. Annual plans receive prorated refunds for unused months.
-                        </div>
+                        <button class="btn-plan btn-plan-contact" onclick="buyEnterpriseMonthly()">Subscribe to Enterprise</button>
                     </div>
                 </div>
             </div>
@@ -1046,68 +608,67 @@ function buyEnterpriseAnnual() {
 
     <script>
         let isAnnual = false;
+        
+        const stripe = Stripe('pk_live_51RybZC3XC25HXCiQqsIzJTdCBnpHwtNTpTInwozichZwf2gGaM10p2alrdaw9GziOW8MyTFLbVyh13JSzWK07ucr00j81TnPIf');
 
         // Initialize Supabase
         const supabaseUrl = 'https://gkcgngqdsmyutvbzepsn.supabase.co'
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdrY2duZ3Fkc215dXR2YnplcHNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU3MDU5NTAsImV4cCI6MjA3MTI4MTk1MH0.rDTTUn_McI1sSfZH12o5FLrS1iSXNEo14Pxce6YI3qA'
         const supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
 
-        async function updateNavigation() {
-            const { data: { user } } = await supabase.auth.getUser()
-            const authButtons = document.getElementById('authButtons');
-            
-            if (user) {
-                const userData = user.user_metadata;
-                const userName = userData.full_name || 'User';
-                const userEmail = user.email;
-                
-                const trialBanner = document.createElement('div');
-                trialBanner.className = 'trial-banner';
-                trialBanner.innerHTML = `Trial: 14 days left - <a href="pricing.html" style="color: #92400e; text-decoration: underline;">Upgrade now</a>`;
-                document.body.insertBefore(trialBanner, document.body.firstChild);
-
-                authButtons.innerHTML = `
-                    <a href="app.html" class="login-btn">Launch App</a>
-                    <div class="account-menu">
-                        <div class="account-button" onclick="toggleAccountDropdown()">
-                            <div class="account-avatar">${userName.charAt(0)}</div>
-                            <span style="font-weight: 500;">${userName.split(' ')[0]}</span>
-                            <span style="font-size: 12px;">▼</span>
-                        </div>
-                        <div class="account-dropdown" id="accountDropdown">
-                            <div class="dropdown-header">
-                                <div style="font-weight: 600;">${userName}</div>
-                                <div class="dropdown-email">${userEmail}</div>
-                                <div class="dropdown-plan">Premium Trial</div>
-                            </div>
-                            <a href="#" class="dropdown-item" onclick="alert('Account settings coming soon!')">Account Settings</a>
-                            <a href="pricing.html" class="dropdown-item">Billing & Plans</a>
-                            <a href="#" class="dropdown-item" onclick="alert('Support coming soon!')">Support</a>
-                            <a href="#" class="dropdown-item" onclick="logout()">Sign Out</a>
-                        </div>
-                    </div>
-                `;
+        // Stripe payment functions
+        function buyCoachMonthly() {
+            if (isAnnual) {
+                stripe.redirectToCheckout({
+                    lineItems: [{price: 'price_1RyuKA3XC25HXCiQsKjv7Akn', quantity: 1}],
+                    mode: 'subscription',
+                    successUrl: 'https://paircpro.ie/success.html',
+                    cancelUrl: 'https://paircpro.ie/pricing.html',
+                });
+            } else {
+                stripe.redirectToCheckout({
+                    lineItems: [{price: 'price_1RyuL73XC25HXCiQ2U3FIIUB', quantity: 1}],
+                    mode: 'subscription',
+                    successUrl: 'https://paircpro.ie/success.html',
+                    cancelUrl: 'https://paircpro.ie/pricing.html',
+                });
             }
         }
 
-        function toggleAccountDropdown() {
-            const dropdown = document.getElementById('accountDropdown');
-            dropdown.classList.toggle('show');
+        function buyPremiumMonthly() {
+            if (isAnnual) {
+                stripe.redirectToCheckout({
+                    lineItems: [{price: 'price_1RycnX3XC25HXCiQM17cB59a', quantity: 1}],
+                    mode: 'subscription',
+                    successUrl: 'https://paircpro.ie/success.html',
+                    cancelUrl: 'https://paircpro.ie/pricing.html',
+                });
+            } else {
+                stripe.redirectToCheckout({
+                    lineItems: [{price: 'price_1RyuNw3XC25HXCiQV4PxzD4x', quantity: 1}],
+                    mode: 'subscription',
+                    successUrl: 'https://paircpro.ie/success.html',
+                    cancelUrl: 'https://paircpro.ie/pricing.html',
+                });
+            }
         }
 
-        document.addEventListener('click', function(event) {
-            const accountMenu = document.querySelector('.account-menu');
-            if (accountMenu && !accountMenu.contains(event.target)) {
-                const dropdown = document.getElementById('accountDropdown');
-                if (dropdown) {
-                    dropdown.classList.remove('show');
-                }
+        function buyEnterpriseMonthly() {
+            if (isAnnual) {
+                stripe.redirectToCheckout({
+                    lineItems: [{price: 'price_1RyctT3XC25HXCiQ7UI8Nhow', quantity: 1}],
+                    mode: 'subscription',
+                    successUrl: 'https://paircpro.ie/success.html',
+                    cancelUrl: 'https://paircpro.ie/pricing.html',
+                });
+            } else {
+                stripe.redirectToCheckout({
+                    lineItems: [{price: 'price_1Rycsc3XC25HXCiQlGjJS70i', quantity: 1}],
+                    mode: 'subscription',
+                    successUrl: 'https://paircpro.ie/success.html',
+                    cancelUrl: 'https://paircpro.ie/pricing.html',
+                });
             }
-        });
-
-        async function logout() {
-            await supabase.auth.signOut();
-            location.reload();
         }
 
         function toggleBilling() {
@@ -1121,11 +682,18 @@ function buyEnterpriseAnnual() {
                 monthlyLabel.classList.remove('active');
                 annualLabel.classList.add('active');
                 
-                document.getElementById('premiumPrice').textContent = '159';
+                // Coach pricing (30% off)
+                document.getElementById('coachPrice').textContent = '68';
+                document.getElementById('coachPeriod').textContent = 'per month, billed annually';
+                document.getElementById('coachSavings').style.display = 'block';
+                
+                // Premium pricing (40% off)
+                document.getElementById('premiumPrice').textContent = '88';
                 document.getElementById('premiumPeriod').textContent = 'per month, billed annually';
                 document.getElementById('premiumSavings').style.display = 'block';
                 
-                document.getElementById('enterprisePrice').textContent = '399';
+                // Enterprise pricing (50% off)
+                document.getElementById('enterprisePrice').textContent = '249';
                 document.getElementById('enterprisePeriod').textContent = 'per month, billed annually';
                 document.getElementById('enterpriseSavings').style.display = 'block';
             } else {
@@ -1133,55 +701,46 @@ function buyEnterpriseAnnual() {
                 monthlyLabel.classList.add('active');
                 annualLabel.classList.remove('active');
                 
-                document.getElementById('premiumPrice').textContent = '199';
+                document.getElementById('coachPrice').textContent = '97';
+                document.getElementById('coachPeriod').textContent = 'per month';
+                document.getElementById('coachSavings').style.display = 'none';
+                
+                document.getElementById('premiumPrice').textContent = '147';
                 document.getElementById('premiumPeriod').textContent = 'per month';
                 document.getElementById('premiumSavings').style.display = 'none';
                 
-                document.getElementById('enterprisePrice').textContent = '499';
+                document.getElementById('enterprisePrice').textContent = '497';
                 document.getElementById('enterprisePeriod').textContent = 'per month';
                 document.getElementById('enterpriseSavings').style.display = 'none';
             }
         }
 
-        function toggleFAQ(element) {
-            const answer = element.nextElementSibling;
-            const isActive = element.classList.contains('active');
+        async function updateNavigation() {
+            const { data: { user } } = await supabase.auth.getUser()
+            const authButtons = document.getElementById('authButtons');
             
-            document.querySelectorAll('.faq-question').forEach(q => {
-                q.classList.remove('active');
-                q.nextElementSibling.classList.remove('active');
-            });
-            
-            if (!isActive) {
-                element.classList.add('active');
-                answer.classList.add('active');
+            if (user) {
+                const userData = user.user_metadata;
+                const userName = userData.full_name || 'User';
+                const userEmail = user.email;
+                
+                authButtons.innerHTML = `
+                    <a href="app.html" class="login-btn">Launch App</a>
+                    <div class="account-menu">
+                        <div class="account-button" onclick="toggleAccountDropdown()">
+                            <div class="account-avatar">${userName.charAt(0)}</div>
+                            <span style="font-weight: 500;">${userName.split(' ')[0]}</span>
+                            <span style="font-size: 12px;">▼</span>
+                        </div>
+                    </div>
+                `;
             }
         }
 
         window.addEventListener('DOMContentLoaded', updateNavigation);
-
         supabase.auth.onAuthStateChange(() => {
             updateNavigation();
         });
     </script>
 </body>
-</html> onclick="toggleFAQ(this)">
-                            Can I switch plans anytime?
-                        </button>
-                        <div class="faq-answer">
-                            Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately, and we'll prorate any billing differences.
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">
-                            What happens if I exceed my storage limit?
-                        </button>
-                        <div class="faq-answer">
-                            We'll notify you when you're approaching your limit. You can either upgrade your plan or delete older videos to free up space.
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question"
-
+</html>
