@@ -41,8 +41,6 @@
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
             text-decoration: none;
             color: white;
         }
@@ -95,6 +93,52 @@
         .cta-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .account-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            z-index: 1001;
+            border: 1px solid #e2e8f0;
+            margin-top: 8px;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            color: #64748b;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.2s;
+            font-weight: 500;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+
+        .dropdown-menu a:last-child {
+            border-top: 1px solid #e2e8f0;
+            color: #dc2626;
+        }
+
+        .dropdown-menu a:last-child:hover {
+            background-color: #fef2f2;
         }
 
         /* Main Content */
@@ -450,7 +494,41 @@
     <!-- Header -->
     <header class="header">
         <div class="nav-container">
-            <a href="index.html" class="logo">PáircPro</a>
+            <a href="index.html" class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="160" height="48">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#0066cc"/>
+                            <stop offset="100%" style="stop-color:#6366f1"/>
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- GAA Pitch Icon -->
+                    <g transform="translate(10, 10)">
+                        <rect x="0" y="0" width="40" height="40" rx="4" fill="url(#logoGradient)"/>
+                        <rect x="4" y="4" width="32" height="32" rx="2" fill="none" stroke="white" stroke-width="1.5"/>
+                        <circle cx="20" cy="20" r="6" fill="none" stroke="white" stroke-width="1.5"/>
+                        <rect x="4" y="14" width="8" height="12" fill="none" stroke="white" stroke-width="1"/>
+                        <rect x="28" y="14" width="8" height="12" fill="none" stroke="white" stroke-width="1"/>
+                        <rect x="4" y="17" width="2" height="6" fill="white"/>
+                        <rect x="34" y="17" width="2" height="6" fill="white"/>
+                        <circle cx="20" cy="20" r="4" fill="rgba(255,255,255,0.9)"/>
+                        <polygon points="17,17 17,23 23,20" fill="url(#logoGradient)"/>
+                    </g>
+                    
+                    <!-- Text Logo -->
+                    <g transform="translate(60, 10)">
+                        <text x="0" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="700" fill="white">
+                            Páirc<tspan fill="white">Pro</tspan>
+                        </text>
+                        <text x="0" y="38" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="500" fill="rgba(255,255,255,0.7)">
+                            GAA VIDEO ANALYSIS
+                        </text>
+                    </g>
+                    
+                    <circle cx="74" cy="12" r="1" fill="white"/>
+                </svg>
+            </a>
             <nav class="nav-links">
                 <a href="features.html">Features</a>
                 <a href="pricing.html" class="active">Pricing</a>
@@ -540,7 +618,7 @@
                             <li>Professional PDF reports</li>
                             <li>25GB video storage</li>
                             <li>Priority email support</li>
-                            <li>Export to Power BI</li>
+                            <li>Data export options</li>
                             <li>Possession zone analysis</li>
                             <li>Performance trends</li>
                             <li>Up to 3 team members</li>
@@ -722,20 +800,41 @@
             if (user) {
                 const userData = user.user_metadata;
                 const userName = userData.full_name || 'User';
-                const userEmail = user.email;
                 
                 authButtons.innerHTML = `
                     <a href="app.html" class="login-btn">Launch App</a>
-                    <div class="account-menu">
-                        <div class="account-button" onclick="toggleAccountDropdown()">
-                            <div class="account-avatar">${userName.charAt(0)}</div>
-                            <span style="font-weight: 500;">${userName.split(' ')[0]}</span>
-                            <span style="font-size: 12px;">▼</span>
+                    <div class="account-dropdown">
+                        <button class="cta-button" onclick="toggleAccountMenu()">${userName} ▼</button>
+                        <div class="dropdown-menu" id="accountMenu">
+                            <a href="app.html">Dashboard</a>
+                            <a href="pricing.html">Subscription</a>
+                            <a href="#" onclick="window.open('mailto:support@paircpro.ie')">Support</a>
+                            <a href="#" onclick="signOut()">Sign Out</a>
                         </div>
                     </div>
                 `;
             }
         }
+
+        function toggleAccountMenu() {
+            const menu = document.getElementById('accountMenu');
+            menu.classList.toggle('show');
+        }
+
+        async function signOut() {
+            await supabase.auth.signOut();
+            window.location.reload();
+        }
+
+        // Close dropdown when clicking outside
+        window.addEventListener('click', function(event) {
+            if (!event.target.matches('.cta-button')) {
+                const dropdowns = document.getElementsByClassName('dropdown-menu');
+                for (let i = 0; i < dropdowns.length; i++) {
+                    dropdowns[i].classList.remove('show');
+                }
+            }
+        });
 
         window.addEventListener('DOMContentLoaded', updateNavigation);
         supabase.auth.onAuthStateChange(() => {
