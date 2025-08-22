@@ -520,6 +520,52 @@
                 transform: none;
             }
         }
+
+        .account-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            z-index: 1001;
+            border: 1px solid #e2e8f0;
+            margin-top: 8px;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            color: #64748b;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.2s;
+            font-weight: 500;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+
+        .dropdown-menu a:last-child {
+            border-top: 1px solid #e2e8f0;
+            color: #dc2626;
+        }
+
+        .dropdown-menu a:last-child:hover {
+            background-color: #fef2f2;
+        }
     </style>
 </head>
 <body>
@@ -789,19 +835,27 @@
             }
         }
 
-        async function updateNavigation() {
-            const { data: { user } } = await supabase.auth.getUser()
-            const authButtons = document.getElementById('authButtons');
-            const heroActions = document.getElementById('heroActions');
-            const ctaButton = document.getElementById('ctaButton');
-            
-            if (user) {
-                const userData = user.user_metadata;
-                const userName = userData.full_name || 'User';
-                
-                authButtons.innerHTML = `
-                    <a href="app.html" class="login-btn">Launch App</a>
-                    <a href="app.html" class="cta-button">Launch App</a>
+async function updateNavigation() {
+    const { data: { user } } = await supabase.auth.getUser()
+    const authButtons = document.getElementById('authButtons');
+    const heroActions = document.getElementById('heroActions');
+    const ctaButton = document.getElementById('ctaButton');
+    
+    if (user) {
+        const userData = user.user_metadata;
+        const userName = userData.full_name || 'User';
+        
+        authButtons.innerHTML = `
+            <a href="app.html" class="login-btn">Launch App</a>
+            <div class="account-dropdown">
+                <button class="cta-button" onclick="toggleAccountMenu()">${userName} ▼</button>
+                <div class="dropdown-menu" id="accountMenu">
+                    <a href="app.html">Dashboard</a>
+                    <a href="pricing.html">Subscription</a>
+                    <a href="#" onclick="window.open('mailto:support@paircpro.ie')">Support</a>
+                    <a href="#" onclick="signOut()">Sign Out</a>
+                </div>
+            </div>
                 `;
                 
                 heroActions.innerHTML = `
@@ -822,6 +876,27 @@
         supabase.auth.onAuthStateChange(() => {
             updateNavigation();
         });
+
+        function toggleAccountMenu() {
+            const menu = document.getElementById('accountMenu');
+            menu.classList.toggle('show');
+        }
+
+        async function signOut() {
+            await supabase.auth.signOut();
+            window.location.reload();
+        }
+
+        // Close dropdown when clicking outside
+        window.addEventListener('click', function(event) {
+            if (!event.target.matches('.cta-button')) {
+                const dropdowns = document.getElementsByClassName('dropdown-menu');
+                for (let i = 0; i < dropdowns.length; i++) {
+                    dropdowns[i].classList.remove('show');
+                }
+            }       
+        });
     </script>
 </body>
 </html>
+
