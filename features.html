@@ -39,8 +39,6 @@
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
             text-decoration: none;
             color: white;
         }
@@ -80,10 +78,6 @@
             opacity: 0.8;
         }
 
-        .login-btn:visited {
-            color: white !important;
-        }
-
         .cta-button {
             background: white;
             color: #0066cc;
@@ -97,107 +91,6 @@
         .cta-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Account Dropdown */
-        .account-menu {
-            position: relative;
-        }
-
-        .account-button {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            color: white;
-        }
-
-        .account-button:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .account-avatar {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: white;
-            color: #0066cc;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .account-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            min-width: 200px;
-            z-index: 1000;
-            margin-top: 0.5rem;
-            display: none;
-        }
-
-        .account-dropdown.show {
-            display: block;
-        }
-
-        .dropdown-header {
-            padding: 1rem;
-            border-bottom: 1px solid #f1f5f9;
-        }
-
-        .dropdown-email {
-            font-size: 0.875rem;
-            color: #64748b;
-            margin-top: 0.25rem;
-        }
-
-        .dropdown-plan {
-            font-size: 0.75rem;
-            color: #0066cc;
-            font-weight: 600;
-            margin-top: 0.25rem;
-        }
-
-        .dropdown-item {
-            display: block;
-            padding: 0.75rem 1rem;
-            color: #374151;
-            text-decoration: none;
-            transition: background 0.2s;
-            border-bottom: 1px solid #f9fafb;
-        }
-
-        .dropdown-item:hover {
-            background: #f8fafc;
-        }
-
-        .dropdown-item:last-child {
-            border-bottom: none;
-            color: #dc2626;
-        }
-
-        .trial-banner {
-            background: #fef3c7;
-            border: 1px solid #f59e0b;
-            color: #92400e;
-            padding: 0.5rem 1rem;
-            text-align: center;
-            font-size: 0.875rem;
-            font-weight: 500;
         }
 
         /* Main Content */
@@ -508,7 +401,41 @@
     <!-- Header -->
     <header class="header">
         <div class="nav-container">
-            <a href="index.html" class="logo">PáircPro</a>
+            <a href="index.html" class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="160" height="48">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#0066cc"/>
+                            <stop offset="100%" style="stop-color:#6366f1"/>
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- GAA Pitch Icon -->
+                    <g transform="translate(10, 10)">
+                        <rect x="0" y="0" width="40" height="40" rx="4" fill="url(#logoGradient)"/>
+                        <rect x="4" y="4" width="32" height="32" rx="2" fill="none" stroke="white" stroke-width="1.5"/>
+                        <circle cx="20" cy="20" r="6" fill="none" stroke="white" stroke-width="1.5"/>
+                        <rect x="4" y="14" width="8" height="12" fill="none" stroke="white" stroke-width="1"/>
+                        <rect x="28" y="14" width="8" height="12" fill="none" stroke="white" stroke-width="1"/>
+                        <rect x="4" y="17" width="2" height="6" fill="white"/>
+                        <rect x="34" y="17" width="2" height="6" fill="white"/>
+                        <circle cx="20" cy="20" r="4" fill="rgba(255,255,255,0.9)"/>
+                        <polygon points="17,17 17,23 23,20" fill="url(#logoGradient)"/>
+                    </g>
+                    
+                    <!-- Text Logo -->
+                    <g transform="translate(60, 10)">
+                        <text x="0" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="700" fill="white">
+                            Páirc<tspan fill="white">Pro</tspan>
+                        </text>
+                        <text x="0" y="38" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="500" fill="rgba(255,255,255,0.7)">
+                            GAA VIDEO ANALYSIS
+                        </text>
+                    </g>
+                    
+                    <circle cx="74" cy="12" r="1" fill="white"/>
+                </svg>
+            </a>
             <nav class="nav-links">
                 <a href="features.html" class="active">Features</a>
                 <a href="pricing.html">Pricing</a>
@@ -527,7 +454,7 @@
         <section class="hero">
             <div class="hero-container">
                 <h1>Powerful Features for GAA Analysis</h1>
-                <p>Everything you need to analyze GAA matches like a professional. From video tagging to advanced statistics, PáircPro has you covered.</p>
+                <p>Everything you need to analyze GAA matches professionally. From video tagging to statistics, PáircPro has you covered.</p>
             </div>
         </section>
 
@@ -542,73 +469,73 @@
                 <div class="features-grid">
                     <div class="feature-card">
                         <div class="feature-icon">🎥</div>
-                        <h3>Multi-Angle Video Analysis</h3>
-                        <p>Upload and analyze multiple camera angles simultaneously. View frame-by-frame with variable playback speeds for precise analysis.</p>
+                        <h3>Professional Video Analysis</h3>
+                        <p>Upload match videos and analyze them with frame-by-frame precision, variable playback speeds, and comprehensive event tagging.</p>
                         <ul class="feature-list">
-                            <li>Multiple camera angle support</li>
+                            <li>Single camera angle support</li>
                             <li>Frame-by-frame stepping</li>
-                            <li>Variable playback speeds (0.25x - 2x)</li>
-                            <li>HD and 4K video quality</li>
+                            <li>Variable playback speeds</li>
+                            <li>HD video quality support</li>
                         </ul>
                     </div>
 
                     <div class="feature-card">
                         <div class="feature-icon">🏷️</div>
                         <h3>GAA-Specific Event Tagging</h3>
-                        <p>Comprehensive GAA event system with sport-specific categories, player ratings, and text annotations for detailed match analysis.</p>
+                        <p>Comprehensive GAA event system with sport-specific categories for Football and Hurling analysis.</p>
                         <ul class="feature-list">
                             <li>Football & Hurling optimization</li>
                             <li>Own vs Opposition kickout tracking</li>
-                            <li>Event rating system (1-5 stars)</li>
-                            <li>Text notes and annotations</li>
+                            <li>Event notes and annotations</li>
+                            <li>Keyboard shortcuts for speed</li>
                         </ul>
                     </div>
 
                     <div class="feature-card">
                         <div class="feature-icon">📊</div>
-                        <h3>Advanced GAA Analytics</h3>
-                        <p>Real-time statistics with GAA-specific insights including kickout success rates, possession analysis, and tactical pattern recognition.</p>
+                        <h3>Live Match Analysis</h3>
+                        <p>Real-time event tagging during matches with instant statistical updates and team collaboration features.</p>
                         <ul class="feature-list">
-                            <li>Live kickout success tracking</li>
-                            <li>Possession zone analysis</li>
-                            <li>Match comparison tools</li>
-                            <li>Opposition weakness detection</li>
+                            <li>Live event tagging</li>
+                            <li>Real-time statistics</li>
+                            <li>Team collaboration</li>
+                            <li>Mobile-friendly interface</li>
                         </ul>
                     </div>
 
                     <div class="feature-card">
                         <div class="feature-icon">🎯</div>
-                        <h3>Interactive Drawing Tools</h3>
-                        <p>Annotate video frames with professional drawing tools. Highlight plays, mark player movements, and create tactical diagrams.</p>
+                        <h3>Advanced Statistics</h3>
+                        <p>Professional analytics with GAA-specific insights including possession analysis and tactical pattern recognition.</p>
                         <ul class="feature-list">
-                            <li>Frame annotation tools</li>
-                            <li>Tactical formation overlays</li>
-                            <li>Player movement tracking</li>
-                            <li>Custom GAA field diagrams</li>
+                            <li>Kickout success tracking</li>
+                            <li>Possession zone analysis</li>
+                            <li>Match comparison tools</li>
+                            <li>Performance trends</li>
                         </ul>
                     </div>
 
                     <div class="feature-card">
                         <div class="feature-icon">🔥</div>
                         <h3>Heat Maps & Visualizations</h3>
-                        <p>Generate professional heat maps showing event locations, player positions, and tactical patterns specific to GAA gameplay.</p>
+                        <p>Generate professional heat maps showing event locations and tactical patterns specific to GAA gameplay.</p>
                         <ul class="feature-list">
                             <li>Event location heat maps</li>
-                            <li>Player position tracking</li>
-                            <li>Kickout target zones</li>
-                            <li>Scoring pattern analysis</li>
+                            <li>Team activity visualization</li>
+                            <li>Possession pattern analysis</li>
+                            <li>Interactive timeline</li>
                         </ul>
                     </div>
 
                     <div class="feature-card">
                         <div class="feature-icon">📋</div>
                         <h3>Professional Reports</h3>
-                        <p>Generate comprehensive PDF reports with statistics, visualizations, and insights. Share analysis with coaches and players.</p>
+                        <p>Generate comprehensive reports with statistics, visualizations, and insights. Share analysis with coaches and players.</p>
                         <ul class="feature-list">
-                            <li>Automated PDF generation</li>
-                            <li>Player performance profiles</li>
+                            <li>PDF report generation</li>
+                            <li>CSV data export</li>
+                            <li>Project sharing links</li>
                             <li>Team collaboration tools</li>
-                            <li>Power BI integration</li>
                         </ul>
                     </div>
                 </div>
@@ -620,29 +547,29 @@
             <div class="container">
                 <div class="feature-row">
                     <div class="feature-content">
-                        <h3>Multi-Angle Video Analysis</h3>
-                        <p>Upload multiple camera angles and analyze them simultaneously. Our advanced video player supports frame-by-frame stepping and variable playback speeds from 0.25x to 2x for detailed tactical analysis. Perfect for reviewing complex GAA plays from every angle.</p>
+                        <h3>Professional Video Analysis</h3>
+                        <p>Upload match videos and analyze them with professional-grade tools. Our video player supports frame-by-frame stepping and variable playback speeds for detailed tactical analysis. Perfect for reviewing GAA plays in detail.</p>
                         <ul class="feature-list">
-                            <li>Support for up to 3 camera angles</li>
+                            <li>Support for MP4, AVI, and MOV formats</li>
                             <li>Frame-by-frame stepping with arrow keys</li>
-                            <li>Variable speed controls (0.25x - 2x)</li>
-                            <li>Synchronized playback across angles</li>
+                            <li>Variable speed controls</li>
+                            <li>Up to 100GB storage on Enterprise</li>
                         </ul>
                     </div>
                     <div class="feature-image">
-                        Multi-Angle Video Player Preview
+                        Video Player Interface Preview
                     </div>
                 </div>
 
                 <div class="feature-row">
                     <div class="feature-content">
                         <h3>GAA-Specific Intelligence</h3>
-                        <p>Purpose-built for GAA with advanced kickout analysis, tactical pattern recognition, and opposition scouting tools. Track own vs opposition kickouts, analyze scoring patterns, and identify weaknesses specific to GAA gameplay.</p>
+                        <p>Purpose-built for GAA with advanced kickout analysis, tactical insights, and opposition scouting tools. Track own vs opposition kickouts, analyze scoring patterns, and identify strengths specific to GAA gameplay.</p>
                         <ul class="feature-list">
-                            <li>Kickout success prediction zones</li>
-                            <li>GAA tactical pattern recognition</li>
-                            <li>Opposition weakness detection</li>
-                            <li>Weather condition analysis</li>
+                            <li>Kickout success tracking</li>
+                            <li>GAA-specific event categories</li>
+                            <li>Team comparison analytics</li>
+                            <li>Match performance trends</li>
                         </ul>
                     </div>
                     <div class="feature-image">
@@ -652,33 +579,33 @@
 
                 <div class="feature-row">
                     <div class="feature-content">
-                        <h3>Professional Drawing & Annotation</h3>
-                        <p>Annotate video frames with professional drawing tools. Create tactical diagrams, highlight player movements, and add detailed notes to enhance your analysis presentations for coaches and players.</p>
+                        <h3>Team Collaboration</h3>
+                        <p>Work together with your coaching team using shared projects, event notes, and real-time collaboration features. Perfect for coordinating analysis across multiple coaches and analysts.</p>
                         <ul class="feature-list">
-                            <li>Frame annotation and drawing tools</li>
-                            <li>GAA formation overlays</li>
-                            <li>Player movement tracking</li>
-                            <li>Event rating system (1-5 stars)</li>
+                            <li>Shared project access</li>
+                            <li>Event notes and comments</li>
+                            <li>Team member management</li>
+                            <li>Real-time updates</li>
                         </ul>
                     </div>
                     <div class="feature-image">
-                        Drawing Tools Interface Preview
+                        Team Collaboration Interface Preview
                     </div>
                 </div>
 
                 <div class="feature-row">
                     <div class="feature-content">
-                        <h3>Live Match Analysis</h3>
-                        <p>Tag events during live matches with our mobile-optimized interface. Share real-time insights with coaches on the sideline and generate instant statistical updates as the game unfolds.</p>
+                        <h3>Data Export & Sharing</h3>
+                        <p>Export your analysis data in multiple formats and share insights with your team. Generate professional reports and maintain your data with comprehensive export options.</p>
                         <ul class="feature-list">
-                            <li>Live tagging during matches</li>
-                            <li>Real-time coach collaboration</li>
-                            <li>Instant statistical updates</li>
-                            <li>Mobile-optimized interface</li>
+                            <li>CSV data export</li>
+                            <li>Professional PDF reports</li>
+                            <li>Shareable project links</li>
+                            <li>Data backup options</li>
                         </ul>
                     </div>
                     <div class="feature-image">
-                        Live Analysis Interface Preview
+                        Export Options Interface Preview
                     </div>
                 </div>
             </div>
@@ -689,8 +616,8 @@
             <div class="container">
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <h3>3</h3>
-                        <p>Camera Angles</p>
+                        <h3>100GB</h3>
+                        <p>Storage Available</p>
                     </div>
                     <div class="stat-item">
                         <h3>Live</h3>
@@ -701,8 +628,8 @@
                         <p>Optimized</p>
                     </div>
                     <div class="stat-item">
-                        <h3>AI</h3>
-                        <p>Insights</p>
+                        <h3>Pro</h3>
+                        <p>Reports</p>
                     </div>
                 </div>
             </div>
@@ -731,80 +658,8 @@
     </footer>
 
     <script>
-        const mockUser = {
-            name: localStorage.getItem('userName') || 'John Doe',
-            email: localStorage.getItem('userEmail') || 'john@example.com',
-            plan: localStorage.getItem('userPlan') || 'Premium Trial',
-            trialDaysLeft: 12
-        };
-
-        function updateNavigation() {
-            const isLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
-            const authButtons = document.getElementById('authButtons');
-            const ctaButton = document.getElementById('ctaButton');
-            
-            if (isLoggedIn) {
-                if (mockUser.plan.includes('Trial')) {
-                    const trialBanner = document.createElement('div');
-                    trialBanner.className = 'trial-banner';
-                    trialBanner.innerHTML = `Trial: ${mockUser.trialDaysLeft} days left - <a href="pricing.html" style="color: #92400e; text-decoration: underline;">Upgrade now</a>`;
-                    document.body.insertBefore(trialBanner, document.body.firstChild);
-                }
-
-                authButtons.innerHTML = `
-                    <a href="app.html" class="login-btn">Launch App</a>
-                    <div class="account-menu">
-                        <div class="account-button" onclick="toggleAccountDropdown()">
-                            <div class="account-avatar">${mockUser.name.charAt(0)}</div>
-                            <span style="font-weight: 500;">${mockUser.name.split(' ')[0]}</span>
-                            <span style="font-size: 12px;">▼</span>
-                        </div>
-                        <div class="account-dropdown" id="accountDropdown">
-                            <div class="dropdown-header">
-                                <div style="font-weight: 600;">${mockUser.name}</div>
-                                <div class="dropdown-email">${mockUser.email}</div>
-                                <div class="dropdown-plan">${mockUser.plan}</div>
-                            </div>
-                            <a href="#" class="dropdown-item" onclick="alert('Account settings coming soon!')">Account Settings</a>
-                            <a href="pricing.html" class="dropdown-item">Billing & Plans</a>
-                            <a href="#" class="dropdown-item" onclick="alert('Support coming soon!')">Support</a>
-                            <a href="#" class="dropdown-item" onclick="logout()">Sign Out</a>
-                        </div>
-                    </div>
-                `;
-                
-                ctaButton.href = 'app.html';
-                ctaButton.textContent = 'Launch App';
-            }
-        }
-
-        function toggleAccountDropdown() {
-            const dropdown = document.getElementById('accountDropdown');
-            dropdown.classList.toggle('show');
-        }
-
-        document.addEventListener('click', function(event) {
-            const accountMenu = document.querySelector('.account-menu');
-            if (accountMenu && !accountMenu.contains(event.target)) {
-                const dropdown = document.getElementById('accountDropdown');
-                if (dropdown) {
-                    dropdown.classList.remove('show');
-                }
-            }
-        });
-
-        function logout() {
-            localStorage.removeItem('userLoggedIn');
-            location.reload();
-        }
-
-        window.addEventListener('DOMContentLoaded', updateNavigation);
-
-        window.addEventListener('storage', function(e) {
-            if (e.key === 'userLoggedIn') {
-                updateNavigation();
-            }
-        });
+        // No complex authentication needed for features page
+        // Keep it simple for now
     </script>
 </body>
 </html>
