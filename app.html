@@ -1190,6 +1190,9 @@
                                 <button class="event-btn goal-btn" onclick="tagEvent('Goal')">Goal</button>
                                 <button class="event-btn point-btn" onclick="tagEvent('Point')">Point</button>
                                 <button class="event-btn point-btn" onclick="tagEvent('2 Point')" id="twoPointBtn">2 Point</button>
+                                <button class="event-btn goal-btn" onclick="tagEvent('Free Goal')">Free Goal</button>
+                                <button class="event-btn point-btn" onclick="tagEvent('Free Point')">Free Point</button>
+                                <button class="event-btn point-btn" onclick="tagEvent('Free 2 Point')" id="free2PointBtn">Free 2 Point</button>
                                 <button class="event-btn wide-btn" onclick="tagEvent('Wide')">Wide</button>
                                 <button class="event-btn save-btn" onclick="tagEvent('Saved')">Saved</button>
                                 <button class="event-btn wide-btn" onclick="tagEvent('45')" id="football45">45</button>
@@ -1207,18 +1210,10 @@
                         </div>
 
                         <div class="event-category">
-                            <div class="category-title">Own Kickouts</div>
+                            <div class="category-title">Kickouts</div>
                             <div class="event-grid">
-                                <button class="event-btn free-btn" onclick="tagEvent('Own Kickout Won')">Won</button>
-                                <button class="event-btn foul-btn" onclick="tagEvent('Own Kickout Lost')">Lost</button>
-                            </div>
-                        </div>
-
-                        <div class="event-category">
-                            <div class="category-title">Opposition Kickouts</div>
-                            <div class="event-grid">
-                                <button class="event-btn free-btn" onclick="tagEvent('Opp Kickout Won')">Won</button>
-                                <button class="event-btn foul-btn" onclick="tagEvent('Opp Kickout Lost')">Lost</button>
+                                <button class="event-btn free-btn" onclick="tagEvent('Home Kickout Won')">Home Won</button>
+                                <button class="event-btn free-btn" onclick="tagEvent('Away Kickout Won')">Away Won</button>
                             </div>
                         </div>
 
@@ -1236,6 +1231,8 @@
                             <div class="category-title">Fouls</div>
                             <div class="event-grid">
                                 <button class="event-btn foul-btn" onclick="tagEvent('Foul')">Foul</button>
+                                <button class="event-btn foul-btn" onclick="tagEvent('Overcarry')">Overcarry</button>
+                                <button class="event-btn foul-btn" onclick="tagEvent('Dissent')">Dissent</button>
                                 <button class="event-btn card-btn" onclick="tagEvent('Yellow Card')">Yellow Card</button>
                                 <button class="event-btn card-btn" onclick="tagEvent('Red Card')">Red Card</button>
                                 <button class="event-btn card-btn" onclick="tagEvent('Black Card')">Black Card</button>
@@ -1245,6 +1242,7 @@
                         <div class="event-category">
                             <div class="category-title">Other</div>
                             <div class="event-grid">
+                                <button class="event-btn other-btn" onclick="tagEvent('Mark')">Mark</button>
                                 <button class="event-btn other-btn" onclick="tagEvent('Substitution')">Substitution</button>
                                 <button class="event-btn other-btn" onclick="tagEvent('Turnover')">Turnover</button>
                                 <button class="event-btn other-btn" onclick="tagEvent('Injury')">Injury</button>
@@ -1648,12 +1646,12 @@
     let activeTeam = 'home';
 
     let stats = {
-        Goal: 0, Point: 0, '2 Point': 0, Wide: 0, Saved: 0, '45': 0, '65': 0,
+        Goal: 0, Point: 0, '2 Point': 0, 'Free Goal': 0, 'Free Point': 0, 'Free 2 Point': 0, Wide: 0, Saved: 0, '45': 0, '65': 0,
         'Hand Pass': 0, 'Kick Pass': 0, 'Hurl Pass': 0,
-        'Own Kickout Won': 0, 'Own Kickout Lost': 0, 'Opp Kickout Won': 0, 'Opp Kickout Lost': 0,
+        'Home Kickout Won': 0, 'Away Kickout Won': 0,
         'Free Kick': 0, Sideline: 0, Penalty: 0, 'Throw-in': 0,
-        Foul: 0, 'Yellow Card': 0, 'Red Card': 0, 'Black Card': 0,
-        Substitution: 0, Turnover: 0, Injury: 0, Custom: 0
+        Foul: 0, Overcarry: 0, Dissent: 0, 'Yellow Card': 0, 'Red Card': 0, 'Black Card': 0,
+        Mark: 0, Substitution: 0, Turnover: 0, Injury: 0, Custom: 0
     };
 
     let teamStats = { home: {}, away: {} };
@@ -1687,6 +1685,7 @@
         });
         
         const twoPointBtn = document.getElementById('twoPointBtn');
+        const free2PointBtn = document.getElementById('free2PointBtn');
         const football45 = document.getElementById('football45');
         const hurling65 = document.getElementById('hurling65');
         const handPass = document.getElementById('handPass');
@@ -1695,6 +1694,7 @@
         
         if (sport === 'football') {
             twoPointBtn.style.display = 'block';
+            free2PointBtn.style.display = 'block';
             football45.style.display = 'block';
             hurling65.style.display = 'none';
             handPass.style.display = 'block';
@@ -1702,6 +1702,7 @@
             hurlPass.style.display = 'none';
         } else {
             twoPointBtn.style.display = 'none';
+            free2PointBtn.style.display = 'none';
             football45.style.display = 'none';
             hurling65.style.display = 'block';
             handPass.style.display = 'block';
@@ -1830,11 +1831,11 @@
         teamStats[team][eventType]++;
         
         document.getElementById('totalEvents').textContent = events.length;
-        document.getElementById('goalCount').textContent = stats.Goal;
-        document.getElementById('pointCount').textContent = stats.Point + stats['2 Point'];
-        document.getElementById('foulCount').textContent = stats.Foul + stats['Yellow Card'] + stats['Red Card'] + stats['Black Card'];
-        document.getElementById('ownKickoutWon').textContent = stats['Own Kickout Won'];
-        document.getElementById('oppKickoutWon').textContent = stats['Opp Kickout Won'];
+        document.getElementById('goalCount').textContent = stats.Goal + stats['Free Goal'];
+        document.getElementById('pointCount').textContent = stats.Point + stats['2 Point'] + stats['Free Point'] + stats['Free 2 Point'];
+        document.getElementById('foulCount').textContent = stats.Foul + stats.Overcarry + stats.Dissent + stats['Yellow Card'] + stats['Red Card'] + stats['Black Card'];
+        document.getElementById('ownKickoutWon').textContent = stats['Home Kickout Won'];
+        document.getElementById('oppKickoutWon').textContent = stats['Away Kickout Won'];
         
         const homeEvents = events.filter(e => e.team === 'home').length;
         const awayEvents = events.filter(e => e.team === 'away').length;
@@ -1852,11 +1853,11 @@
     }
 
     function updateScores(eventType, team) {
-        if (eventType === 'Goal') {
+        if (eventType === 'Goal' || eventType === 'Free Goal') {
             scores[team].goals++;
-        } else if (eventType === 'Point') {
+        } else if (eventType === 'Point' || eventType === 'Free Point') {
             scores[team].points++;
-        } else if (eventType === '2 Point') {
+        } else if (eventType === '2 Point' || eventType === 'Free 2 Point') {
             scores[team].points += 2;
         }
         
@@ -1959,11 +1960,11 @@
         stats[lastEvent.type]--;
         teamStats[lastEvent.team][lastEvent.type]--;
         
-        if (lastEvent.type === 'Goal') {
+        if (lastEvent.type === 'Goal' || lastEvent.type === 'Free Goal') {
             scores[lastEvent.team].goals--;
-        } else if (lastEvent.type === 'Point') {
+        } else if (lastEvent.type === 'Point' || lastEvent.type === 'Free Point') {
             scores[lastEvent.team].points--;
-        } else if (lastEvent.type === '2 Point') {
+        } else if (lastEvent.type === '2 Point' || lastEvent.type === 'Free 2 Point') {
             scores[lastEvent.team].points -= 2;
         }
         
@@ -1975,11 +1976,11 @@
 
     function refreshAllStats() {
         document.getElementById('totalEvents').textContent = events.length;
-        document.getElementById('goalCount').textContent = stats.Goal;
-        document.getElementById('pointCount').textContent = stats.Point + stats['2 Point'];
-        document.getElementById('foulCount').textContent = stats.Foul + stats['Yellow Card'] + stats['Red Card'] + stats['Black Card'];
-        document.getElementById('ownKickoutWon').textContent = stats['Own Kickout Won'];
-        document.getElementById('oppKickoutWon').textContent = stats['Opp Kickout Won'];
+        document.getElementById('goalCount').textContent = stats.Goal + stats['Free Goal'];
+        document.getElementById('pointCount').textContent = stats.Point + stats['2 Point'] + stats['Free Point'] + stats['Free 2 Point'];
+        document.getElementById('foulCount').textContent = stats.Foul + stats.Overcarry + stats.Dissent + stats['Yellow Card'] + stats['Red Card'] + stats['Black Card'];
+        document.getElementById('ownKickoutWon').textContent = stats['Home Kickout Won'];
+        document.getElementById('oppKickoutWon').textContent = stats['Away Kickout Won'];
         
         const homeEvents = events.filter(e => e.team === 'home').length;
         const awayEvents = events.filter(e => e.team === 'away').length;
