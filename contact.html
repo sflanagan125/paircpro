@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - PáircPro | Professional GAA Video Analysis</title>
+    <title>Contact & Support - PáircPro | Professional GAA Video Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         * {
             margin: 0;
@@ -61,8 +62,30 @@
             transition: opacity 0.3s;
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover, .nav-links a.active {
             opacity: 0.8;
+        }
+
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .login-btn {
+            color: white !important;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: opacity 0.3s;
+        }
+
+        .login-btn:hover {
+            opacity: 0.8;
+        }
+
+        .login-btn:visited {
+            color: white !important;
         }
 
         .cta-button {
@@ -80,108 +103,461 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
-        /* Main Content */
-        .main-content {
-            margin-top: 80px;
-            padding: 4rem 0;
-            min-height: calc(100vh - 160px);
+        /* Account Dropdown */
+        .account-menu {
+            position: relative;
         }
 
-        .container {
+        .account-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: white;
+        }
+
+        .account-button:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .account-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: white;
+            color: #0066cc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .account-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            min-width: 200px;
+            z-index: 1000;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .account-dropdown.show {
+            display: block;
+        }
+
+        .dropdown-header {
+            padding: 1rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .dropdown-email {
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-top: 0.25rem;
+        }
+
+        .dropdown-plan {
+            font-size: 0.75rem;
+            color: #0066cc;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: #374151;
+            text-decoration: none;
+            transition: background 0.2s;
+            border-bottom: 1px solid #f9fafb;
+        }
+
+        .dropdown-item:hover {
+            background: #f8fafc;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+            color: #dc2626;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 100px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+            color: white;
+            padding: 6rem 0 4rem;
+            text-align: center;
+        }
+
+        .hero-container {
             max-width: 800px;
             margin: 0 auto;
             padding: 0 2rem;
         }
 
-        .page-header {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding: 2rem 0;
-            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
-            border-radius: 12px;
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
         }
 
-        .page-title {
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 6rem 0;
+            background: #f8fafc;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .contact-info h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+
+        .contact-method:hover {
+            background: #e2e8f0;
+            transform: translateY(-2px);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #0066cc, #6366f1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .contact-details h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-details p {
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-details a {
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-details a:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .contact-form h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #0066cc;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #0066cc, #6366f1);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Support Section */
+        .support-section {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
             font-size: 2.5rem;
             font-weight: 700;
             color: #1e293b;
             margin-bottom: 1rem;
         }
 
-        .page-subtitle {
-            font-size: 1.1rem;
+        .section-subtitle {
+            font-size: 1.2rem;
             color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .last-updated {
-            color: #64748b;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
         }
 
-        .content-section {
-            background: white;
+        .support-card {
+            background: #f8fafc;
             padding: 2rem;
             border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            margin-bottom: 2rem;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+            transition: all 0.3s;
         }
 
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 700;
+        .support-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .support-card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #0066cc, #6366f1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 24px;
+            color: white;
+        }
+
+        .support-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
             color: #1e293b;
             margin-bottom: 1rem;
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 0.5rem;
         }
 
-        .subsection-title {
-            font-size: 1.2rem;
+        .support-card p {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+
+        .support-card a {
+            color: #0066cc;
+            text-decoration: none;
             font-weight: 600;
-            color: #475569;
-            margin: 1.5rem 0 0.5rem 0;
         }
 
-        p {
-            margin-bottom: 1rem;
-            color: #475569;
+        .support-card a:hover {
+            text-decoration: underline;
         }
 
-        ul, ol {
-            margin-bottom: 1rem;
-            padding-left: 2rem;
+        /* FAQ Section */
+        .faq-section {
+            padding: 6rem 0;
+            background: #f8fafc;
         }
 
-        li {
-            margin-bottom: 0.5rem;
-            color: #475569;
+        .faq-grid {
+            display: grid;
+            gap: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .highlight-box {
-            background: #f1f5f9;
-            border-left: 4px solid #0066cc;
-            padding: 1rem;
-            margin: 1.5rem 0;
-            border-radius: 0 8px 8px 0;
+        .faq-item {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
 
-        .contact-info {
+        .faq-question {
+            padding: 1.5rem;
+            background: white;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1e293b;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question:hover {
+            background: #f8fafc;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: #0066cc;
+            transition: transform 0.3s;
+        }
+
+        .faq-question.active::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            color: #64748b;
+            display: none;
+        }
+
+        .faq-answer.active {
+            display: block;
+        }
+
+        /* Response Times */
+        .response-times {
             background: linear-gradient(135deg, #0066cc, #6366f1);
             color: white;
-            padding: 2rem;
-            border-radius: 12px;
+            padding: 3rem 0;
             text-align: center;
-            margin: 2rem 0;
         }
 
-        .contact-info h3 {
-            margin-bottom: 1rem;
+        .response-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .contact-info a {
-            color: white;
-            text-decoration: underline;
+        .response-item {
+            text-align: center;
+        }
+
+        .response-item h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .response-item p {
+            opacity: 0.9;
         }
 
         /* Footer */
@@ -189,7 +565,6 @@
             background: #1e293b;
             color: white;
             padding: 3rem 0 1rem;
-            margin-top: 4rem;
         }
 
         .footer-content {
@@ -201,7 +576,6 @@
 
         .footer p {
             opacity: 0.8;
-            color: white;
         }
 
         /* Mobile Responsive */
@@ -210,12 +584,17 @@
                 display: none;
             }
 
-            .page-title {
+            .hero h1 {
                 font-size: 2rem;
             }
 
-            .content-section {
-                padding: 1.5rem;
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -262,220 +641,242 @@
             <nav class="nav-links">
                 <a href="features.html">Features</a>
                 <a href="pricing.html">Pricing</a>
-                <a href="contact.html">Contact</a>
+                <a href="contact.html" class="active">Contact</a>
             </nav>
-            <a href="app.html" class="cta-button">Launch App</a>
+            <div class="auth-buttons" id="authButtons">
+                <a href="auth.html?mode=login" class="login-btn">Log in</a>
+                <a href="auth.html" class="cta-button">Get started</a>
+            </div>
         </div>
     </header>
 
     <!-- Main Content -->
     <main class="main-content">
-        <div class="container">
-            <!-- Page Header -->
-            <div class="page-header">
-                <h1 class="page-title">Privacy Policy</h1>
-                <p class="page-subtitle">Your privacy is important to us. This policy explains how we collect, use, and protect your information.</p>
-                <p class="last-updated">Last updated: January 2025</p>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-container">
+                <h1>Get in Touch</h1>
+                <p>Have questions about PáircPro? Need help with your GAA video analysis? We're here to help you succeed.</p>
             </div>
+        </section>
 
-            <!-- Introduction -->
-            <div class="content-section">
-                <h2 class="section-title">1. Introduction</h2>
-                <p>Welcome to PáircPro. We are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, store, and protect your data when you use our GAA video analysis platform.</p>
-                
-                <div class="highlight-box">
-                    <strong>Quick Summary:</strong> We only collect data necessary to provide our service, never sell your information, and give you control over your data at all times.
-                </div>
-                
-                <p>By using PáircPro, you agree to the collection and use of information in accordance with this policy. If you disagree with any part of this policy, please do not use our service.</p>
-            </div>
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact-grid">
+                    <!-- Contact Information -->
+                    <div class="contact-info">
+                        <h2>Contact Information</h2>
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <div class="contact-icon">📧</div>
+                                <div class="contact-details">
+                                    <h3>General Support</h3>
+                                    <p>For questions, technical issues, and general inquiries</p>
+                                    <a href="mailto:support@paircpro.ie">support@paircpro.ie</a>
+                                </div>
+                            </div>
 
-            <!-- Information We Collect -->
-            <div class="content-section">
-                <h2 class="section-title">2. Information We Collect</h2>
-                
-                <h3 class="subsection-title">Account Information</h3>
-                <ul>
-                    <li>Name and email address (required for registration)</li>
-                    <li>Profile information you choose to provide</li>
-                    <li>Billing information (processed securely by Stripe)</li>
-                    <li>Communication preferences</li>
-                </ul>
+                            <div class="contact-method">
+                                <div class="contact-icon">💼</div>
+                                <div class="contact-details">
+                                    <h3>Sales & Enterprise</h3>
+                                    <p>For pricing questions and enterprise solutions</p>
+                                    <a href="mailto:sales@paircpro.ie">sales@paircpro.ie</a>
+                                </div>
+                            </div>
 
-                <h3 class="subsection-title">Usage Data</h3>
-                <ul>
-                    <li>Video files you upload for analysis</li>
-                    <li>Match analysis data and statistics</li>
-                    <li>Event tags and annotations you create</li>
-                    <li>App usage patterns and performance metrics</li>
-                </ul>
+                            <div class="contact-method">
+                                <div class="contact-icon">⚖️</div>
+                                <div class="contact-details">
+                                    <h3>Legal & Privacy</h3>
+                                    <p>For legal matters and data protection inquiries</p>
+                                    <a href="mailto:legal@paircpro.ie">legal@paircpro.ie</a>
+                                </div>
+                            </div>
 
-                <h3 class="subsection-title">Technical Information</h3>
-                <ul>
-                    <li>IP address and device information</li>
-                    <li>Browser type and version</li>
-                    <li>Operating system and screen resolution</li>
-                    <li>Cookies and similar tracking technologies</li>
-                </ul>
-            </div>
+                            <div class="contact-method">
+                                <div class="contact-icon">🏢</div>
+                                <div class="contact-details">
+                                    <h3>Postal Address</h3>
+                                    <p>PáircPro<br>Ireland</p>
+                                    <a href="#">Company Number: [TBD]</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-            <!-- How We Use Your Information -->
-            <div class="content-section">
-                <h2 class="section-title">3. How We Use Your Information</h2>
-                
-                <p>We use your information solely to provide and improve our service:</p>
-                
-                <ul>
-                    <li><strong>Service Delivery:</strong> To provide video analysis features and store your match data</li>
-                    <li><strong>Account Management:</strong> To create and manage your account, process payments, and provide support</li>
-                    <li><strong>Communication:</strong> To send important updates, security alerts, and respond to your inquiries</li>
-                    <li><strong>Improvement:</strong> To analyze usage patterns and improve our platform (anonymized data only)</li>
-                    <li><strong>Security:</strong> To detect fraud, abuse, and ensure platform security</li>
-                </ul>
+                    <!-- Contact Form -->
+                    <div class="contact-form">
+                        <h2>Send us a Message</h2>
+                        <form id="contactForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name *</label>
+                                    <input type="text" id="firstName" name="firstName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name *</label>
+                                    <input type="text" id="lastName" name="lastName" required>
+                                </div>
+                            </div>
 
-                <div class="highlight-box">
-                    <strong>We never:</strong> Sell your data to third parties, use your video content for training AI models, or share your analysis data with other users without permission.
-                </div>
-            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
 
-            <!-- Data Storage and Security -->
-            <div class="content-section">
-                <h2 class="section-title">4. Data Storage and Security</h2>
-                
-                <h3 class="subsection-title">Where Your Data is Stored</h3>
-                <ul>
-                    <li>Video files: Secure cloud storage with Cloudflare R2 (EU servers)</li>
-                    <li>Analysis data: Supabase database (EU region)</li>
-                    <li>All data stored within the European Union for GDPR compliance</li>
-                </ul>
+                            <div class="form-group">
+                                <label for="subject">Subject *</label>
+                                <select id="subject" name="subject" required>
+                                    <option value="">Select a subject</option>
+                                    <option value="technical">Technical Support</option>
+                                    <option value="billing">Billing & Payments</option>
+                                    <option value="features">Feature Request</option>
+                                    <option value="sales">Sales Inquiry</option>
+                                    <option value="partnership">Partnership</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
 
-                <h3 class="subsection-title">Security Measures</h3>
-                <ul>
-                    <li>End-to-end encryption for all data transmission</li>
-                    <li>Encrypted storage for video files and analysis data</li>
-                    <li>Regular security audits and vulnerability assessments</li>
-                    <li>Multi-factor authentication available for accounts</li>
-                    <li>SOC 2 compliant infrastructure partners</li>
-                </ul>
+                            <div class="form-group">
+                                <label for="message">Message *</label>
+                                <textarea id="message" name="message" placeholder="Please describe your question or issue in detail..." required></textarea>
+                            </div>
 
-                <h3 class="subsection-title">Data Retention</h3>
-                <ul>
-                    <li>Active accounts: Data retained as long as your account is active</li>
-                    <li>Deleted accounts: Data permanently deleted within 30 days</li>
-                    <li>Video files: Automatically deleted 90 days after account deletion</li>
-                    <li>Backup data: Securely deleted within 6 months</li>
-                </ul>
-            </div>
-
-            <!-- Your Rights -->
-            <div class="content-section">
-                <h2 class="section-title">5. Your Rights and Choices</h2>
-                
-                <p>Under GDPR and other privacy laws, you have the following rights:</p>
-                
-                <ul>
-                    <li><strong>Access:</strong> Request a copy of all personal data we hold about you</li>
-                    <li><strong>Rectification:</strong> Correct any inaccurate or incomplete data</li>
-                    <li><strong>Erasure:</strong> Request deletion of your personal data ("right to be forgotten")</li>
-                    <li><strong>Portability:</strong> Export your data in a machine-readable format</li>
-                    <li><strong>Restriction:</strong> Limit how we process your data</li>
-                    <li><strong>Objection:</strong> Object to processing based on legitimate interests</li>
-                    <li><strong>Withdraw Consent:</strong> Withdraw consent for data processing at any time</li>
-                </ul>
-
-                <div class="highlight-box">
-                    <strong>Exercise Your Rights:</strong> Contact us at privacy@paircpro.ie or use the data export/deletion tools in your account settings.
+                            <button type="submit" class="btn-submit">Send Message</button>
+                        </form>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Sharing and Third Parties -->
-            <div class="content-section">
-                <h2 class="section-title">6. Information Sharing</h2>
-                
-                <p>We only share your information in limited circumstances:</p>
-                
-                <h3 class="subsection-title">Service Providers</h3>
-                <ul>
-                    <li><strong>Supabase:</strong> Database and authentication services</li>
-                    <li><strong>Cloudflare:</strong> Video storage and content delivery</li>
-                    <li><strong>Stripe:</strong> Payment processing (they never see your video data)</li>
-                    <li><strong>Vercel:</strong> Web application hosting</li>
-                </ul>
-
-                <h3 class="subsection-title">Legal Requirements</h3>
-                <p>We may disclose information if required by law, court order, or to protect rights, property, or safety. We will notify you unless legally prohibited.</p>
-
-                <h3 class="subsection-title">Business Transfers</h3>
-                <p>In the event of a merger, acquisition, or sale, your data may be transferred. You will be notified with choices about your data.</p>
+        <!-- Response Times -->
+        <section class="response-times">
+            <div class="container">
+                <h2 style="margin-bottom: 2rem;">Our Response Times</h2>
+                <div class="response-grid">
+                    <div class="response-item">
+                        <h3>< 1 Hour</h3>
+                        <p>Enterprise Support</p>
+                    </div>
+                    <div class="response-item">
+                        <h3>< 24 Hours</h3>
+                        <p>Premium Support</p>
+                    </div>
+                    <div class="response-item">
+                        <h3>< 48 Hours</h3>
+                        <p>General Inquiries</p>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <!-- Cookies and Tracking -->
-            <div class="content-section">
-                <h2 class="section-title">7. Cookies and Tracking</h2>
-                
-                <p>We use cookies and similar technologies to improve your experience:</p>
-                
-                <ul>
-                    <li><strong>Essential Cookies:</strong> Required for login and basic functionality</li>
-                    <li><strong>Performance Cookies:</strong> Anonymous analytics to improve our service</li>
-                    <li><strong>Preference Cookies:</strong> Remember your settings and preferences</li>
-                </ul>
+        <!-- Support Resources -->
+        <section class="support-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Support Resources</h2>
+                    <p class="section-subtitle">Find answers quickly with our self-service resources</p>
+                </div>
 
-                <p>You can control cookies through your browser settings. Disabling essential cookies may limit functionality.</p>
+                <div class="support-grid">
+                    <div class="support-card">
+                        <div class="support-card-icon">📚</div>
+                        <h3>Documentation</h3>
+                        <p>Comprehensive guides and tutorials for getting the most out of PáircPro</p>
+                        <a href="#" onclick="alert('Documentation coming soon!')">View Docs</a>
+                    </div>
+
+                    <div class="support-card">
+                        <div class="support-card-icon">🎥</div>
+                        <h3>Video Tutorials</h3>
+                        <p>Step-by-step video guides for GAA analysis workflows and best practices</p>
+                        <a href="#" onclick="alert('Video tutorials coming soon!')">Watch Videos</a>
+                    </div>
+
+                    <div class="support-card">
+                        <div class="support-card-icon">💬</div>
+                        <h3>Community Forum</h3>
+                        <p>Connect with other GAA analysts and share tips, strategies, and insights</p>
+                        <a href="#" onclick="alert('Community forum coming soon!')">Join Community</a>
+                    </div>
+
+                    <div class="support-card">
+                        <div class="support-card-icon">🔧</div>
+                        <h3>System Status</h3>
+                        <p>Check real-time status of PáircPro services and scheduled maintenance</p>
+                        <a href="#" onclick="alert('Status page coming soon!')">Check Status</a>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <!-- International Transfers -->
-            <div class="content-section">
-                <h2 class="section-title">8. International Data Transfers</h2>
-                
-                <p>Your data is primarily stored within the European Union. When data is transferred outside the EU, we ensure:</p>
-                
-                <ul>
-                    <li>Adequate protection through adequacy decisions or appropriate safeguards</li>
-                    <li>Standard Contractual Clauses (SCCs) with service providers</li>
-                    <li>Regular reviews of data protection measures</li>
-                </ul>
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Frequently Asked Questions</h2>
+                    <p class="section-subtitle">Quick answers to common questions</p>
+                </div>
+
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            How do I get started with PáircPro?
+                        </button>
+                        <div class="faq-answer">
+                            Simply sign up for a free account, upload your first match video, and start tagging events. Our intuitive interface makes it easy to begin analyzing GAA matches immediately.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            What video formats are supported?
+                        </button>
+                        <div class="faq-answer">
+                            PáircPro supports all major video formats including MP4, AVI, and MOV. We recommend MP4 for best performance and compatibility across all devices.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            Can I analyze live matches?
+                        </button>
+                        <div class="faq-answer">
+                            Yes! Premium and Enterprise plans include live tagging features that allow you to analyze matches in real-time and share insights with coaches on the sideline.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            Is my video data secure?
+                        </button>
+                        <div class="faq-answer">
+                            Absolutely. All video files are encrypted and stored securely in EU-based servers. Your analysis data remains private and is never shared without your permission.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            Do you offer team training?
+                        </button>
+                        <div class="faq-answer">
+                            Yes! Enterprise customers receive dedicated onboarding and training sessions. We also offer group training workshops for GAA clubs and organizations.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            Can I cancel my subscription anytime?
+                        </button>
+                        <div class="faq-answer">
+                            Yes, you can cancel your subscription at any time through your account settings. Your access continues until the end of your billing period, and you can export all your data.
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <!-- Children's Privacy -->
-            <div class="content-section">
-                <h2 class="section-title">9. Children's Privacy</h2>
-                
-                <p>PáircPro is not intended for children under 16. We do not knowingly collect personal information from children under 16. If you believe we have collected such information, please contact us immediately for deletion.</p>
-                
-                <p>For GAA youth teams, we recommend adult coaches or managers create and manage accounts with appropriate consent from parents/guardians.</p>
-            </div>
-
-            <!-- Changes to This Policy -->
-            <div class="content-section">
-                <h2 class="section-title">10. Changes to This Policy</h2>
-                
-                <p>We may update this Privacy Policy periodically. When we do:</p>
-                
-                <ul>
-                    <li>We'll notify you via email for significant changes</li>
-                    <li>Update the "Last updated" date at the top of this policy</li>
-                    <li>Post the updated policy on our website</li>
-                    <li>Give you 30 days notice for material changes affecting your rights</li>
-                </ul>
-
-                <p>Continued use of PáircPro after changes constitutes acceptance of the new policy.</p>
-            </div>
-
-            <!-- Contact Information -->
-            <div class="contact-info">
-                <h3>Questions About Privacy?</h3>
-                <p>If you have any questions about this Privacy Policy or our data practices, please contact us:</p>
-                <p>
-                    <strong>Email:</strong> <a href="mailto:privacy@paircpro.ie">privacy@paircpro.ie</a><br>
-                    <strong>Address:</strong> PáircPro, Ireland<br>
-                    <strong>Data Protection Officer:</strong> <a href="mailto:dpo@paircpro.ie">dpo@paircpro.ie</a>
-                </p>
-                <p style="margin-top: 1rem; font-size: 0.9rem;">
-                    You also have the right to lodge a complaint with the Irish Data Protection Commission if you believe we have not handled your data properly.
-                </p>
-            </div>
-        </div>
+        </section>
     </main>
 
     <!-- Footer -->
@@ -484,6 +885,120 @@
             <p>&copy; 2025 PáircPro. All rights reserved. | <a href="privacy.html" style="color: white;">Privacy Policy</a> | <a href="terms.html" style="color: white;">Terms of Service</a></p>
         </div>
     </footer>
-</body>
 
-</html>
+    <script>
+        // Initialize Supabase
+        const supabaseUrl = 'https://gkcgngqdsmyutvbzepsn.supabase.co'
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdrY2duZ3Fkc215dXR2YnplcHNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU3MDU5NTAsImV4cCI6MjA3MTI4MTk1MH0.rDTTUn_McI1sSfZH12o5FLrS1iSXNEo14Pxce6YI3qA'
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
+
+        let trialBannerAdded = false;
+
+        async function updateNavigation() {
+            const { data: { user } } = await supabase.auth.getUser()
+            const authButtons = document.getElementById('authButtons');
+            
+            if (user) {
+                const userData = user.user_metadata;
+                const userName = userData.full_name || 'User';
+                const userEmail = user.email;
+                
+                // Only add trial banner once
+                if (!trialBannerAdded) {
+                    // Check if user has a trial
+                    const trialEndDate = new Date(userData.trial_end || Date.now() + 7 * 24 * 60 * 60 * 1000);
+                    const now = new Date();
+                    const daysLeft = Math.max(0, Math.ceil((trialEndDate - now) / (24 * 60 * 60 * 1000)));
+                    
+                    if (daysLeft > 0) {
+                        const trialBanner = document.createElement('div');
+                        trialBanner.className = 'trial-banner';
+                        trialBanner.style.cssText = 'background: #fef3c7; border: 1px solid #f59e0b; color: #92400e; padding: 0.5rem 1rem; text-align: center; font-size: 0.875rem; font-weight: 500; position: fixed; top: 80px; width: 100%; z-index: 999;';
+                        trialBanner.innerHTML = `Trial: ${daysLeft} days left - <a href="pricing.html" style="color: #92400e; text-decoration: underline;">Upgrade now</a>`;
+                        document.body.insertBefore(trialBanner, document.querySelector('.main-content'));
+                        document.querySelector('.main-content').style.marginTop = '130px';
+                        trialBannerAdded = true;
+                    }
+                }
+
+                authButtons.innerHTML = `
+                    <a href="app.html" class="login-btn">Launch App</a>
+                    <div class="account-menu">
+                        <div class="account-button" onclick="toggleAccountDropdown()">
+                            <div class="account-avatar">${userName.charAt(0)}</div>
+                            <span style="font-weight: 500;">${userName.split(' ')[0]}</span>
+                            <span style="font-size: 12px;">▼</span>
+                        </div>
+                        <div class="account-dropdown" id="accountDropdown">
+                            <div class="dropdown-header">
+                                <div style="font-weight: 600;">${userName}</div>
+                                <div class="dropdown-email">${userEmail}</div>
+                                <div class="dropdown-plan">Coach Trial</div>
+                            </div>
+                            <a href="#" class="dropdown-item" onclick="alert('Account settings coming soon!')">Account Settings</a>
+                            <a href="pricing.html" class="dropdown-item">Billing & Plans</a>
+                            <a href="#" class="dropdown-item" onclick="alert('Support coming soon!')">Support</a>
+                            <a href="#" class="dropdown-item" onclick="logout()">Sign Out</a>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function toggleAccountDropdown() {
+            const dropdown = document.getElementById('accountDropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        document.addEventListener('click', function(event) {
+            const accountMenu = document.querySelector('.account-menu');
+            if (accountMenu && !accountMenu.contains(event.target)) {
+                const dropdown = document.getElementById('accountDropdown');
+                if (dropdown) {
+                    dropdown.classList.remove('show');
+                }
+            }
+        });
+
+        async function logout() {
+            await supabase.auth.signOut();
+            location.reload();
+        }
+
+        // Contact Form Submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            if (!data.firstName || !data.lastName || !data.email || !data.subject || !data.message) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            alert('Thank you for your message! We\'ll get back to you within 24-48 hours.');
+            this.reset();
+        });
+
+        // FAQ Toggle Function
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const isActive = element.classList.contains('active');
+            
+            document.querySelectorAll('.faq-question').forEach(q => {
+                q.classList.remove('active');
+                q.nextElementSibling.classList.remove('active');
+            });
+            
+            if (!isActive) {
+                element.classList.add('active');
+                answer.classList.add('active');
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', updateNavigation);
+
+        supabase.auth.onAuthStateChange(() => {
+            updateNavigation();
+        });
