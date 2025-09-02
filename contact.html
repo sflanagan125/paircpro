@@ -903,21 +903,42 @@
                 const userName = userData.full_name || 'User';
                 const userEmail = user.email;
                 
-                // Only add trial banner once
-                if (!trialBannerAdded) {
-                    // Check if user has a trial
-                    const trialEndDate = new Date(userData.trial_end || Date.now() + 7 * 24 * 60 * 60 * 1000);
-                    const now = new Date();
-                    const daysLeft = Math.max(0, Math.ceil((trialEndDate - now) / (24 * 60 * 60 * 1000)));
-                    
-                    if (daysLeft > 0) {
-                        const trialBanner = document.createElement('div');
-                        trialBanner.className = 'trial-banner';
-                        trialBanner.style.cssText = 'background: #fef3c7; border: 1px solid #f59e0b; color: #92400e; padding: 0.5rem 1rem; text-align: center; font-size: 0.875rem; font-weight: 500; position: fixed; top: 80px; width: 100%; z-index: 999;';
-                        trialBanner.innerHTML = `Trial: ${daysLeft} days left - <a href="pricing.html" style="color: #92400e; text-decoration: underline;">Upgrade now</a>`;
-                        document.body.insertBefore(trialBanner, document.querySelector('.main-content'));
-                        document.querySelector('.main-content').style.marginTop = '130px';
-                        trialBannerAdded = true;
+                // Get trial status from database
+                const { data: profile } = await supabase
+                    .from('user_profiles')
+                    .select('trial_end_date, subscription_status, plan_type')
+                    .eq('user_id', user.id)
+                    .single();
+                
+                // Only add trial banner once and only if user is on trial
+                if (!trialBannerAdded && profile) {
+                    if (profile.subscription_status === 'trial' && profile.trial_end_date) {
+                        const trialEndDate = new Date(profile.trial_end_date);
+                        const now = new Date();
+                        const daysLeft = Math.max(0, Math.ceil((trialEndDate - now) / (24 * 60 * 60 * 1000)));
+                        
+                        if (daysLeft > 0) {
+                            const trialBanner = document.createElement('div');
+                            trialBanner.className = 'trial-banner';
+                            trialBanner.style.cssText = 'background: #fef3c7; border: 1px solid #f59e0b; color: #92400e; padding: 0.5rem 1rem; text-align: center; font-size: 0.875rem; font-weight: 500; position: fixed; top: 80px; width: 100%; z-index: 999;';
+                            trialBanner.innerHTML = `Trial: ${daysLeft} days left - <a href="pricing.html" style="color: #92400e; text-decoration: underline;">Upgrade now</a>`;
+                            document.body.insertBefore(trialBanner, document.querySelector('.main-content'));
+                            document.querySelector('.main-content').style.marginTop = '130px';
+                            trialBannerAdded = true;
+                        } else if (daysLeft === 0) {
+                            // Trial expired - block access
+                            const expiredBanner = document.createElement('div');
+                            expiredBanner.style.cssText = 'background: #fee2e2; border: 1px solid #ef4444; color: #dc2626; padding: 1rem; text-align: center; font-weight: 600; position: fixed; top: 80px; width: 100%; z-index: 999;';
+                            expiredBanner.innerHTML = `Your trial has expired. <a href="pricing.html" style="color: #dc2626; text-decoration: underline;">Subscribe now to continue</a>`;
+                            document.body.insertBefore(expiredBanner, document.querySelector('.main-content'));
+                            document.querySelector('.main-content').style.marginTop = '130px';
+                            trialBannerAdded = true;
+                            
+                            // Redirect to pricing after 3 seconds
+                            setTimeout(() => {
+                                window.location.href = 'pricing.html';
+                            }, 3000);
+                        }
                     }
                 }
 
@@ -933,7 +954,7 @@
                             <div class="dropdown-header">
                                 <div style="font-weight: 600;">${userName}</div>
                                 <div class="dropdown-email">${userEmail}</div>
-                                <div class="dropdown-plan">Coach Trial</div>
+                                <div class="dropdown-plan">${profile?.plan_type || 'Coach'} ${profile?.subscription_status === 'trial' ? 'Trial' : ''}</div>
                             </div>
                             <a href="#" class="dropdown-item" onclick="alert('Account settings coming soon!')">Account Settings</a>
                             <a href="pricing.html" class="dropdown-item">Billing & Plans</a>
